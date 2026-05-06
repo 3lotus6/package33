@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RE:TONE - 상황 실험 퀴즈</title>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 이 페이지 전용 CSS 연결 -->
+    <link rel="stylesheet" href="game1.css" />
+    <link rel="stylesheet" href="common.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="opening.html" class="logo">RE:TONE</a>
+
+      <ul class="menu">
+        <li><a href="index.html">언어 포장</a></li>
+        <li><a href="storage.html">포장 보관함</a></li>
+        <li><a href="test.html">포장 유형 테스트</a></li>
+        <li class="active"><a href="lab.html">가상 대화 실험</a></li>
+      </ul>
+    </div>
+
+    <!-- 🔥 전체 게임 화면 -->
+    <div class="game-container">
+      <!-- 1️⃣ 왼쪽: 캐릭터 일러스트 -->
+      <div class="character-area">
+        <!-- 🚨 src 속성에 직접 만드신 캐릭터 이미지 파일 경로를 넣어주세요 -->
+        <img
+          src="images/hurry1.png"
+          alt="당황한 캐릭터"
+          class="character-img"
+        />
+      </div>
+
+      <!-- 2️⃣ 오른쪽: 질문 및 선택지 -->
+      <div class="quiz-area">
+        <!-- 질문 박스 -->
+        <div class="question-box">
+          <h2>팀원이 자료를 보내주기로 했는데 계속 늦고 있는 상황</h2>
+          <p>
+            팀원이 약속 기한이 지나도 자료를 안 보내주고 있다. 하지만 재촉은
+            해야 한다.<br />당신의 첫 마디는?
+          </p>
+        </div>
+        <div class="options">
+          <!-- ⭕ 정답: 에어캡 -->
+          <button class="option-btn" onclick="location.href = 'correct2.html'">
+            보자기 : 혹시 자료 언제쯤 가능하실까요? 일정 조율 때문에 확인
+            부탁드립니다.
+          </button>
+          <!-- 선택지 목록 -->
+
+          <!-- ❌ 오답: 압축팩 -->
+          <button class="option-btn" onclick="location.href = 'wrong2.html'">
+            홀로그램 : 일정이 애매해질 수도 있을 것 같은데~ 상황이 어떻게 될지
+            모르겠네ㅎㅎ
+          </button>
+
+          <!-- ❌ 오답: 크라프트지 -->
+          <button class="option-btn" onclick="location.href = 'wrong2.html'">
+            금박지 : 우리 완전 망할 수도 있겠다. 이 흐름을 끊지 말아줘!!! 지금
+            당장 보내줘!!!
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

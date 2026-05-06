@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RE:TONE - 모든 상황 포장 완료!</title>
+    <!-- 폰트 연결 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ✨ 공통 CSS (네비바) 연결 -->
+    <link rel="stylesheet" href="common.css" />
+    <!-- 결과 페이지 전용 CSS 연결 -->
+    <link rel="stylesheet" href="all.css" />
+  </head>
+
+  <body>
+    <!-- 🔥 네비바 -->
+    <div class="navbar">
+      <a href="opening.html" class="logo">RE:TONE</a>
+
+      <ul class="menu">
+        <li><a href="index.html">언어 포장</a></li>
+        <li><a href="storage.html">포장 보관함</a></li>
+        <li><a href="test.html">포장 유형 테스트</a></li>
+        <li class="active"><a href="lab.html">가상 대화 실험</a></li>
+      </ul>
+    </div>
+
+    <!-- 🔥 중앙 콘텐츠 영역 -->
+    <div class="result-content">
+      <!-- ✨ Clear 도장 이미지 (쾅! 찍히는 애니메이션) -->
+      <!-- 🚨 도장 이미지 파일 경로를 변경해 주세요 -->
+      <img src="images/stamp.png" alt="Clear 도장" class="clear-stamp" />
+
+      <!-- ✨ 텍스트 영역 (서서히 나타나는 애니메이션) -->
+      <div class="text-group">
+        <h1>모든 상황을 완벽하게 포장했어요 !</h1>
+        <p>
+          말은 사라지지만, 그때의 느낌은 오래 남습니다.<br />
+          당신의 선택은 좋은 기억으로 남았어요.
+        </p>
+      </div>
+    </div>
+
+    <!-- 🔥 다시하기 버튼 (오른쪽 아래) -->
+    <button class="retry-btn" onclick="location.href = 'lab.html'">
+      다시하기
+    </button>
+  </body>
+</html>

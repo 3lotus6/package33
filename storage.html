@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>언어 저장소</title>
+
+    <link rel="stylesheet" href="storage.css" />
+    <link rel="stylesheet" href="common.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="opening.html" class="logo">RE:TONE</a>
+
+      <ul class="menu">
+        <li><a href="index.html">언어 포장</a></li>
+        <li class="active"><a href="index.html">포장 보관함</a></li>
+        <li><a href="la.html">포장 유형 테스트</a></li>
+        <li><a href="lab.html">가상 대화 실험</a></li>
+      </ul>
+    </div>
+
+    <!-- 🔥 컨베이어 -->
+    <div class="belt-wrapper">
+      <div class="rail"></div>
+      <div class="rail second"></div>
+
+      <div class="belt" id="belt1"></div>
+      <div class="belt" id="belt2"></div>
+    </div>
+
+    <!-- 🔥 모달 -->
+    <div class="modal" id="modal">
+      <div class="close-btn" onclick="closeModal()">✕</div>
+
+      <div class="card-flip" onclick="flipCard()">
+        <div class="card-inner" id="cardInner">
+          <div class="card-front">
+            <p id="modalText"></p>
+          </div>
+          <div class="card-back">
+            <p id="originalText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="storage.js"></script>
+
+    <script>
+      function goPage(page) {
+        window.location.href = page;
+      }
+    </script>
+  </body>
+</html>

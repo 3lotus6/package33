@@ -1,0 +1,99 @@
+/* 기본 */
+body {
+  margin: 0;
+  background: #ff612d;
+  font-family: "Noto Sans KR", sans-serif;
+  overflow-x: hidden;
+}
+
+/* 🔥 전체 영역 (수직 중앙 정렬 & 여백 축소) */
+.lab-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 좌우 반반 쪼개기 */
+  grid-template-rows: auto auto; /* 위아래 2줄로 쪼개기 */
+  align-content: end; /* ✨ 위쪽 쏠림 해결: 전체 콘텐츠를 화면 수직 중앙에 딱 맞게 정렬 */
+
+  width: 100%;
+
+  padding: 0 80px; /* 메뉴바 수준의 좌우 패딩 */
+  box-sizing: border-box; /* 패딩이 영역 밖으로 삐져나가지 않게 처리 */
+  height: calc(100vh - 80px);
+}
+
+/* 1️⃣ 일러스트: 위쪽(1행) + 오른쪽 끝(2열) */
+.lab-illust {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  justify-self: end; /* 오른쪽 끝으로 밀착 */
+  width: 700px;
+  margin-bottom: -100px;
+
+  /* ✨ 오른쪽에서 날아오는 애니메이션 추가 */
+  opacity: 0;
+  animation: slideInFromRight 0.8s ease-out forwards;
+}
+
+/* 2️⃣ 텍스트 영역: 이미지 아래(2행) + 왼쪽 끝(1열) */
+.lab-text {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  justify-self: start; /* 왼쪽 끝으로 밀착 */
+  align-self: end; /* ✨ 바닥으로 내려서 우측 버튼과 수평 맞추기 */
+  color: white;
+}
+
+.lab-text h1 {
+  font-size: 58px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 28px;
+  letter-spacing: -2px;
+}
+
+.lab-text p {
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.8;
+  opacity: 0.9;
+  letter-spacing: -0.5px;
+  margin-bottom: 0; /* 버튼과 밑단 수평을 자로 잰 듯 완벽하게 맞추기 위해 기본 여백 제거 */
+}
+
+/* 3️⃣ 시작 버튼: 글과 수평(2행 바닥) + 오른쪽 끝(2열) */
+.start-btn {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  justify-self: end; /* 오른쪽 끝으로 밀착 */
+  align-self: end; /* ✨ 텍스트와 동일하게 바닥으로 내려서 완벽한 수평 유지! */
+
+  padding: 12px 24px;
+  background: #f3f3f3;
+  color: #ff5e28;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+/* hover 효과 */
+.start-btn:hover {
+  background: #ffdbcb;
+}
+
+/* ========================================= */
+/* ✨ 애니메이션 키프레임 정의 ✨ */
+/* ========================================= */
+
+/* 오른쪽에서 왼쪽으로 부드럽게 날아오는 애니메이션 */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

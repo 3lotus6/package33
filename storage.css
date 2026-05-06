@@ -1,0 +1,169 @@
+/* 🔥 기본 */
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: "Noto Sans KR", sans-serif;
+
+  /* 🔥 배경 이미지 */
+  background: #ff6c3b;
+
+  background-size: 100% auto;
+}
+
+/* 🔥 컨테이너 */
+.belt-wrapper {
+  position: relative;
+  margin-top: 120px;
+}
+
+/* 🔥 레일 */
+.rail {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+
+  background: url("images/rail.png") repeat-x;
+  background-size: auto 30px;
+
+  top: 300px;
+}
+
+.rail.second {
+  top: 600px;
+}
+
+/* 🔥 벨트 */
+.belt {
+  display: flex;
+  position: absolute;
+  width: max-content;
+}
+
+/* 🔥 박스 위치 */
+#belt1 {
+  top: 130px;
+}
+
+#belt2 {
+  top: 430px;
+}
+
+/* 🔥 박스 */
+.box {
+  width: 150px;
+  margin: 0 40px;
+
+  display: flex;
+  align-items: flex-end;
+
+  cursor: pointer;
+}
+
+/* 🔥 이미지 */
+.box-img {
+  width: 100%;
+  height: auto;
+}
+
+/* 🔥 클릭 애니메이션 */
+.box.opening {
+  animation: openBox 0.4s ease forwards;
+}
+
+@keyframes openBox {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* 🔥 모달 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  backdrop-filter: blur(3px); /* 🔥 살짝 블러 */
+}
+
+/* 🔥 카드 */
+.card-flip {
+  width: 320px;
+  height: 200px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card-inner.flip {
+  transform: rotateY(180deg);
+}
+
+/* 🔥 카드 앞/뒤 */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background: white;
+  border-radius: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  box-sizing: border-box;
+
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* 🔥 텍스트 */
+.card-front p,
+.card-back p {
+  text-align: center;
+  line-height: 1.6;
+  word-break: keep-all;
+
+  font-size: 14px;
+  color: #333;
+
+  max-width: 260px;
+}
+
+/* 🔥 닫기 버튼 */
+.close-btn {
+  position: fixed;
+  top: 80px;
+  right: 40px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #222;
+}
+
+/* 🔥 hover 효과 */
+.box:hover {
+  transform: scale(1.05);
+}

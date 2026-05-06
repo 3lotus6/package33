@@ -1,0 +1,223 @@
+/* ========================================= */
+/* 1. 기본 & 배경 설정 */
+/* ========================================= */
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+
+  background-image: url("images/bgcafe.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ========================================= */
+/* 2. 🔥 현재 페이지 한정: 네비바 스타일 덮어쓰기 */
+/* ========================================= */
+.navbar .logo {
+  color: #ff5e28;
+  text-decoration: none;
+}
+
+.navbar .menu a {
+  color: #555555;
+}
+
+.navbar .menu li.active a {
+  background-color: #ff5e28;
+  color: white;
+}
+
+.navbar .menu {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* ========================================= */
+/* 3. 🔥 전체 레이아웃 (Grid) */
+/* ========================================= */
+.result-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 150px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+
+  height: calc(100vh - 80px);
+}
+
+/* ========================================= */
+/* 4. 왼쪽: 캐릭터 일러스트 영역 */
+/* ========================================= */
+.character-area {
+  text-align: center;
+  align-self: end;
+  margin-bottom: -80px;
+}
+
+.character-img {
+  max-width: 115%; /* game.html과 완벽하게 동일한 크기 */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+
+  /* ✨ game.html과 똑같이 아래에서 위로 등장하는 애니메이션 추가! */
+  opacity: 0;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+/* ========================================= */
+/* 5. 오른쪽: 피드백 영역 (말풍선 + 버튼) */
+/* ========================================= */
+.feedback-area {
+  align-self: flex-start;
+  margin-top: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 30px;
+  width: 130%;
+  max-width: 700px;
+}
+
+/* 🔹 말풍선 박스 */
+.speech-bubble {
+  position: relative;
+  width: 100%;
+
+  /* ✨ 수정됨: 말풍선 높이를 고정하여 글자가 위로 가고 도장 찍힐 공간 확보 */
+  height: 220px;
+
+  background-color: #f7f2ef;
+  border: 3.5px solid #8e8e8e;
+  border-radius: 20px;
+
+  /* ✨ 수정됨: 위쪽 여백을 70px에서 40px로 줄임 */
+  padding: 35px 40px;
+
+  box-sizing: border-box;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align: left;
+
+  /* 오른쪽에서 날아오는 애니메이션 추가 (캐릭터 등장 후) */
+  opacity: 0;
+  animation: slideInRight 0.6s ease-out 0.3s forwards;
+}
+
+/* 🔹 말풍선 꼬리 */
+.speech-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -22px;
+  left: 61px;
+  border-width: 22px 20px 0 0;
+  border-style: solid;
+  border-color: #8e8e8e transparent transparent transparent;
+}
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 63px;
+  border-width: 18px 16px 0 0;
+  border-style: solid;
+  border-color: #f7f2ef transparent transparent transparent;
+}
+
+/* 🔹 말풍선 안의 텍스트 */
+.speech-bubble p {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+  color: #747474;
+  line-height: 1.8;
+}
+
+/* ========================================= */
+/* 6. ✨ 스탬프 애니메이션 설정 */
+/* ========================================= */
+.stamp-img {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;
+
+  /* 타이밍 조절: 말풍선이 거의 다 날아왔을 때(0.8초 쯤) 쾅! */
+  opacity: 0;
+  animation: stampBang 0.4s ease-in 0.8s forwards;
+}
+
+/* ========================================= */
+/* 7. 다시하기 버튼 */
+/* ========================================= */
+.retry-btn {
+  background-color: #ff5e28;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 26px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  /* 버튼도 순서대로 날아오도록 추가 */
+  opacity: 0;
+  animation: slideInRight 0.5s ease-out 0.5s forwards;
+}
+
+.retry-btn:hover {
+  background-color: #e54c1c;
+  transform: translateY(-2px);
+}
+
+/* ========================================= */
+/* 8. ✨ 애니메이션 키프레임 정의 ✨ */
+/* ========================================= */
+
+/* 아래에서 위로 올라오기 (캐릭터용) */
+@keyframes slideUp {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 오른쪽에서 왼쪽으로 날아오기 (말풍선, 버튼용) */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 도장이 쾅! 찍히기 */
+@keyframes stampBang {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) scale(3);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-50%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}

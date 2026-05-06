@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RE:TONE - 오답</title>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ✨ 공통 CSS (네비바 기본 스타일) 연결 -->
+    <link rel="stylesheet" href="common.css" />
+    <!-- 오답 페이지 전용 CSS 연결 -->
+    <link rel="stylesheet" href="correct.css" />
+  </head>
+
+  <body>
+    <!-- 🔥 네비바 (추가됨) -->
+    <div class="navbar">
+      <a href="opening.html" class="logo">RE:TONE</a>
+
+      <ul class="menu">
+        <li><a href="index.html">언어 포장</a></li>
+        <li><a href="storage.html">포장 보관함</a></li>
+        <li><a href="test.html">포장 유형 테스트</a></li>
+        <li class="active"><a href="lab.html">가상 대화 실험</a></li>
+      </ul>
+    </div>
+
+    <!-- 🔥 전체 화면 영역 -->
+    <div class="result-container">
+      <!-- 1️⃣ 왼쪽: 시무룩한 캐릭터 영역 -->
+      <div class="character-area">
+        <!-- 🚨 시무룩한 캐릭터 이미지 파일 경로로 변경해 주세요 -->
+        <img
+          src="images/happycharacter1-14.png"
+          alt="시무룩한 캐릭터"
+          class="character-img"
+        />
+      </div>
+
+      <!-- 2️⃣ 오른쪽: 말풍선과 버튼 영역 -->
+      <div class="feedback-area">
+        <!-- 말풍선 박스 -->
+        <div class="speech-bubble">
+          <p>
+            아 그렇구나 ... 괜찮아 !<br />
+            내가 갑자기 부탁해서 미안해. <br />나와줘서 고마워 !
+          </p>
+
+          <!-- ✨ 도장 이미지 (쾅! 찍힐 예정) -->
+          <img
+            src="images/correctstamp.png"
+            alt="Failed 도장"
+            class="stamp-img"
+          />
+        </div>
+
+        <!-- 다시하기 버튼 -->
+        <button class="retry-btn" onclick="location.href = 'game2.html'">
+          다음으로
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

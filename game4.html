@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RE:TONE - 상황 실험 퀴즈</title>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 이 페이지 전용 CSS 연결 -->
+    <link rel="stylesheet" href="game1.css" />
+    <link rel="stylesheet" href="common.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="opening.html" class="logo">RE:TONE</a>
+
+      <ul class="menu">
+        <li><a href="index.html">언어 포장</a></li>
+        <li><a href="storage.html">포장 보관함</a></li>
+        <li><a href="test.html">포장 유형 테스트</a></li>
+        <li class="active"><a href="lab.html">가상 대화 실험</a></li>
+      </ul>
+    </div>
+
+    <!-- 🔥 전체 게임 화면 -->
+    <div class="game-container">
+      <!-- 1️⃣ 왼쪽: 캐릭터 일러스트 -->
+      <div class="character-area">
+        <!-- 🚨 src 속성에 직접 만드신 캐릭터 이미지 파일 경로를 넣어주세요 -->
+        <img src="images/good1.png" alt="당황한 캐릭터" class="character-img" />
+      </div>
+
+      <!-- 2️⃣ 오른쪽: 질문 및 선택지 -->
+      <div class="quiz-area">
+        <!-- 질문 박스 -->
+        <div class="question-box">
+          <h2>이웃이 반찬이나 물건을 나눠주려는 상황</h2>
+          <p>
+            감사하지만 사정상 받기 어렵다. 예의 있게 거절해야 한다.
+
+            <br />당신의 첫 마디는?
+          </p>
+        </div>
+        <div class="options">
+          <!-- ❌ 오답: 압축팩 -->
+          <button class="option-btn" onclick="location.href = 'wrong4.html'">
+            크라프트지 : 혼자 사는데 이런 거 주시면 곤란해요. 다른 분 주세요.
+          </button>
+
+          <!-- ❌ 오답: 크라프트지 -->
+          <button class="option-btn" onclick="location.href = 'wrong4.html'">
+            압축팩 : 괜찮아요. 안 받을게요.
+          </button>
+          <!-- ⭕ 정답: 에어캡 -->
+          <button class="option-btn" onclick="location.href = 'correct4.html'">
+            에어캡 : 아이고, 챙겨주셔서 감사해요. 저는 혼자라 다 먹기 어려울 것
+            같아서 이번엔 괜찮을 것 같아요.
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

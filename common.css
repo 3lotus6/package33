@@ -1,0 +1,66 @@
+/* 🔥 네비게이션 */
+.navbar {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+
+  padding: 0 40px;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+/* 🔥 로고 */
+.logo {
+  font-size: 23px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none; /* ✨ 밑줄 제거 */
+}
+
+/* 🔥 메뉴 박스 */
+.menu {
+  display: flex;
+  gap: 10px;
+
+  background: rgba(225, 80, 47, 0.8);
+  padding: 8px;
+  border-radius: 999px;
+
+  list-style: none;
+  margin: 0;
+}
+
+/* 🔥 메뉴 아이템 */
+.menu li {
+  padding: 8px 25px;
+  border-radius: 999px;
+
+  font-size: 15px;
+  color: #f9f9f9;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+/* 🔥 hover */
+.menu li:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* 🔥 active (핵심 ⭐) */
+.menu .active {
+  background: #ff5811; /* 연두색 */
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.menu a {
+  text-decoration: none;
+  color: inherit;
+}

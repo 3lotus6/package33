@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RE:TONE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="common.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="opening.html" class="logo">RE:TONE</a>
+
+      <ul class="menu">
+        <li class="active"><a href="index.html">언어 포장</a></li>
+        <li><a href="storage.html">포장 보관함</a></li>
+        <li>포장 유형 테스트</li>
+        <li><a href="lab.html">가상 대화 실험</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="card-wrap">
+        <div class="card-bg">
+          <div id="smoke-overlay"></div>
+
+          <textarea
+            id="input-text"
+            placeholder="포장할 문장을 입력하세요"
+            maxlength="47s"
+          ></textarea>
+
+          <div id="result-text"></div>
+
+          <button id="convert-btn" onclick="convert()">포장하기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="roll bojagi" id="bojagiRoll">
+      <img src="bojagi1.png" />
+    </div>
+
+    <div class="roll hologram" id="holoRoll">
+      <img src="holo1.png" />
+    </div>
+
+    <div class="roll vacuum" id="vacuumRoll">
+      <img src="vacuum1.png" />
+    </div>
+
+    <div class="roll kraft" id="kraftRoll">
+      <img src="kraft1.png" />
+    </div>
+
+    <div class="roll gold" id="goldRoll">
+      <img src="gold1.png" />
+    </div>
+
+    <div class="roll aircap" id="aircapRoll">
+      <img src="aircap1.png" />
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
