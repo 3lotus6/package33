@@ -193,16 +193,19 @@ async function convert() {
   smokeEl.classList.add("smoke-active");
 
   try {
-    const res = await fetch("http://localhost:3000/convert", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const res = await fetch(
+      "https://package33-production.up.railway.app/convert",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: text,
+          style: currentSelected,
+        }),
       },
-      body: JSON.stringify({
-        text: text,
-        style: currentSelected,
-      }),
-    });
+    );
 
     let data;
     try {
