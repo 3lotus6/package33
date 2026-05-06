@@ -223,6 +223,26 @@ async function convert() {
       inputEl.style.display = "none";
       resultEl.style.display = "block";
       resultEl.innerText = data.result || "변환 실패 😢";
+      const saved = JSON.parse(localStorage.getItem("texts")) || [];
+
+      saved.push({
+        text: data.result,
+        original: text,
+        style:
+          currentSelected === "aircap"
+            ? "에어캡"
+            : currentSelected === "bojagi"
+              ? "보자기"
+              : currentSelected === "hologram"
+                ? "홀로그램"
+                : currentSelected === "vacuum"
+                  ? "진공팩"
+                  : currentSelected === "kraft"
+                    ? "크라프트지"
+                    : "황금",
+      });
+
+      localStorage.setItem("texts", JSON.stringify(saved));
 
       // 버튼 교체 (포장하기 -> 재포장하기)
       btnEl.innerText = "재포장하기";
