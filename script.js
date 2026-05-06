@@ -225,21 +225,19 @@ async function convert() {
       resultEl.innerText = data.result || "변환 실패 😢";
       const saved = JSON.parse(localStorage.getItem("texts")) || [];
 
+      const styleMap = {
+        aircap: "에어캡",
+        bojagi: "보자기",
+        hologram: "홀로그램",
+        vacuum: "진공팩",
+        kraft: "크라프트지",
+        gold: "황금",
+      };
+
       saved.push({
         text: data.result,
         original: text,
-        style:
-          currentSelected === "aircap"
-            ? "에어캡"
-            : currentSelected === "bojagi"
-              ? "보자기"
-              : currentSelected === "hologram"
-                ? "홀로그램"
-                : currentSelected === "vacuum"
-                  ? "진공팩"
-                  : currentSelected === "kraft"
-                    ? "크라프트지"
-                    : "황금",
+        style: styleMap[currentSelected],
       });
 
       localStorage.setItem("texts", JSON.stringify(saved));
