@@ -2,42 +2,77 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>언어 저장소</title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="storage.css" />
     <link rel="stylesheet" href="common.css" />
+
+    <!-- 폰트 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
+    <!-- 🔥 네비게이션 -->
     <div class="navbar">
       <a href="opening.html" class="logo">RE:TONE</a>
 
       <ul class="menu">
-        <li><a href="index.html">언어 포장</a></li>
-        <li class="active"><a href="index.html">포장 보관함</a></li>
-        <li><a href="la.html">포장 유형 테스트</a></li>
-        <li><a href="lab.html">가상 대화 실험</a></li>
+        <li>
+          <a href="index.html">언어 포장</a>
+        </li>
+
+        <li class="active">
+          <a href="storage.html">언어 창고</a>
+        </li>
+
+        <li>
+          <a href="test.html">포장 유형 테스트</a>
+        </li>
+
+        <li>
+          <a href="lab.html">가상 대화 실험</a>
+        </li>
       </ul>
     </div>
 
     <!-- 🔥 컨베이어 -->
     <div class="belt-wrapper">
+      <!-- 레일 -->
       <div class="rail"></div>
       <div class="rail second"></div>
+      <div class="rail third"></div>
 
+      <!-- 벨트 -->
       <div class="belt" id="belt1"></div>
       <div class="belt" id="belt2"></div>
+      <div class="belt" id="belt3"></div>
     </div>
 
     <!-- 🔥 모달 -->
     <div class="modal" id="modal">
+      <!-- 닫기 -->
       <div class="close-btn" onclick="closeModal()">✕</div>
 
+      <!-- 카드 -->
       <div class="card-flip" onclick="flipCard()">
         <div class="card-inner" id="cardInner">
+          <!-- 앞 -->
           <div class="card-front">
             <p id="modalText"></p>
+
+            <span class="flip-guide">
+              카드를 눌러 원래 문장을 확인해 보세요!
+            </span>
           </div>
+
+          <!-- 뒤 -->
           <div class="card-back">
             <p id="originalText"></p>
           </div>
@@ -45,6 +80,7 @@
       </div>
     </div>
 
+    <!-- JS -->
     <script src="storage.js"></script>
 
     <script>

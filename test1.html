@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RE:TONE - 포장 유형 테스트</title>
+
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="test.css" />
+  </head>
+
+  <body>
+    <!-- 네비게이션 -->
+    <div class="navbar">
+      <a href="opening.html" class="logo"> RE:TONE </a>
+
+      <ul class="menu">
+        <li>
+          <a href="index.html">언어 포장</a>
+        </li>
+
+        <li>
+          <a href="storage.html">언어 창고</a>
+        </li>
+
+        <li class="active">
+          <a href="test.html">포장 유형 테스트</a>
+        </li>
+
+        <li>
+          <a href="lab.html">가상 대화 실험</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 테스트 전체 -->
+    <div class="test-wrap">
+      <div class="test-inner">
+        <!-- 진행률 카드 -->
+        <div class="top-card">
+          <div class="top-info">
+            <div class="question-count" id="questionCount">QUESTION 1 / 12</div>
+
+            <div class="percent" id="percent">8%</div>
+          </div>
+
+          <!-- 진행바 -->
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+          </div>
+        </div>
+
+        <!-- 질문 카드 -->
+        <div class="test-card">
+          <!-- 질문 -->
+          <div class="question" id="question"></div>
+
+          <!-- 선택지 -->
+          <div class="choices" id="choices"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="test.js"></script>
+  </body>
+</html>

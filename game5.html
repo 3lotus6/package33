@@ -17,12 +17,13 @@
   </head>
 
   <body>
+    <body style="background-image: url(&quot;images/bgca.png&quot;)"></body>
     <div class="navbar">
       <a href="opening.html" class="logo">RE:TONE</a>
 
       <ul class="menu">
         <li><a href="index.html">언어 포장</a></li>
-        <li><a href="storage.html">포장 보관함</a></li>
+        <li><a href="storage.html">언어 창고</a></li>
         <li><a href="test.html">포장 유형 테스트</a></li>
         <li class="active"><a href="lab.html">가상 대화 실험</a></li>
       </ul>
@@ -33,36 +34,31 @@
       <!-- 1️⃣ 왼쪽: 캐릭터 일러스트 -->
       <div class="character-area">
         <!-- 🚨 src 속성에 직접 만드신 캐릭터 이미지 파일 경로를 넣어주세요 -->
-        <img src="images/work1.png" alt="당황한 캐릭터" class="character-img" />
+        <img src="images/cafe1.png" alt="당황한 캐릭터" class="character-img" />
       </div>
 
       <!-- 2️⃣ 오른쪽: 질문 및 선택지 -->
       <div class="quiz-area">
         <!-- 질문 박스 -->
         <div class="question-box">
-          <h2>이미 업무량이 많은데, 상사가 계속 새로운 업무를 지시하는 상황</h2>
+          <h2>아르바이트 월급이 들어오지 않은 상황</h2>
           <p>
-            거절은 어렵지만, 무리 없이 조율해야 한다.
-
-            <br />당신의 첫 마디는?
+            월급 지급일이 지났지만 아직 급여가 들어오지 않았다.<br />감정적으로
+            말하지 않고 정중하게 이야기해야 한다. 당신의 첫 마디는?
           </p>
         </div>
         <div class="options">
           <!-- ❌ 오답: 압축팩 -->
           <button class="option-btn" onclick="location.href = 'wrong5.html'">
-            금박지 : 이 이상 업무를 더 받게 된다면… 제 일정은 완전히 붕괴하고 말
-            겁니다…! 지금 이 순간에도 업무들이 서로 충돌하고 있어요…!
+            월급 아직 안 들어왔는데 원래 이렇게 늦게 주시나요?
           </button>
           <!-- ⭕ 정답: 에어캡 -->
-          <button class="option-btn" onclick="location.href = 'wrong5.html'">
-            압축팩 : 지금 제 일도 많은데요. 이건 못 합니다.
+          <button class="option-btn" onclick="location.href = 'correct5.html'">
+            안녕하세요, 혹시 이번 달 급여 지급 일정이 어떻게 되는지 확인
+            가능할까요?
             <!-- ❌ 오답: 크라프트지 -->
-            <button
-              class="option-btn"
-              onclick="location.href = 'correct5.html'"
-            >
-              보자기 : 지금 진행 중인 업무가 있어서요. 일정 보면서 순서대로
-              진행하겠습니다.
+            <button class="option-btn" onclick="location.href = 'wrong5.html'">
+              급여도 제대로 안 주시면 어떻게 일하라는 거예요?
             </button>
           </button>
         </div>

@@ -1,0 +1,313 @@
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+
+  background: #ffece5;
+
+  overflow: hidden;
+}
+
+/* =========================
+   네비
+========================= */
+
+.navbar .logo {
+  color: #ff5e28;
+}
+
+.navbar .menu a {
+  color: #555555;
+}
+
+.navbar .menu li.active a {
+  background-color: #ff5e28;
+  color: white;
+}
+
+.navbar .menu {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* =========================
+   전체
+========================= */
+
+.result-wrap {
+  width: clamp(1100px, 60vw, 1700px);
+
+  margin: 0 auto;
+
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: clamp(50px, 3vw, 100px);
+
+  box-sizing: border-box;
+}
+
+/* =========================
+   왼쪽 카드
+========================= */
+
+.type-card {
+  width: clamp(320px, 18vw, 520px);
+
+  height: clamp(420px, 25vw, 680px);
+
+  background: linear-gradient(180deg, #5d5cff 0%, #4c4be7 100%);
+
+  border-radius: clamp(25px, 1.5vw, 40px);
+
+  padding: clamp(38px, 2.2vw, 65px);
+
+  box-sizing: border-box;
+
+  color: white;
+
+  position: relative;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 8px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================
+   왼쪽 카드 텍스트
+========================= */
+
+.type-text h1 {
+  margin: 0;
+
+  font-size: clamp(32px, 2vw, 58px);
+
+  font-weight: 800;
+
+  letter-spacing: -1px;
+}
+
+.type-text p {
+  margin-top: clamp(14px, 1vw, 28px);
+
+  font-size: clamp(20px, 1.1vw, 32px);
+
+  line-height: 1.6;
+
+  font-weight: 500;
+
+  letter-spacing: -1.3px;
+}
+
+/* =========================
+   카드 이미지
+========================= */
+
+.type-image {
+  width: clamp(170px, 11vw, 300px);
+
+  position: absolute;
+
+  right: clamp(28px, 1.5vw, 50px);
+  bottom: clamp(28px, 1.5vw, 50px);
+
+  object-fit: contain;
+}
+
+/* =========================
+   오른쪽 카드
+========================= */
+
+.result-box {
+  flex: 1;
+
+  height: clamp(420px, 25vw, 680px);
+
+  background: rgba(255, 255, 255, 0.45);
+
+  border-radius: clamp(25px, 1.5vw, 40px);
+
+  padding: clamp(45px, 2.5vw, 75px) clamp(43px, 2.5vw, 70px);
+
+  box-sizing: border-box;
+
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    0 8px 18px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================
+   설명 영역
+========================= */
+
+.description p {
+  margin: 0 0 clamp(16px, 1vw, 28px) 0;
+
+  font-size: clamp(17px, 1vw, 28px);
+
+  line-height: 1;
+
+  color: #453a32;
+
+  letter-spacing: -0.8px;
+
+  font-weight: 400;
+}
+
+/* 첫 문장 */
+
+.description p:first-child {
+  font-size: clamp(19px, 1.2vw, 34px);
+
+  font-weight: 700;
+
+  margin-bottom: clamp(24px, 1.5vw, 40px);
+
+  letter-spacing: -1px;
+}
+
+/* =========================
+   하단 정보 영역
+========================= */
+
+.bottom-info {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: clamp(70px, 4vw, 140px);
+
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+
+  padding-top: clamp(30px, 2vw, 50px);
+
+  margin-top: clamp(25px, 1.5vw, 45px);
+}
+
+/* =========================
+   하단 제목
+========================= */
+
+.info-column h3 {
+  margin: 0 0 clamp(18px, 1vw, 30px) 0;
+
+  font-size: clamp(18px, 1.1vw, 30px);
+
+  font-weight: 700;
+
+  color: #453a32;
+
+  letter-spacing: -1px;
+}
+
+/* =========================
+   리스트
+========================= */
+
+.info-column ul {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.info-column li {
+  margin-bottom: clamp(14px, 0.8vw, 24px);
+
+  font-size: clamp(17px, 1vw, 26px);
+
+  line-height: 1.2;
+
+  color: #453a32;
+
+  letter-spacing: -1.2px;
+}
+
+/* =========================
+   직업 리스트
+========================= */
+
+.job-list {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  column-gap: clamp(28px, 2vw, 60px);
+}
+
+/* =========================
+   등장 애니메이션
+========================= */
+
+.type-card,
+.result-box {
+  opacity: 0;
+
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+/* 아래 → 위 */
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+
+    transform: translateY(60px);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   유형별 카드 색상
+========================= */
+
+/* 에어캡 */
+
+.type-card.aircap {
+  background: linear-gradient(180deg, #f0cc56 0%, #ffbf3c 100%);
+}
+
+/* 보자기 */
+
+.type-card.bojagi {
+  background: linear-gradient(180deg, #7a5cff 0%, #5d43db 100%);
+}
+
+/* 압축팩 */
+
+.type-card.vacuum {
+  background: linear-gradient(180deg, #a3a7b3 0%, #696d77 100%);
+}
+
+/* 금박지 */
+
+.type-card.gold {
+  background: linear-gradient(180deg, #d3af4b 0%, #d89b1d 100%);
+}
+
+/* 홀로그램 */
+
+.type-card.holo {
+  background: linear-gradient(180deg, #9872ff 0%, #48ade8 100%);
+}
+
+/* 크라프트지 */
+
+.type-card.kraft {
+  background: linear-gradient(180deg, #e8b57e 0%, #cb9161 100%);
+}

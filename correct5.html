@@ -14,17 +14,18 @@
     <!-- ✨ 공통 CSS (네비바 기본 스타일) 연결 -->
     <link rel="stylesheet" href="common.css" />
     <!-- 오답 페이지 전용 CSS 연결 -->
-    <link rel="stylesheet" href="correct.css" />
+    <link rel="stylesheet" href="correct5.css" />
   </head>
 
   <body>
+    <body style="background-image: url(&quot;images/bgca.png&quot;)"></body>
     <!-- 🔥 네비바 (추가됨) -->
     <div class="navbar">
       <a href="opening.html" class="logo">RE:TONE</a>
 
       <ul class="menu">
         <li><a href="index.html">언어 포장</a></li>
-        <li><a href="storage.html">포장 보관함</a></li>
+        <li><a href="storage.html">언어 창고</a></li>
         <li><a href="test.html">포장 유형 테스트</a></li>
         <li class="active"><a href="lab.html">가상 대화 실험</a></li>
       </ul>
@@ -36,7 +37,7 @@
       <div class="character-area">
         <!-- 🚨 시무룩한 캐릭터 이미지 파일 경로로 변경해 주세요 -->
         <img
-          src="images/work2.png"
+          src="images/cafe2.png"
           alt="시무룩한 캐릭터"
           class="character-img"
         />
@@ -47,8 +48,8 @@
         <!-- 말풍선 박스 -->
         <div class="speech-bubble">
           <p>
-            그래? <br />
-            그럼 지금 하고 있는 것부터 정리하고, <br />이건 그 다음에 진행해줘.
+            아, 아직 입금 처리가 안 됐네요. <br />확인해줘서 고마워요.<br />
+            오늘 바로 처리할게요.
           </p>
 
           <!-- ✨ 도장 이미지 (쾅! 찍힐 예정) -->
@@ -58,14 +59,12 @@
             class="stamp-img"
           />
         </div>
+
+        <!-- 다시하기 버튼 -->
+        <button class="retry-btn" onclick="location.href = 'game6.html'">
+          다음으로
+        </button>
       </div>
     </div>
-    <script>
-      // 3000은 3초를 의미합니다 (1000 = 1초)
-      setTimeout(function () {
-        // 🚨 '다음페이지.html' 부분을 실제로 이동할 다음 단계 파일명으로 변경해 주세요!
-        location.href = "all.html";
-      }, 3000);
-    </script>
   </body>
 </html>

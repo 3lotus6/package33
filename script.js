@@ -5,50 +5,62 @@ const rolls = {
   bojagi: {
     element: document.getElementById("bojagiRoll"),
     frames: [
-      "bojagi1.png",
-      "bojagi2.png",
-      "bojagi3.png",
-      "bojagi4.png",
-      "bojagi5.png",
+      "images/bojagi1.png",
+      "images/bojagi2.png",
+      "images/bojagi3.png",
+      "images/bojagi4.png",
+      "images/bojagi5.png",
     ],
   },
   hologram: {
     element: document.getElementById("holoRoll"),
-    frames: ["holo1.png", "holo2.png", "holo3.png", "holo4.png", "holo5.png"],
+    frames: [
+      "images/holo1.png",
+      "images/holo2.png",
+      "images/holo3.png",
+      "images/holo4.png",
+      "images/holo5.png",
+    ],
   },
   vacuum: {
     element: document.getElementById("vacuumRoll"),
     frames: [
-      "vacuum1.png",
-      "vacuum2.png",
-      "vacuum3.png",
-      "vacuum4.png",
-      "vacuum5.png",
+      "images/vacuum1.png",
+      "images/vacuum2.png",
+      "images/vacuum3.png",
+      "images/vacuum4.png",
+      "images/vacuum5.png",
     ],
   },
   kraft: {
     element: document.getElementById("kraftRoll"),
     frames: [
-      "kraft1.png",
-      "kraft2.png",
-      "kraft3.png",
-      "kraft4.png",
-      "kraft5.png",
+      "images/kraft1.png",
+      "images/kraft2.png",
+      "images/kraft3.png",
+      "images/kraft4.png",
+      "images/kraft5.png",
     ],
   },
   aircap: {
     element: document.getElementById("aircapRoll"),
     frames: [
-      "aircap1.png",
-      "aircap2.png",
-      "aircap3.png",
-      "aircap4.png",
-      "aircap5.png",
+      "images/aircap1.png",
+      "images/aircap2.png",
+      "images/aircap3.png",
+      "images/aircap4.png",
+      "images/aircap5.png",
     ],
   },
   gold: {
     element: document.getElementById("goldRoll"),
-    frames: ["gold1.png", "gold2.png", "gold3.png", "gold4.png", "gold5.png"],
+    frames: [
+      "images/gold1.png",
+      "images/gold2.png",
+      "images/gold3.png",
+      "images/gold4.png",
+      "images/gold5.png",
+    ],
   },
 };
 
@@ -168,6 +180,8 @@ async function convert() {
   const resultEl = document.getElementById("result-text");
   const btnEl = document.getElementById("convert-btn");
   const smokeEl = document.getElementById("smoke-overlay");
+  const sparkleEl = document.getElementById("sparkle");
+  const card = document.querySelector(".card-inner");
 
   if (!inputEl) return;
 
@@ -184,33 +198,49 @@ async function convert() {
   }
 
   // 버튼 로딩 상태로 변경
-  btnEl.innerText = "포장 중...";
   btnEl.disabled = true;
 
+  let dots = 0;
+
+  const loadingAnimation = setInterval(() => {
+    dots = (dots + 1) % 4;
+    btnEl.innerText = "포장 중" + ".".repeat(dots);
+  }, 300);
+
   // 1. 연기 애니메이션 강제 시작
+
   smokeEl.classList.remove("smoke-active");
-  void smokeEl.offsetWidth; // 애니메이션 재시작을 위한 트릭
+  void smokeEl.offsetWidth;
   smokeEl.classList.add("smoke-active");
 
+  sparkleEl.classList.remove("sparkle-active");
+  void sparkleEl.offsetWidth;
+  sparkleEl.classList.add("sparkle-active");
+
   try {
-    const res = await fetch(
-      "https://package33-production.up.railway.app/convert",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          text: text,
-          style: currentSelected,
-        }),
+    const res = await fetch("https://package33.onrender.com/convert", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        text: text,
+        style: currentSelected,
+      }),
+    });
 
     let data;
     try {
       data = await res.json();
+
+      clearInterval(loadingAnimation);
+
+      card.classList.remove("flipping");
+      void card.offsetWidth;
+      card.classList.add("flipping");
     } catch {
+      clearInterval(loadingAnimation);
+
       alert("서버 응답 오류 😢");
       btnEl.innerText = "포장하기";
       btnEl.disabled = false;
@@ -222,7 +252,9 @@ async function convert() {
       // 텍스트 교체
       inputEl.style.display = "none";
       resultEl.style.display = "block";
-      resultEl.innerText = data.result || "변환 실패 😢";
+      const limitedResult = (data.result || "변환 실패 😢").slice(0, 47);
+
+      resultEl.innerText = limitedResult;
       const saved = JSON.parse(localStorage.getItem("texts")) || [];
 
       const styleMap = {
@@ -250,8 +282,10 @@ async function convert() {
       btnEl.onclick = () => {
         location.reload();
       };
-    }, 500);
+    }, 1400);
   } catch (error) {
+    clearInterval(loadingAnimation);
+
     console.error(error);
     alert("에러 발생 😢");
     btnEl.innerText = "포장하기";

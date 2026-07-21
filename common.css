@@ -1,50 +1,38 @@
 /* 🔥 네비게이션 */
 .navbar {
   position: fixed;
-  top: 20px;
+  top: 1.3vw;
   left: 0;
   width: 100%;
-
-  padding: 0 40px;
+  padding: 0 2.6vw;
   box-sizing: border-box;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   z-index: 1000;
 }
-
-/* 🔥 로고 */
 .logo {
-  font-size: 23px;
+  font-size: 1.35vw;
   font-weight: 700;
   color: white;
-  text-decoration: none; /* ✨ 밑줄 제거 */
+  text-decoration: none;
 }
-
-/* 🔥 메뉴 박스 */
 .menu {
   display: flex;
-  gap: 10px;
-
+  gap: 0.55vw;
   background: rgba(225, 80, 47, 0.8);
-  padding: 8px;
+  padding: 0.45vw;
   border-radius: 999px;
-
   list-style: none;
   margin: 0;
 }
 
-/* 🔥 메뉴 아이템 */
 .menu li {
-  padding: 8px 25px;
+  padding: 0.45vw 1.45vw;
   border-radius: 999px;
-
-  font-size: 15px;
+  font-size: 0.88vw;
   color: #f9f9f9;
   cursor: pointer;
-
   transition: all 0.2s ease;
 }
 
@@ -53,9 +41,9 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
-/* 🔥 active (핵심 ⭐) */
+/* 🔥 active */
 .menu .active {
-  background: #ff5811; /* 연두색 */
+  background: #ff5811;
   color: #ffffff;
   font-weight: 500;
 }

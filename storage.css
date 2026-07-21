@@ -1,69 +1,93 @@
 /* 🔥 기본 */
 body {
   margin: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: "Noto Sans KR", sans-serif;
+  background: #ff5e28;
 
-  /* 🔥 배경 이미지 */
-  background: #ff6c3b;
-
-  background-size: 100% auto;
+  background-size: cover;
+  background-position: center;
 }
 
 /* 🔥 컨테이너 */
 .belt-wrapper {
   position: relative;
-  margin-top: 120px;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* 🔥 레일 */
 .rail {
   position: absolute;
   width: 100%;
-  height: 30px;
-
+  height: 1.43vw;
   background: url("images/rail.png") repeat-x;
-  background-size: auto 30px;
+  background-size: auto 1.43vw;
+  z-index: 5;
+}
 
-  top: 300px;
+/* 🔥 레일 위치 */
+.rail {
+  top: 18.7vw;
 }
 
 .rail.second {
-  top: 600px;
+  top: 33.5vw;
+}
+
+.rail.third {
+  top: 49.1vw;
 }
 
 /* 🔥 벨트 */
 .belt {
-  display: flex;
   position: absolute;
-  width: max-content;
+  width: 100%;
+  height: 12vw;
+  z-index: 1;
 }
 
-/* 🔥 박스 위치 */
+/* 🔥 벨트 위치 */
 #belt1 {
-  top: 130px;
+  top: 6.8vw;
 }
 
 #belt2 {
-  top: 430px;
+  top: 21.5vw;
+}
+
+#belt3 {
+  top: 37.1vw;
 }
 
 /* 🔥 박스 */
 .box {
-  width: 150px;
-  margin: 0 40px;
+  width: clamp(140px, 7vw, 280px);
+
+  position: absolute;
+  bottom: 0;
 
   display: flex;
   align-items: flex-end;
 
   cursor: pointer;
-}
 
+  transition: transform 0.2s ease;
+}
 /* 🔥 이미지 */
 .box-img {
   width: 100%;
   height: auto;
+  display: block;
 }
+
+/* 🔥 hover */
+.box:hover {
+  transform: scale(1.04);
+}
+
+/* 🔥 컨베이어 미세 진동 */
 
 /* 🔥 클릭 애니메이션 */
 .box.opening {
@@ -75,6 +99,7 @@ body {
     transform: scale(1);
     opacity: 1;
   }
+
   100% {
     transform: scale(1.4);
     opacity: 0;
@@ -88,30 +113,31 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-
   display: none;
   justify-content: center;
   align-items: center;
-
-  background: rgba(0, 0, 0, 0.5);
-
-  backdrop-filter: blur(3px); /* 🔥 살짝 블러 */
+  background: rgba(0, 0, 0, 0.58);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
 }
 
 /* 🔥 카드 */
 .card-flip {
-  width: 320px;
-  height: 200px;
+  width: 25vw;
+  height: 15vw;
   perspective: 1000px;
 }
 
+/* 🔥 카드 내부 */
 .card-inner {
   width: 100%;
   height: 100%;
+  position: relative;
   transition: 0.6s;
   transform-style: preserve-3d;
 }
 
+/* 🔥 뒤집기 */
 .card-inner.flip {
   transform: rotateY(180deg);
 }
@@ -122,20 +148,19 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-
-  background: white;
-  border-radius: 15px;
-
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 5.7vw 2.7vw 2.5vw;
   box-sizing: border-box;
-
   backface-visibility: hidden;
+  background-image: url("images/card22.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
+/* 🔥 카드 뒷면 */
 .card-back {
   transform: rotateY(180deg);
 }
@@ -143,27 +168,83 @@ body {
 /* 🔥 텍스트 */
 .card-front p,
 .card-back p {
+  width: 100%;
+  margin: 0;
+
   text-align: center;
-  line-height: 1.6;
+
+  font-size: 1vw;
+  font-weight: 400;
+
+  color: #482c23;
+
+  line-height: 1.8;
+  letter-spacing: -0.02vw;
+
   word-break: keep-all;
-
-  font-size: 14px;
-  color: #333;
-
-  max-width: 260px;
+  overflow-wrap: break-word;
 }
 
 /* 🔥 닫기 버튼 */
 .close-btn {
   position: fixed;
-  top: 80px;
-  right: 40px;
-  font-size: 30px;
+  top: 1.43vw;
+  right: 1.82vw;
+  font-size: 1.56vw;
+  font-weight: 600;
+  line-height: 1;
   cursor: pointer;
-  color: #222;
+  color: white;
+  z-index: 10000;
+  transition: 0.2s;
 }
 
-/* 🔥 hover 효과 */
-.box:hover {
-  transform: scale(1.05);
+/* 🔥 hover */
+.close-btn:hover {
+  transform: scale(1.08);
+  opacity: 0.8;
+}
+/* 🔥 카드 안내문 */
+.flip-guide {
+  position: absolute;
+  bottom: 1.4vw;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 0.8vw;
+  font-weight: 400;
+
+  color: rgba(72, 44, 35, 0.7);
+
+  letter-spacing: -0.02vw;
+
+  white-space: nowrap;
+
+  pointer-events: none;
+}
+.flip-guide {
+  animation: guideBlink 1.6s ease-in-out infinite;
+}
+
+@keyframes guideBlink {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
+  }
+}
+/* 🔥 카드 hover */
+.card-flip {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card-flip:hover {
+  transform: translateY(-0.3vw) scale(1.03);
 }

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RE:TONE - 상황 실험 퀴즈</title>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 이 페이지 전용 CSS 연결 -->
+    <link rel="stylesheet" href="game2.css" />
+    <link rel="stylesheet" href="common.css" />
+  </head>
+
+  <body>
+    <body style="background-image: url(&quot;images/bgparty.png&quot;)"></body>
+    <div class="navbar">
+      <a href="opening.html" class="logo">RE:TONE</a>
+
+      <ul class="menu">
+        <li><a href="index.html">언어 포장</a></li>
+        <li><a href="storage.html">언어 창고</a></li>
+        <li><a href="test.html">포장 유형 테스트</a></li>
+        <li class="active"><a href="lab.html">가상 대화 실험</a></li>
+      </ul>
+    </div>
+
+    <!-- 🔥 전체 게임 화면 -->
+    <div class="game-container">
+      <!-- 1️⃣ 왼쪽: 캐릭터 일러스트 -->
+      <div class="character-area">
+        <!-- 🚨 src 속성에 직접 만드신 캐릭터 이미지 파일 경로를 넣어주세요 -->
+        <img
+          src="images/present1.png"
+          alt="당황한 캐릭터"
+          class="character-img"
+        />
+      </div>
+
+      <!-- 2️⃣ 오른쪽: 질문 및 선택지 -->
+      <div class="quiz-area">
+        <!-- 질문 박스 -->
+        <div class="question-box">
+          <h2>지인이 부담스러운 고가의 선물을 줄 때 상황</h2>
+          <p>
+            지인이 예상보다 훨씬 비싼 선물을 건넸다.<br />
+            고마운 마음은 있지만, 부담스럽고 미안한 마음도 함께 든다.
+
+            <br />당신의 첫 마디는?
+          </p>
+        </div>
+        <div class="options">
+          <!-- ❌ 오답: 압축팩 -->
+          <button class="option-btn" onclick="location.href = 'correct6.html'">
+            정말 고마워. 그런데 이렇게 비싼 선물까지 준비해줘서 괜히 미안하다.
+          </button>
+
+          <!-- ❌ 오답: 크라프트지 -->
+          <button class="option-btn" onclick="location.href = 'wrong6.html'">
+            이렇게 부담스럽게 주면 솔직히 좀 곤란해.
+          </button>
+          <!-- ⭕ 정답: 에어캡 -->
+          <button class="option-btn" onclick="location.href = 'wrong6.html'">
+            이 정도면 좀 부담스러운데 왜 이렇게까지 했어?
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

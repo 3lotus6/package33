@@ -5,7 +5,6 @@ body {
   background: url("bg.png") center/cover no-repeat;
 }
 
-/* 🔥 메인 */
 .container {
   height: 100vh;
   display: flex;
@@ -16,68 +15,64 @@ body {
 
 /* 🔥 카드 */
 .card-bg {
-  width: 450px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   background: url("card.png") center/contain no-repeat;
   position: relative;
-  overflow: hidden; /* 연기가 카드 밖으로 나가는 것을 막아줌 */
-  border-radius: 20px;
-  /* ★ 이 줄을 추가하세요! (숫자가 커질수록 위로 올라감) */
-}
+  overflow: hidden;
+  border-radius: 1.3vw;
+  z-index: 20;
 
-/* 🔥 텍스트 (입력창 & 결과창 공통) */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+/* 🔥 텍스트 */
 #input-text,
 #result-text {
   position: absolute;
-  top: 40px;
-  left: 45px;
-  width: 350px;
-  height: 106px; /* ★ 기존 90px에서 106px로 변경 (2줄 높이) */
+  top: 14%;
+  left: 10%;
+  width: 80%;
+  height: 40%;
   border: none;
   outline: none;
   resize: none;
   background: transparent;
-  font-size: 16px;
-  line-height: 53px;
+  font-size: 0.93vw;
+  line-height: 3.5;
   letter-spacing: -0.5px;
   color: #5b2506;
   font-family: "Noto Sans KR", sans-serif;
-  overflow: hidden; /* ★ 추가: 입력창 스크롤바 강제 숨김 */
+  overflow: hidden;
 }
-
-/* 결과창 전용 (기본 숨김) */
 #result-text {
   display: none;
-  overflow-y: auto;
-  white-space: pre-wrap; /* 결과 줄바꿈 유지 */
+  overflow: hidden;
+  white-space: pre-wrap;
 }
 
 /* 🔥 버튼 */
 button {
   position: absolute;
-  top: 190px;
+  top: 63%;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 15px;
-  padding: 10px 21px;
-  border-radius: 10px;
+  font-size: 0.88vw;
+  padding: 0.57vw 1.2vw;
+  border-radius: 0.57vw;
   border: none;
   background: #ff5811;
   color: white;
   cursor: pointer;
   transition: all 0.2s;
-  z-index: 10; /* 버튼이 연기 위로 오도록 설정 */
+  z-index: 10;
 }
-
 button:hover {
   background: #c2440a;
   transform: translateX(-50%) scale(0.97);
 }
 
-/* ========================= */
-/* 🔥 연기 효과 (새로 추가됨) */
-/* ========================= */
-
+/* 🔥 연기 */
 #smoke-overlay {
   position: absolute;
   top: 0;
@@ -107,7 +102,7 @@ button:hover {
   30% {
     opacity: 1;
     transform: scale(1.2);
-  } /* 연기가 가장 짙어짐 */
+  }
   70% {
     opacity: 1;
     transform: scale(1.1);
@@ -115,54 +110,46 @@ button:hover {
   100% {
     opacity: 0;
     transform: scale(1.5);
-  } /* 연기가 흩어짐 */
+  }
 }
 
-/* ========================= */
 /* 🔥 롤 공통 */
-/* ========================= */
-
 .roll {
   position: fixed;
   z-index: 10;
 }
 
 .roll img {
-  width: 480px;
+  width: 27vw;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-
-/* ========================= */
-/* 🔥 각 롤 기울기 및 위치 */
-/* ========================= */
-
-/* 보자기 */
+/* 🔥 보자기 */
 .bojagi {
-  top: 80px;
-  left: 200px;
-  z-index: 25;
+  top: 5.2vw;
+  left: 13vw;
+  z-index: 5;
 }
 .bojagi img {
   --angle: 10deg;
-
   transform: rotate(var(--angle));
 }
 
-/* 홀로그램 */
+/* 🔥 홀로그램 */
 .hologram {
-  top: 330px;
-  left: -30px;
+  top: 21.5vw;
+  left: -2vw;
+  z-index: 18;
 }
 .hologram img {
   --angle: 0deg;
   transform: rotate(var(--angle));
 }
 
-/* 압축팩 */
+/* 🔥 압축팩 */
 .vacuum {
   bottom: 0px;
-  left: 90px;
+  left: 5.9vw;
   z-index: 15;
 }
 .vacuum img {
@@ -170,10 +157,10 @@ button:hover {
   transform: rotate(var(--angle));
 }
 
-/* 크라프트지 */
+/* 🔥 크라프트지 */
 .kraft {
-  bottom: -50px;
-  right: 200px;
+  bottom: -3.3vw;
+  right: 13vw;
   z-index: 18;
 }
 .kraft img {
@@ -181,10 +168,10 @@ button:hover {
   transform: rotate(var(--angle));
 }
 
-/* 황금보자기 */
+/* 🔥 황금보자기 */
 .gold {
-  top: 110px;
-  right: 80px;
+  top: 7.2vw;
+  right: 5.2vw;
   z-index: 25;
 }
 .gold img {
@@ -192,10 +179,10 @@ button:hover {
   transform: rotate(var(--angle));
 }
 
-/* 에어캡 */
+/* 🔥 에어캡 */
 .aircap {
-  top: 350px;
-  right: 40px;
+  top: 22.8vw;
+  right: 2.6vw;
   z-index: 35;
 }
 .aircap img {
@@ -203,63 +190,276 @@ button:hover {
   transform: rotate(var(--angle));
 }
 
-/* ========================= */
 /* 🔥 hover */
-/* ========================= */
-
 .roll:hover img {
   transform: rotate(var(--angle)) scale(1.03);
   --angle: 10deg;
 }
-
 .gold:hover img {
   transform: rotate(var(--angle)) scale(1.03);
   --angle: -10deg;
 }
-
 .aircap:hover img {
   transform: rotate(var(--angle)) scale(1.03);
   --angle: -10deg;
 }
-
 .kraft:hover img {
   transform: rotate(var(--angle)) scale(1.03);
   --angle: -10deg;
 }
 
-/* ========================= */
 /* 🔥 선택 상태 */
-/* ========================= */
-
 .roll.active img {
   transform: rotate(var(--angle)) scale(1.08);
   --angle: 10deg;
   filter: drop-shadow(0 0 10px white)
     drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 }
-
 .gold.active img {
   transform: rotate(var(--angle)) scale(1.08);
   --angle: -10deg;
   filter: drop-shadow(0 0 10px white)
     drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 }
-
 .aircap.active img {
   transform: rotate(var(--angle)) scale(1.08);
   --angle: -10deg;
   filter: drop-shadow(0 0 10px white)
     drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 }
-
 .kraft.active img {
   transform: rotate(var(--angle)) scale(1.08);
   --angle: -10deg;
   filter: drop-shadow(0 0 10px white)
     drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
 }
+
 .logo {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+}
+
+/* 🔥 네비게이션 */
+.navbar {
+  position: fixed;
+  top: 1.3vw;
+  left: 0;
+  width: 100%;
+  padding: 0 2.6vw;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5vw;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  gap: 0.65vw;
+  background: rgba(225, 80, 47, 0.8);
+  padding: 0.52vw;
+  border-radius: 999px;
+  list-style: none;
+  margin: 0;
+}
+
+.menu li {
+  padding: 0.52vw 1.63vw;
+  border-radius: 999px;
+  font-size: 0.98vw;
+  color: #f9f9f9;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.menu li:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.menu .active {
+  background: #ff5811;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.menu a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  perspective: 2500px;
+}
+
+.card-wrap {
+  width: 26vw;
+  height: 17.3vw;
+  perspective: 2000px;
+
+  position: relative; /* 중요 */
+}
+
+/* 포장 애니메이션 */
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  transform-style: preserve-3d;
+  will-change: transform;
+
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transform: translateZ(1px);
+}
+.card-back {
+  background: url("images/card2.png") center/contain no-repeat;
+  transform: rotateY(180deg);
+
+  outline: 1px solid transparent;
+}
+
+.card-inner.flipping {
+  animation: flipCard 1.5s linear forwards;
+}
+
+@keyframes flipCard {
+  0% {
+    transform: scale(1) rotateY(0deg);
+  }
+
+  40% {
+    transform: scale(1.15) rotateY(180deg);
+  }
+
+  60% {
+    transform: scale(1.2) rotateY(360deg);
+  }
+
+  90% {
+    transform: scale(0.92) rotateY(680deg);
+  }
+
+  100% {
+    transform: scale(1) rotateY(720deg);
+  }
+}
+#sparkle {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 26vw;
+  height: 17.3vw;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+  opacity: 0;
+  z-index: 999;
+}
+
+@keyframes sparkleBurst {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.sparkle-active::before {
+  content: "✦ ✦ ✦ ✦ ✦ ✦ ✦ ✦";
+
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2vw;
+  color: #fff8c6;
+
+  letter-spacing: 1.5vw;
+
+  animation: sparkleRing 1.2s ease-out forwards;
+}
+@keyframes sparkleRing {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(0deg);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2) rotate(220deg);
+  }
+}
+.sparkle-active {
+  opacity: 1;
+}
+.card-inner.flipping .card-bg {
+  animation: cardFlash 1.5s ease-out;
+}
+
+@keyframes cardFlash {
+  0% {
+    filter: brightness(1);
+  }
+
+  30% {
+    filter: brightness(1.2);
+  }
+
+  50% {
+    filter: brightness(1.8);
+  }
+
+  70% {
+    filter: brightness(1.3);
+  }
+
+  100% {
+    filter: brightness(1);
+  }
 }

@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -26,12 +26,12 @@ body {
   top: 3vh;
   left: 0;
   right: 0;
-  height: 35vh;
+  height: 37vh;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 5px;
-  padding: 20px 160px 20px 160px;
+  gap: 0.4vw; /* 고정 px에서 vw로 수정 */
+  padding: 2vw 10vw; /* px 패딩을 vw 비율로 수정 */
 }
 
 .pkg {
@@ -60,8 +60,8 @@ body {
 .text-area {
   position: absolute;
   top: 45vh;
-  left: 160px;
-  right: 160px;
+  left: 10vw; /* 160px를 vw 비율로 수정 */
+  right: 10vw;
   height: 42vh;
 
   border-top: 1px solid rgba(255, 255, 255, 0.7);
@@ -71,7 +71,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding: 0;
-  gap: 6.125rem;
+  gap: 5vw; /* 6.125rem을 vw로 수정하여 대화면 대응 */
   z-index: 10;
 }
 
@@ -241,12 +241,11 @@ body {
   line-height: 1.5;
   top: 0;
   margin-top: -1.2vw;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.03em;
 }
 
 .typed-text.tone-mode {
   font-size: 16vw;
-
   font-weight: 505;
   top: 0;
   margin-top: -2.4vw;
@@ -272,16 +271,27 @@ body {
 /* ───────── 푸터 ───────── */
 .footer {
   position: absolute;
-  bottom: 70px;
+  bottom: 7.5vh; /* 70px를 vh 비율로 수정 */
   left: 0;
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 160px;
+  padding: 0 11vw; /* 160px를 vw 비율로 수정 */
 }
 
 .footer-item {
-  font-size: 18px;
-  font-weight: 50;
+  font-size: 1vw; /* 18px를 vw로 수정 */
+  font-weight: 300; /* 너무 가늘지 않게 소폭 조정 */
   color: rgba(255, 255, 255, 0.7);
 }
+
+.typed-text.outline-text {
+  color: rgb(78, 40, 31);
+  font-weight: 700;
+  text-shadow:
+    -0.15vw -0.15vw 0 rgb(255, 94, 25),
+    0.15vw -0.15vw 0 rgb(255, 94, 25),
+    -0.15vw 0.15vw 0 rgb(255, 94, 25),
+    0.15vw 0.15vw 0 rgb(255, 94, 25);
+}
+/* 마지막 문장 전용 폰트 */

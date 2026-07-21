@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RE:TONE 결과</title>
+
+    <!-- 공통 -->
+    <link rel="stylesheet" href="common.css" />
+
+    <!-- 결과 -->
+    <link rel="stylesheet" href="result.css" />
+
+    <!-- 폰트 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- 네비게이션 -->
+    <div class="navbar">
+      <a href="opening.html" class="logo"> RE:TONE </a>
+
+      <ul class="menu">
+        <li>
+          <a href="index.html">언어 포장</a>
+        </li>
+
+        <li>
+          <a href="storage.html">언어 창고</a>
+        </li>
+
+        <li class="active">
+          <a href="test.html">포장 유형 테스트</a>
+        </li>
+
+        <li>
+          <a href="lab.html">가상 대화 실험</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 결과 -->
+    <div class="result-wrap">
+      <!-- 왼쪽 카드 -->
+      <div class="type-card" id="typeCard">
+        <div class="type-text">
+          <h1 id="resultType"></h1>
+
+          <p id="resultShort"></p>
+        </div>
+
+        <img id="resultImage" src="" alt="" class="type-image" />
+      </div>
+
+      <!-- 오른쪽 카드 -->
+      <div class="result-box">
+        <!-- 설명 -->
+        <div class="description">
+          <p id="resultMain"></p>
+
+          <p id="resultDesc1"></p>
+
+          <p id="resultDesc2"></p>
+
+          <p id="resultDesc3"></p>
+        </div>
+
+        <!-- 하단 -->
+        <div class="bottom-info">
+          <!-- 특징 -->
+          <div class="info-column">
+            <h3>이런 모습이 자주 보여요</h3>
+
+            <ul id="featureList"></ul>
+          </div>
+
+          <!-- 직업 -->
+          <div class="info-column">
+            <h3>어울리는 직업</h3>
+
+            <ul class="job-list" id="jobList"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="result.js"></script>
+  </body>
+</html>

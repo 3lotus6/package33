@@ -1,143 +1,113 @@
-/* ========================================= */
-/* 1. 기본 & 배경 설정 */
-/* ========================================= */
 body {
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;
-
-  /* 🚨 배경 이미지 경로 (실제 파일명으로 변경해 주세요) */
-  background-image: url("images/bgcafe.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  /* 스크롤 없이 한 화면에 꽉 차게 */
   height: 100vh;
-  overflow: hidden; /* 화면 밖으로 넘치는 애니메이션 방지 */
+  overflow: hidden;
 }
 
-/* ========================================= */
-/* 2. 🔥 현재 페이지 한정: 네비바 스타일 덮어쓰기 */
-/* ========================================= */
-/* 배경 이미지 때문에 글자가 안 보일 수 있으니 어둡게 변경하고 반투명 배경 깔기 */
-
+/* 🔥 네비바 덮어쓰기 */
 .navbar .logo {
-  color: #ff5e28; /* 로고 색상 어둡게 */
+  color: #ff5e28;
 }
 .navbar .menu a {
-  color: #555555; /* 메뉴 글자 색상 어둡게 */
+  color: #555555;
 }
-
 .navbar .menu li.active a {
   background-color: #ff5e28;
   color: white;
 }
-
 .navbar .menu {
-  /* ✨ 원하는 색상으로 변경해 보세요! 
-     예시로 깔끔한 반투명 흰색을 넣어두었습니다. */
   background-color: rgba(255, 255, 255, 0.8);
 }
-/* ========================================= */
-/* 3. 🔥 전체 레이아웃 (Grid) */
-/* ========================================= */
+
+/* 🔥 전체 레이아웃 */
 .game-container {
   display: grid;
-  grid-template-columns: 1fr 1.5fr; /* 왼쪽(캐릭터) 1 : 오른쪽(퀴즈) 1.5 */
-  gap: 80px;
-
-  max-width: 1300px;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3vw;
+  max-width: 75vw;
   width: 100%;
-  margin: 0 auto; /* 화면 정중앙 */
-  padding: 0 40px;
+  margin: 0 auto;
+  padding: 0 2vw;
   box-sizing: border-box;
-
-  /* 네비바(80px)를 제외한 높이 꽉 채우기 */
-  height: calc(100vh - 80px);
+  height: calc(100vh - 4vw);
 }
 
-/* ========================================= */
-/* 4. 캐릭터 일러스트 영역 */
-/* ========================================= */
+/* 🔥 캐릭터 영역 */
 .character-area {
   text-align: center;
-  align-self: end; /* ✨ 캐릭터가 화면 바닥에 딱 붙게 만듦 */
-  margin-bottom: -80px;
+  align-self: end;
+  margin-bottom: -4vw;
 }
 
 .character-img {
-  max-width: 76%; /* ✨ 크기 살짝 축소 (숫자를 바꿔서 조절 가능) */
+  max-width: 76%;
   height: auto;
   display: block;
   margin: 0 auto;
-
-  /* ✨ 아래에서 위로 등장 애니메이션 적용 */
   opacity: 0;
   animation: slideUp 0.8s ease-out forwards;
 }
 
-/* ========================================= */
-/* 5. 퀴즈 영역 (질문 + 버튼) */
-/* ========================================= */
+/* 🔥 퀴즈 영역 */
 .quiz-area {
-  align-self: center; /* ✨ 퀴즈들은 화면 수직 중앙에 예쁘게 띄워둠 */
+  align-self: center;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 1.5vw;
 }
 
 /* 🔹 질문 박스 */
 .question-box {
   background-color: #ff5e28;
   color: rgb(255, 255, 255);
-  padding: 33px 40px;
-  border-radius: 20px;
-
-  /* ✨ 오른쪽에서 날아오는 애니메이션 (캐릭터 등장 후 0.3초 뒤) */
+  padding: 2vw 2vw;
+  border-radius: 1.3vw;
   opacity: 0;
   animation: slideInRight 0.6s ease-out 0.3s forwards;
 }
 
 .question-box h2 {
   margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 22px;
+  margin-bottom: 0.5vw;
+  font-size: 1.2vw;
   font-weight: 500;
 }
 
 .question-box p {
   margin: 0;
-  font-size: 18px;
+  font-size: 1vw;
   line-height: 1.6;
   font-weight: 300;
 }
 
-/* 🔹 선택지 목록 묶음 */
+/* 🔹 선택지 목록 */
 .options {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1vw;
 }
 
-/* 🔹 개별 선택지 버튼 디자인 */
+/* 🔹 선택지 버튼 */
 .option-btn {
   width: 100%;
   text-align: left;
-  padding: 22px 30px;
-
+  padding: 1.3vw 1.5vw;
   background-color: rgba(255, 243, 238, 0.85);
-  border: 3px solid #ff5e28;
-  border-radius: 15px;
+  border: 0.18vw solid #ff5e28;
+  border-radius: 1vw;
   color: #ff5e28;
-
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 1.03vw;
+  font-weight: 700;
   font-family: inherit;
   cursor: pointer;
+  line-height: 1.6;
   transition: all 0.2s ease-in-out;
 }
 
-/* 호버(마우스 올림) 효과 */
 .option-btn:hover {
   background-color: #ff5e28;
   color: white;
@@ -145,7 +115,6 @@ body {
   box-shadow: 0 6px 15px rgba(255, 94, 40, 0.3);
 }
 
-/* ✨ 버튼들이 0.2초 간격으로 순서대로 날아오도록 적용 */
 .option-btn:nth-child(1) {
   opacity: 0;
   animation: slideInRight 0.5s ease-out 0.5s forwards;
@@ -159,11 +128,7 @@ body {
   animation: slideInRight 0.5s ease-out 0.9s forwards;
 }
 
-/* ========================================= */
-/* 6. ✨ 애니메이션 키프레임 정의 ✨ */
-/* ========================================= */
-
-/* 아래에서 위로 올라오기 */
+/* 🔥 애니메이션 */
 @keyframes slideUp {
   0% {
     transform: translateY(100px);
@@ -175,7 +140,6 @@ body {
   }
 }
 
-/* 오른쪽에서 왼쪽으로 날아오기 */
 @keyframes slideInRight {
   0% {
     transform: translateX(50px);
