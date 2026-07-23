@@ -20,7 +20,7 @@
 .menu {
   display: flex;
   gap: 0.55vw;
-  background: rgba(225, 80, 47, 0.8);
+  background: rgba(188, 43, 11, 0.8);
   padding: 0.45vw;
   border-radius: 999px;
   list-style: none;
@@ -38,7 +38,7 @@
 
 /* 🔥 hover */
 .menu li:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* 🔥 active */

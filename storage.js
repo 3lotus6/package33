@@ -178,9 +178,21 @@ function openBox(box, item) {
     card.classList.add("drop");
     front.style.backgroundImage = `url(${cardFrontImages[item.style]})`;
     back.style.backgroundImage = 'url("images/card2.png")';
-    text.innerHTML = item.text.replace(/\n/g, "<br>");
+    if (item.style === "진공팩") {
+      text.style.color = "#000000"; // 앞면(포장된 문장)
+    } else {
+      text.style.color = "#482c23"; // 기본 색
+    }
+    if (item.style === "보자기") {
+      text.style.color = "#fefefe"; // 앞면(포장된 문장)
+    } else {
+      text.style.color = "#482c23"; // 기본 색
+    }
+    text.innerHTML = (item.text || "")
+      .replace(/^["'“”‘’]|["'“”‘’]$/g, "")
+      .replace(/\n/g, "<br>");
 
-    original.innerHTML = item.original.replace(/\n/g, "<br>");
+    original.innerHTML = (item.original || "").replace(/\n/g, "<br>");
 
     modal.dataset.currentId = item.id;
   }, 500);
@@ -193,11 +205,21 @@ function openBox(box, item) {
 function flipCard() {
   const card = document.getElementById("cardInner");
 
-  if (card) {
-    card.classList.toggle("flip");
+  if (!card) return;
+
+  // 앞면 → 뒷면
+  if (!card.classList.contains("flip")) {
+    card.classList.add("breaking");
+
+    setTimeout(() => {
+      card.classList.add("flip");
+      card.classList.remove("breaking");
+    }, 320);
+  } else {
+    // 다시 앞면
+    card.classList.remove("flip");
   }
 }
-
 /* =========================
    모달 닫기
 ========================= */

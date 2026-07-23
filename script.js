@@ -1,4 +1,5 @@
-// =========================
+const paperSound = document.getElementById("paperSound");
+fetch("https://package33.onrender.com/ping").catch(() => {}); // =========================
 // 🔥 프레임 설정
 // =========================
 const rolls = {
@@ -135,9 +136,13 @@ Object.keys(rolls).forEach((key) => {
   // hover
   el.addEventListener("mouseenter", () => {
     if (currentSelected === key) return;
+
+    paperSound.currentTime = 0;
+    paperSound.volume = 0.5;
+    paperSound.play().catch(() => {});
+
     playForward(key);
   });
-
   el.addEventListener("mouseleave", () => {
     if (currentSelected === key) return;
     playReverse(key);
@@ -273,10 +278,19 @@ async function convert() {
       limitedResult = limitedResult.replace(/^["'“”‘’]|["'“”‘’]$/g, "");
 
       resultEl.innerText = limitedResult;
+      resultEl.style.fontWeight = "500";
       if (currentSelected === "bojagi") {
         resultEl.style.color = "#ffffff";
+        btnEl.style.background = "#5544ea"; // 파란색
+        btnEl.style.color = "#ffffff";
+      } else if (currentSelected === "vacuum") {
+        resultEl.style.color = "#4e4e4e";
+        btnEl.style.background = "#616161"; // 검은색
+        btnEl.style.color = "#ffffff";
       } else {
-        resultEl.style.color = "#5b2506"; // 기본 색
+        resultEl.style.color = "#5b2506";
+        btnEl.style.background = "#ff5811"; // 기본 주황색
+        btnEl.style.color = "#ffffff";
       }
       const saved = JSON.parse(localStorage.getItem("texts")) || [];
 

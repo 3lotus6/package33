@@ -270,3 +270,118 @@ body {
     transform: translateY(0);
   }
 }
+/* 카드가 해체되기 직전 */
+.card-inner.breaking {
+  animation: breakPackage 0.35s ease;
+}
+
+@keyframes breakPackage {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+
+  20% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+
+  40% {
+    transform: translateX(2px) rotate(1deg);
+  }
+
+  60% {
+    transform: scale(0.97);
+    filter: blur(1px);
+  }
+
+  100% {
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* 포장 파편 */
+.card-front::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.card-inner.breaking .card-front::after {
+  animation: packageDust 0.4s ease forwards;
+}
+
+@keyframes packageDust {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  30% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+.card-inner.breaking {
+  animation: breakPackage 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+@keyframes breakPackage {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+
+  10% {
+    transform: translate(-8px, 4px) rotate(-4deg);
+  }
+
+  20% {
+    transform: translate(8px, -4px) rotate(4deg);
+  }
+
+  35% {
+    transform: translate(-6px, 2px) rotate(-3deg);
+  }
+
+  55% {
+    transform: scale(0.9);
+    filter: blur(3px);
+  }
+
+  100% {
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+.card-front::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-inner.breaking .card-front::before {
+  animation: flash 0.18s;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}

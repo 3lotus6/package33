@@ -1,4 +1,6 @@
-/* ─── DOM 요소 참조 ─── */
+const typingSound = document.getElementById("typingSound");
+const clickSound =
+  document.getElementById("clickSound"); /* ─── DOM 요소 참조 ─── */
 const reBtn = document.getElementById("re-btn");
 const typedText = document.getElementById("typed-text");
 const reTooltip = document.getElementById("re-tooltip");
@@ -136,7 +138,12 @@ function runStep(idx) {
       shakePkg(s.shakeIdx);
     }, 800);
   }
-
+  if (s.isLast) {
+    typingSound.currentTime = 0;
+    typingSound.volume = 0.8;
+    typingSound.playbackRate = 2; // 10% 빠르게
+    typingSound.play().catch(() => {});
+  }
   typeText(
     s.text,
     () => {
@@ -193,6 +200,12 @@ function runStep(idx) {
 if (reBtn) {
   reBtn.addEventListener("click", () => {
     if (typing || step >= STEPS.length - 1) return;
+
+    // 마지막 문장으로 넘어가는 클릭은 소리 재생 안 함
+    if (step < STEPS.length - 2) {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
 
     step++;
 

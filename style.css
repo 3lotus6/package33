@@ -35,7 +35,7 @@ body {
 #input-text,
 #result-text {
   position: absolute;
-  top: 14%;
+  top: 12%;
   left: 10%;
   width: 80%;
   height: 40%;
@@ -302,7 +302,7 @@ button:hover {
 
 .card-wrap {
   width: 26vw;
-  height: 17.3vw;
+  height: 15.3vw;
   aspect-ratio: 3 / 2;
   position: fixed;
   left: 50%;
