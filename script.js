@@ -63,7 +63,21 @@ const rolls = {
     ],
   },
 };
+const cardBg = document.getElementById("card-bg");
 
+const cardImages = {
+  default: "card.png",
+
+  bojagi: "images/card_bojagi.png",
+  hologram: "images/card_holo.png",
+  vacuum: "images/card_vacuum.png",
+  kraft: "images/card_kraft.png",
+  gold: "images/card_gold.png",
+  aircap: "images/card_aircap.png",
+};
+
+// 첫 화면은 일반 카드
+cardBg.style.backgroundImage = `url(${cardImages.default})`;
 let currentSelected = null;
 let intervals = {};
 
@@ -238,6 +252,9 @@ async function convert() {
       card.classList.remove("flipping");
       void card.offsetWidth;
       card.classList.add("flipping");
+      setTimeout(() => {
+        cardBg.style.backgroundImage = `url(${cardImages[currentSelected]})`;
+      }, 700);
     } catch {
       clearInterval(loadingAnimation);
 
@@ -252,9 +269,15 @@ async function convert() {
       // 텍스트 교체
       inputEl.style.display = "none";
       resultEl.style.display = "block";
-      const limitedResult = (data.result || "변환 실패 😢").slice(0, 47);
+      let limitedResult = (data.result || "변환 실패 😢").slice(0, 47);
+      limitedResult = limitedResult.replace(/^["'“”‘’]|["'“”‘’]$/g, "");
 
       resultEl.innerText = limitedResult;
+      if (currentSelected === "bojagi") {
+        resultEl.style.color = "#ffffff";
+      } else {
+        resultEl.style.color = "#5b2506"; // 기본 색
+      }
       const saved = JSON.parse(localStorage.getItem("texts")) || [];
 
       const styleMap = {
@@ -282,7 +305,7 @@ async function convert() {
       btnEl.onclick = () => {
         location.reload();
       };
-    }, 1400);
+    }, 700);
   } catch (error) {
     clearInterval(loadingAnimation);
 

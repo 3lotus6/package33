@@ -47,7 +47,7 @@ function createBox(item) {
   box.dataset.text = item.text || "";
   box.dataset.original = item.original || "원문 없음";
   box.dataset.id = item.id || "";
-
+  box.dataset.style = item.style || "";
   return box;
 }
 
@@ -144,6 +144,7 @@ document.addEventListener("click", (e) => {
     text: box.dataset.text,
     original: box.dataset.original,
     id: box.dataset.id,
+    style: box.dataset.style,
   });
 });
 
@@ -160,17 +161,29 @@ function openBox(box, item) {
     const text = document.getElementById("modalText");
 
     const original = document.getElementById("originalText");
+    const front = document.querySelector(".card-front");
+    const back = document.querySelector(".card-back");
 
     if (!modal || !text || !original) return;
 
-    modal.style.display = "flex";
+    modal.classList.add("show");
 
+    const card = document.querySelector(".card-flip");
+
+    card.classList.remove("drop");
+
+    // 다시 애니메이션 실행
+    void card.offsetWidth;
+
+    card.classList.add("drop");
+    front.style.backgroundImage = `url(${cardFrontImages[item.style]})`;
+    back.style.backgroundImage = 'url("images/card2.png")';
     text.innerHTML = item.text.replace(/\n/g, "<br>");
 
     original.innerHTML = item.original.replace(/\n/g, "<br>");
 
     modal.dataset.currentId = item.id;
-  }, 300);
+  }, 500);
 }
 
 /* =========================
@@ -193,9 +206,14 @@ function closeModal() {
   const modal = document.getElementById("modal");
 
   if (modal) {
-    modal.style.display = "none";
-  }
+    modal.classList.remove("show");
 
+    const card = document.querySelector(".card-flip");
+
+    card.classList.remove("drop");
+    card.style.opacity = "";
+    card.style.transform = "";
+  }
   document.querySelectorAll(".box").forEach((box) => {
     box.classList.remove("opening");
   });
@@ -234,3 +252,11 @@ window.addEventListener("keydown", (e) => {
     closeModal();
   }
 });
+const cardFrontImages = {
+  에어캡: "images/card2_aircap.png",
+  보자기: "images/card2_bojagi.png",
+  홀로그램: "images/card2_holo.png",
+  진공팩: "images/card2_vacuum.png",
+  크라프트지: "images/card2_kraft.png",
+  황금: "images/card2_gold.png",
+};

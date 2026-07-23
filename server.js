@@ -422,3 +422,6 @@ ${getStylePrompt(style)}
 app.listen(3000, () => {
   console.log("🚀 서버 실행됨 👉 http://localhost:3000");
 });
+app.get("/ping", (req, res) => {
+  res.status(200).send("OK");
+});

@@ -90,18 +90,19 @@ body {
 /* 🔥 컨베이어 미세 진동 */
 
 /* 🔥 클릭 애니메이션 */
+
 .box.opening {
-  animation: openBox 0.4s ease forwards;
+  animation: boxUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-@keyframes openBox {
-  0% {
-    transform: scale(1);
+@keyframes boxUp {
+  from {
+    transform: translateY(0);
     opacity: 1;
   }
 
-  100% {
-    transform: scale(1.4);
+  to {
+    transform: translateY(-18vw);
     opacity: 0;
   }
 }
@@ -120,14 +121,20 @@ body {
   backdrop-filter: blur(4px);
   z-index: 9999;
 }
-
+.modal.show {
+  display: flex;
+}
 /* 🔥 카드 */
 .card-flip {
   width: 25vw;
   height: 15vw;
   perspective: 1000px;
-}
 
+  opacity: 0;
+  transform: translateY(-20vw);
+
+  cursor: pointer;
+}
 /* 🔥 카드 내부 */
 .card-inner {
   width: 100%;
@@ -174,7 +181,7 @@ body {
   text-align: center;
 
   font-size: 1vw;
-  font-weight: 400;
+  font-weight: 500;
 
   color: #482c23;
 
@@ -247,4 +254,19 @@ body {
 
 .card-flip:hover {
   transform: translateY(-0.3vw) scale(1.03);
+}
+.card-flip.drop {
+  animation: cardDrop 0.65s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes cardDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-20vw);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
