@@ -7,25 +7,21 @@
     <title>RE:TONE</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Hahmlet&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;600;700&family=Song+Myung&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="style.css" />
 
     <link rel="stylesheet" href="common.css" />
   </head>
 
   <body>
-    <audio id="paperSound" preload="auto">
-      <source src="sounds/paper.mp3" type="audio/mpeg" />
-    </audio>
     <div class="navbar">
-      <a href="opening.html" class="logo">RE:TONE</a>
+      <a href="opening.html" class="logo">
+        <img src="images/logo.png" alt="RE:TONE" />
+      </a>
 
       <ul class="menu">
         <li class="active"><a href="index.html">언어 포장</a></li>
@@ -62,30 +58,45 @@
     </div>
     <div class="container">
       <div class="card-wrap">
+        <div class="landing-dust" aria-hidden="true"></div>
         <div id="sparkle"></div>
 
         <div class="card-inner">
+          <!-- 기존 카드 -->
           <div class="card-front">
             <div class="card-bg" id="card-bg">
+              <img class="base-card-image" src="images/card.png" alt="" />
+
               <div id="smoke-overlay"></div>
 
-              <textarea
-                id="input-text"
-                placeholder="포장할 직설적인 문장을 입력하세요"
-                maxlength="47"
-              ></textarea>
+              <div class="input-wrap">
+                <textarea
+                  id="input-text"
+                  placeholder=""
+                  maxlength="47"
+                ></textarea>
+
+                <div class="fake-placeholder">
+                  포장할 직설적인 문장을 입력하세요<span
+                    class="fake-cursor"
+                  ></span>
+                </div>
+              </div>
 
               <div id="result-text"></div>
 
-              <button id="convert-btn" onclick="convert()">포장하기</button>
+              <button id="convert-btn" onclick="convert()">
+                <img src="images/button.png" alt="포장하기" />
+              </button>
             </div>
           </div>
 
+          <!-- 포장된 카드 -->
           <div class="card-back"></div>
         </div>
+        <script src="script.js"></script>
       </div>
+      <!-- card-wrap -->
     </div>
-
-    <script src="script.js"></script>
   </body>
 </html>

@@ -1,54 +1,72 @@
 /* 🔥 네비게이션 */
+
 .navbar {
   position: fixed;
-  top: 1.3vw;
+  top: 2vw;
   left: 0;
   width: 100%;
   padding: 0 2.6vw;
   box-sizing: border-box;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   z-index: 1000;
 }
+
 .logo {
-  font-size: 1.35vw;
-  font-weight: 700;
-  color: white;
+  display: flex;
+  align-items: center;
   text-decoration: none;
 }
+
+.logo img {
+  display: block;
+  width: 7vw; /* 로고 크기는 여기서 조절 */
+  height: auto;
+}
+/* 메뉴 */
 .menu {
   display: flex;
-  gap: 0.55vw;
-  background: rgba(188, 43, 11, 0.8);
-  padding: 0.45vw;
-  border-radius: 999px;
-  list-style: none;
+  align-items: center;
+  gap: 3vw;
+
+  padding: 0;
   margin: 0;
+
+  list-style: none;
 }
 
 .menu li {
-  padding: 0.45vw 1.45vw;
-  border-radius: 999px;
-  font-size: 0.88vw;
-  color: #f9f9f9;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+  padding: 0;
 
-/* 🔥 hover */
-.menu li:hover {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-/* 🔥 active */
-.menu .active {
-  background: #ff5811;
+  font-size: 1.04vw;
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: opacity 0.2s ease;
 }
 
+/* hover */
+.menu li:hover {
+  opacity: 0.6;
+}
+
+/* active */
+.menu li.active a,
+.menu a.active {
+  text-decoration: underline;
+  text-underline-offset: 0.55em; /* 글자와 밑줄 사이 간격 */
+  text-decoration-thickness: 1.7px; /* 밑줄 두께 */
+}
+
+/* 링크 */
 .menu a {
   text-decoration: none;
   color: inherit;
+}
+.opening-page .logo {
+  display: none;
 }

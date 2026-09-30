@@ -8,20 +8,12 @@ body {
   overflow: hidden;
 }
 
-/* 🔥 네비바 덮어쓰기 */
 .navbar .logo {
   color: #ff5e28;
-  text-decoration: none;
 }
+
 .navbar .menu a {
-  color: #555555;
-}
-.navbar .menu li.active a {
-  background-color: #ff5e28;
-  color: white;
-}
-.navbar .menu {
-  background-color: rgba(255, 255, 255, 0.8);
+  color: #ff5e28;
 }
 
 /* 🔥 전체 레이아웃 */

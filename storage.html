@@ -5,23 +5,24 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>언어 저장소</title>
-
+    <title>RE:TONE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hahmlet&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;600;700&family=Song+Myung&display=swap"
+      rel="stylesheet"
+    />
     <!-- CSS -->
     <link rel="stylesheet" href="storage.css" />
     <link rel="stylesheet" href="common.css" />
-
-    <!-- 폰트 -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap"
-      rel="stylesheet"
-    />
   </head>
 
   <body>
     <!-- 🔥 네비게이션 -->
     <div class="navbar">
-      <a href="opening.html" class="logo">RE:TONE</a>
+      <a href="opening.html" class="logo">
+        <img src="images/logo.png" alt="RE:TONE" />
+      </a>
 
       <ul class="menu">
         <li>
@@ -55,28 +56,25 @@
       <div class="belt" id="belt3"></div>
     </div>
 
-    <!-- 🔥 모달 -->
     <div class="modal" id="modal">
-      <!-- 닫기 -->
       <div class="close-btn" onclick="closeModal()">✕</div>
 
-      <!-- 카드 -->
       <div class="card-flip" onclick="flipCard()">
         <div class="card-inner" id="cardInner">
-          <!-- 앞 -->
           <div class="card-front">
             <p id="modalText"></p>
-
-            <span class="flip-guide">
-              카드를 눌러 원래 문장을 확인해 보세요!
-            </span>
+            <div id="packDate" class="pack-date"></div>
           </div>
 
-          <!-- 뒤 -->
           <div class="card-back">
             <p id="originalText"></p>
+            <div class="basic-card-message">
+              같은 말도, 어떻게 포장하느냐에 따라 다르게 전해집니다.
+            </div>
           </div>
         </div>
+
+        <span class="flip-guide"> 카드를 눌러 원래 문장을 확인해 보세요! </span>
       </div>
     </div>
 

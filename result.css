@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;
 
-  background: #ffece5;
+  background: #ffffff;
 
   overflow: hidden;
 }
@@ -16,16 +16,7 @@ body {
 }
 
 .navbar .menu a {
-  color: #555555;
-}
-
-.navbar .menu li.active a {
-  background-color: #ff5e28;
-  color: white;
-}
-
-.navbar .menu {
-  background-color: rgba(255, 255, 255, 0.8);
+  color: #ff5e28;
 }
 
 /* =========================
@@ -87,7 +78,7 @@ body {
 
   font-size: clamp(32px, 2vw, 58px);
 
-  font-weight: 800;
+  font-weight: 700;
 
   letter-spacing: -1px;
 }
@@ -125,27 +116,22 @@ body {
 
 .result-box {
   flex: 1;
-
   height: clamp(420px, 25vw, 680px);
 
-  background: rgba(255, 255, 255, 0.45);
-
+  background: #faf9f7;
+  border: 1px solid #e8e5e1;
   border-radius: clamp(25px, 1.5vw, 40px);
 
   padding: clamp(45px, 2.5vw, 75px) clamp(43px, 2.5vw, 70px);
-
   box-sizing: border-box;
-
-  backdrop-filter: blur(10px);
 
   display: flex;
   flex-direction: column;
 
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.06),
-    0 8px 18px rgba(0, 0, 0, 0.04);
+    0 2px 6px rgba(55, 45, 35, 0.03),
+    0 18px 48px rgba(55, 45, 35, 0.09);
 }
-
 /* =========================
    설명 영역
 ========================= */
@@ -157,11 +143,11 @@ body {
 
   line-height: 1;
 
-  color: #453a32;
+  color: #787776;
 
-  letter-spacing: -0.8px;
+  letter-spacing: -1px;
 
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* 첫 문장 */
@@ -170,10 +156,10 @@ body {
   font-size: clamp(19px, 1.2vw, 34px);
 
   font-weight: 700;
-
+  color: #565554;
   margin-bottom: clamp(24px, 1.5vw, 40px);
 
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
 }
 
 /* =========================
@@ -204,10 +190,9 @@ body {
   font-size: clamp(18px, 1.1vw, 30px);
 
   font-weight: 700;
+  color: #565554;
 
-  color: #453a32;
-
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
 }
 
 /* =========================
@@ -225,12 +210,12 @@ body {
   margin-bottom: clamp(14px, 0.8vw, 24px);
 
   font-size: clamp(17px, 1vw, 26px);
-
+  font-weight: 500;
   line-height: 1.2;
 
-  color: #453a32;
+  color: #787776;
 
-  letter-spacing: -1.2px;
+  letter-spacing: -1px;
 }
 
 /* =========================
@@ -271,43 +256,55 @@ body {
     transform: translateY(0);
   }
 }
-
+.type-card.aircap {
+  background: #eac13c;
+}
+.type-card.bojagi {
+  background: #7a5cff;
+}
+.type-card.vacuum {
+  background: #b8b9be;
+}
+.type-card.gold {
+  background: #d3af4b;
+}
+.type-card.holo {
+  background: #9872ff;
+}
+.type-card.kraft {
+  background: #e8b57e;
+}
 /* =========================
    유형별 카드 색상
 ========================= */
 
 /* 에어캡 */
 
-.type-card.aircap {
-  background: linear-gradient(180deg, #f0cc56 0%, #ffbf3c 100%);
+body:has(.type-card.aircap) {
+  background: linear-gradient(to top, #ece2c6 0%, #ffffff 55%);
 }
 
-/* 보자기 */
-
-.type-card.bojagi {
-  background: linear-gradient(180deg, #7a5cff 0%, #5d43db 100%);
+body:has(.type-card.bojagi) {
+  background: linear-gradient(to top, #eee9ff 0%, #ffffff 55%);
 }
 
-/* 압축팩 */
-
-.type-card.vacuum {
-  background: linear-gradient(180deg, #a3a7b3 0%, #696d77 100%);
+body:has(.type-card.vacuum) {
+  background: linear-gradient(to top, #e9eaed 0%, #ffffff 55%);
 }
 
-/* 금박지 */
-
-.type-card.gold {
-  background: linear-gradient(180deg, #d3af4b 0%, #d89b1d 100%);
+body:has(.type-card.gold) {
+  background: linear-gradient(to top, #f8efd9 0%, #ffffff 55%);
 }
 
-/* 홀로그램 */
-
-.type-card.holo {
-  background: linear-gradient(180deg, #9872ff 0%, #48ade8 100%);
+body:has(.type-card.holo) {
+  background: linear-gradient(to top, #eeeaff 0%, #ffffff 55%);
 }
 
-/* 크라프트지 */
+body:has(.type-card.kraft) {
+  background: linear-gradient(to top, #f8eee5 0%, #ffffff 55%);
+}
 
-.type-card.kraft {
-  background: linear-gradient(180deg, #e8b57e 0%, #cb9161 100%);
+.description p:first-child,
+.info-column h3 {
+  color: var(--result-accent, #414141);
 }

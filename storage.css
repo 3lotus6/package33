@@ -18,15 +18,27 @@ body {
 }
 
 /* 🔥 레일 */
+
 .rail {
   position: absolute;
   width: 100%;
   height: 1.43vw;
   background: url("images/rail.png") repeat-x;
   background-size: auto 1.43vw;
-  z-index: 5;
+  z-index: 10;
+  animation: railMove 8s linear infinite;
+  filter: drop-shadow(0 0.1vw 0.12vw rgba(0, 0, 0, 0.12));
+  opacity: 0.85;
 }
+@keyframes railMove {
+  from {
+    background-position-x: 0;
+  }
 
+  to {
+    background-position-x: -10vw;
+  }
+}
 /* 🔥 레일 위치 */
 .rail {
   top: 18.7vw;
@@ -40,17 +52,33 @@ body {
   top: 49.1vw;
 }
 
-/* 🔥 벨트 */
+.rail-dot {
+  position: absolute;
+
+  width: 0.4vw;
+  height: 0.4vw;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(104, 35, 21, 0.45);
+
+  border-radius: 50%;
+
+  z-index: 6;
+
+  pointer-events: none;
+} /* 🔥 벨트 */
 .belt {
   position: absolute;
   width: 100%;
   height: 12vw;
-  z-index: 1;
+  z-index: 6;
 }
 
 /* 🔥 벨트 위치 */
 #belt1 {
-  top: 6.8vw;
+  top: 6.7vw;
 }
 
 #belt2 {
@@ -64,24 +92,49 @@ body {
 /* 🔥 박스 */
 .box {
   width: clamp(140px, 7vw, 280px);
-
   position: absolute;
   bottom: 0;
-
   display: flex;
   align-items: flex-end;
-
   cursor: pointer;
-
   transition: transform 0.2s ease;
+
+  will-change: left, transform;
 }
+
 /* 🔥 이미지 */
 .box-img {
   width: 100%;
   height: auto;
   display: block;
+  filter: drop-shadow(0.12vw 0 0.18vw rgba(0, 0, 0, 0.1))
+    drop-shadow(-0.08vw 0 0.16vw rgba(0, 0, 0, 0.07))
+    drop-shadow(0 0.15vw 0.2vw rgba(0, 0, 0, 0.1));
 }
 
+.box::after {
+  content: "";
+  position: absolute;
+
+  left: 5%;
+  right: 5%;
+  bottom: 0;
+
+  height: 0.5vw;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.18) 35%,
+    rgba(0, 0, 0, 0.05) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  border-radius: 50%;
+
+  filter: blur(0.35vw);
+
+  z-index: 8;
+  pointer-events: none;
+}
 /* 🔥 hover */
 .box:hover {
   transform: scale(1.04);
@@ -126,8 +179,8 @@ body {
 }
 /* 🔥 카드 */
 .card-flip {
-  width: 25vw;
-  height: 15vw;
+  width: 27vw;
+  height: 15.75vw;
   perspective: 1000px;
 
   opacity: 0;
@@ -143,69 +196,98 @@ body {
   transition: 0.6s;
   transform-style: preserve-3d;
 }
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  padding: 0;
+
+  box-sizing: border-box;
+  backface-visibility: hidden;
+
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.card-back {
+  transform: rotateY(180deg);
+}
 /* 🔥 뒤집기 */
 .card-inner.flip {
   transform: rotateY(180deg);
 }
 
 /* 🔥 카드 앞/뒤 */
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 5.7vw 2.7vw 2.5vw;
-  box-sizing: border-box;
-  backface-visibility: hidden;
-  background-image: url("images/card22.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+.card-front p,
+.card-back p {
+  margin: 0;
+  text-align: left;
 
+  font-family: "Noto Sans KR", sans-serif;
+
+  font-size: 0.95vw;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: -0.02vw;
+
+  word-break: keep-all;
+  overflow-wrap: break-word;
+
+  position: absolute;
+  transform: none;
+}
 /* 🔥 카드 뒷면 */
 .card-back {
   transform: rotateY(180deg);
 }
 
 /* 🔥 텍스트 */
-.card-front p,
-.card-back p {
-  width: 100%;
-  margin: 0;
+/* 🔥 카드 텍스트 */
 
-  text-align: center;
+/* =========================
+   🔥 앞면 글자 위치
+========================= */
 
-  font-size: 1vw;
-  font-weight: 500;
+.card-front p {
+  width: 52%;
+
+  left: 8%;
+  top: 24%;
 
   color: #482c23;
-
-  line-height: 1.8;
-  letter-spacing: -0.02vw;
-
-  word-break: keep-all;
-  overflow-wrap: break-word;
 }
 
-/* 🔥 닫기 버튼 */
+/* =========================
+   🔥 뒷면 글자 위치
+========================= */
+
+.card-back p {
+  width: 52%;
+
+  left: 17%;
+  top: 19%;
+
+  color: #482c23;
+}
+
+/* 🔥 포장지별 글꼴 */
+
 .close-btn {
   position: fixed;
   top: 1.43vw;
   right: 1.82vw;
+  left: auto;
+  transform: none;
   font-size: 1.56vw;
-  font-weight: 600;
-  line-height: 1;
-  cursor: pointer;
+  font-weight: 400;
   color: white;
-  z-index: 10000;
-  transition: 0.2s;
 }
-
 /* 🔥 hover */
 .close-btn:hover {
   transform: scale(1.08);
@@ -214,14 +296,14 @@ body {
 /* 🔥 카드 안내문 */
 .flip-guide {
   position: absolute;
-  bottom: 1.4vw;
+  bottom: 2vw;
   left: 50%;
   transform: translateX(-50%);
 
   font-size: 0.8vw;
-  font-weight: 400;
+  font-weight: 500;
 
-  color: rgba(72, 44, 35, 0.7);
+  color: rgba(47, 45, 44, 0.7);
 
   letter-spacing: -0.02vw;
 
@@ -384,4 +466,110 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+/* =========================
+   포장 날짜 / 시간
+========================= */
+
+#packDate {
+  position: absolute;
+
+  left: 9%;
+  bottom: 44%;
+
+  transform: none;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.7vw;
+  font-weight: 500;
+
+  color: rgba(47, 45, 44, 0.55);
+
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+/* =========================
+   🔥 기본 카드 하단 문구
+========================= */
+
+.basic-card-message {
+  position: absolute;
+
+  left: 50%;
+  bottom: 13%;
+
+  transform: translateX(-50%);
+
+  width: 80%;
+
+  text-align: center;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.8vw;
+  font-weight: 600;
+
+  line-height: 1.7;
+  letter-spacing: -0.02vw;
+
+  color: rgba(90, 53, 34, 0.55);
+
+  pointer-events: none;
+}
+.card-front p,
+.card-back p {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1.04vw;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: -0.035em;
+}
+
+/* 뒷면의 원래 문장은 입력 카드와 같은 갈색 */
+.card-back p {
+  color: #563d2a;
+}
+.card-front p,
+.card-back p {
+  width: 72%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 1.75;
+  font-size: 1.15vw;
+  font-weight: 800;
+}
+#packDate {
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+}
+.card-flip {
+  position: relative;
+}
+
+.flip-guide {
+  top: calc(100% + 1vw);
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+}
+.card-inner.flip + .flip-guide {
+  animation: none;
+  opacity: 0;
+}
+.card-flip p,
+.card-flip p span,
+.card-flip #packDate,
+.card-flip .basic-card-message {
+  font-weight: 650 !important;
+}
+.belt,
+.rail {
+  transform: translateY(calc(50vh - 28.5vw));
 }

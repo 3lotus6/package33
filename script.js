@@ -1,5 +1,5 @@
 const paperSound = document.getElementById("paperSound");
-fetch("https://package33.onrender.com/ping").catch(() => {}); // =========================
+fetch("https://package33.onrender.com/ping").catch(() => {});
 // 🔥 프레임 설정
 // =========================
 const rolls = {
@@ -67,8 +67,6 @@ const rolls = {
 const cardBg = document.getElementById("card-bg");
 
 const cardImages = {
-  default: "card.png",
-
   bojagi: "images/card_bojagi.png",
   hologram: "images/card_holo.png",
   vacuum: "images/card_vacuum.png",
@@ -78,7 +76,7 @@ const cardImages = {
 };
 
 // 첫 화면은 일반 카드
-cardBg.style.backgroundImage = `url(${cardImages.default})`;
+
 let currentSelected = null;
 let intervals = {};
 
@@ -133,13 +131,14 @@ Object.keys(rolls).forEach((key) => {
 
   const img = el.querySelector("img");
 
-  // hover
   el.addEventListener("mouseenter", () => {
     if (currentSelected === key) return;
 
-    paperSound.currentTime = 0;
-    paperSound.volume = 0.5;
-    paperSound.play().catch(() => {});
+    if (paperSound) {
+      paperSound.currentTime = 0;
+      paperSound.volume = 0.5;
+      paperSound.play().catch(() => {});
+    }
 
     playForward(key);
   });
@@ -176,17 +175,39 @@ Object.keys(rolls).forEach((key) => {
     console.log("선택된 스타일:", key);
   });
 });
-
-// =========================
-// 🔥 textarea 제한
-// =========================
 const textarea = document.getElementById("input-text");
+const fakePlaceholder = document.querySelector(".fake-placeholder");
+const inputWrap = document.querySelector(".input-wrap");
 
-if (textarea) {
+if (textarea && fakePlaceholder && inputWrap) {
+  textarea.style.caretColor = "transparent";
+
+  // 페이지 열리자마자 바로 입력 가능
+  textarea.focus();
+
+  inputWrap.addEventListener("click", () => {
+    textarea.focus();
+  });
+
   textarea.addEventListener("input", () => {
     const lines = textarea.value.split("\n");
+
     if (lines.length > 2) {
       textarea.value = lines.slice(0, 2).join("\n");
+    }
+
+    if (textarea.value.length > 0) {
+      fakePlaceholder.style.display = "none";
+      textarea.style.caretColor = "#999";
+    } else {
+      fakePlaceholder.style.display = "flex";
+      textarea.style.caretColor = "transparent";
+    }
+  });
+
+  textarea.addEventListener("focus", () => {
+    if (textarea.value.length === 0) {
+      textarea.style.caretColor = "transparent";
     }
   });
 }
@@ -219,23 +240,7 @@ async function convert() {
   // 버튼 로딩 상태로 변경
   btnEl.disabled = true;
 
-  let dots = 0;
-
-  const loadingAnimation = setInterval(() => {
-    dots = (dots + 1) % 4;
-    btnEl.innerText = "포장 중" + ".".repeat(dots);
-  }, 300);
-
-  // 1. 연기 애니메이션 강제 시작
-
-  smokeEl.classList.remove("smoke-active");
-  void smokeEl.offsetWidth;
-  smokeEl.classList.add("smoke-active");
-
-  sparkleEl.classList.remove("sparkle-active");
-  void sparkleEl.offsetWidth;
-  sparkleEl.classList.add("sparkle-active");
-
+  card.classList.add("loading");
   try {
     const res = await fetch("https://package33.onrender.com/convert", {
       method: "POST",
@@ -248,27 +253,41 @@ async function convert() {
       }),
     });
 
-    let data;
-    try {
-      data = await res.json();
+    const data = await res.json();
 
-      clearInterval(loadingAnimation);
+    // 🔥 카드 축소 → 사라짐 → 새 카드 등장
 
-      card.classList.remove("flipping");
-      void card.offsetWidth;
-      card.classList.add("flipping");
-      setTimeout(() => {
-        cardBg.style.backgroundImage = `url(${cardImages[currentSelected]})`;
-      }, 700);
-    } catch {
-      clearInterval(loadingAnimation);
+    const sparkle = document.getElementById("sparkle");
 
-      alert("서버 응답 오류 😢");
-      btnEl.innerText = "포장하기";
-      btnEl.disabled = false;
-      return;
+    sparkle.classList.remove("sparkle-active");
+    void sparkle.offsetWidth;
+    sparkle.classList.add("sparkle-active");
+
+    setTimeout(() => {
+      sparkle.classList.remove("sparkle-active");
+    }, 1200);
+    // 카드가 사라지는 순간 새 카드 이미지로 교체
+    const baseCard = document.querySelector(".base-card-image");
+    if (baseCard && cardImages[currentSelected]) {
+      const imagePath = cardImages[currentSelected];
+
+      baseCard.src = imagePath;
+
+      document
+        .querySelector(".landing-dust")
+        ?.style.setProperty("--dust-mask", `url("${imagePath}")`);
     }
+    card.classList.remove("loading", "impact", "card-shine");
+    void card.offsetWidth;
+    card.classList.add("impact");
 
+    setTimeout(() => {
+      card.classList.add("card-shine");
+    }, 1550);
+
+    setTimeout(() => {
+      card.classList.remove("impact", "card-shine");
+    }, 2600);
     // 2. 연기가 가장 짙어지는 타이밍(약 500ms 뒤)에 텍스트와 버튼 교체
     setTimeout(() => {
       // 텍스트 교체
@@ -276,21 +295,142 @@ async function convert() {
       resultEl.style.display = "block";
       let limitedResult = (data.result || "변환 실패 😢").slice(0, 47);
       limitedResult = limitedResult.replace(/^["'“”‘’]|["'“”‘’]$/g, "");
+      function makeTwoLines(text) {
+        const words = text.trim().split(/\s+/);
 
-      resultEl.innerText = limitedResult;
-      resultEl.style.fontWeight = "500";
-      if (currentSelected === "bojagi") {
-        resultEl.style.color = "#ffffff";
-        btnEl.style.background = "#5544ea"; // 파란색
-        btnEl.style.color = "#ffffff";
-      } else if (currentSelected === "vacuum") {
-        resultEl.style.color = "#4e4e4e";
-        btnEl.style.background = "#616161"; // 검은색
-        btnEl.style.color = "#ffffff";
-      } else {
-        resultEl.style.color = "#5b2506";
-        btnEl.style.background = "#ff5811"; // 기본 주황색
-        btnEl.style.color = "#ffffff";
+        let firstLine = "";
+        let cutIndex = words.length;
+
+        for (let i = 0; i < words.length; i++) {
+          const test = firstLine ? firstLine + " " + words[i] : words[i];
+
+          if (test.length <= 17 || firstLine === "") {
+            firstLine = test;
+          } else {
+            cutIndex = i;
+            break;
+          }
+        }
+
+        const secondLine = words.slice(cutIndex).join(" ");
+
+        return {
+          firstLine,
+          secondLine,
+        };
+      }
+      const lines = makeTwoLines(limitedResult);
+
+      resultEl.innerHTML = "";
+
+      const line1 = document.createElement("span");
+      line1.className = "result-line-1";
+      line1.textContent = lines.firstLine;
+
+      resultEl.appendChild(line1);
+
+      if (lines.secondLine) {
+        resultEl.appendChild(document.createElement("br"));
+
+        const line2 = document.createElement("span");
+        line2.className = "result-line-2";
+        line2.textContent = lines.secondLine;
+
+        resultEl.appendChild(line2);
+      }
+      resultEl.style.fontWeight = "700";
+      // =========================
+      // 🔥 포장지별 글꼴 & 글자색
+      // =========================
+
+      const styleText = {
+        bojagi: {
+          color: "#231c60",
+          top: "47%",
+          left: "50%",
+          rotate: "10deg",
+        },
+
+        hologram: {
+          color: "#3e3a64",
+          top: "47%",
+          left: "49%",
+          rotate: "8deg",
+        },
+
+        vacuum: {
+          color: "#4E4E4E",
+          top: "45%",
+          left: "50%",
+          rotate: "8deg",
+        },
+
+        kraft: {
+          color: "#643e22",
+          top: "48%",
+          left: "50%",
+          rotate: "8deg",
+        },
+
+        gold: {
+          color: "#472f03",
+          top: "46%",
+          left: "50%",
+          rotate: "10deg",
+        },
+
+        aircap: {
+          color: "#56616c",
+          top: "47%",
+          left: "50%",
+          rotate: "11deg",
+        },
+      };
+      const buttonStyle = {
+        bojagi: {
+          left: "47%",
+          top: "64%",
+          rotate: "10deg",
+        },
+
+        hologram: {
+          left: "48%",
+          top: "64%",
+          rotate: "8deg",
+        },
+
+        vacuum: {
+          left: "47%",
+          top: "64%",
+          rotate: "8deg",
+        },
+
+        kraft: {
+          left: "46%",
+          top: "68%",
+          rotate: "8deg",
+        },
+
+        gold: {
+          left: "47%",
+          top: "65%",
+          rotate: "10deg",
+        },
+
+        aircap: {
+          left: "47%",
+          top: "62%",
+          rotate: "11deg",
+        },
+      };
+      const selectedStyle = styleText[currentSelected];
+
+      if (selectedStyle) {
+        resultEl.style.color = selectedStyle.color;
+        resultEl.style.top = selectedStyle.top;
+        resultEl.style.left = selectedStyle.left;
+
+        resultEl.style.transform = `translate(-50%, -50%) rotate(${selectedStyle.rotate})`;
       }
       const saved = JSON.parse(localStorage.getItem("texts")) || [];
 
@@ -303,26 +443,63 @@ async function convert() {
         gold: "황금",
       };
 
+      // 포장한 순간의 날짜와 시간
+      const createdAt = Date.now();
+
       saved.push({
+        id: createdAt,
         text: data.result,
         original: text,
         style: styleMap[currentSelected],
+        createdAt: createdAt,
       });
 
       localStorage.setItem("texts", JSON.stringify(saved));
+      // =========================
+      // 🔥 재포장하기 버튼으로 변경
+      // =========================
 
-      // 버튼 교체 (포장하기 -> 재포장하기)
-      btnEl.innerText = "재포장하기";
+      btnEl.innerHTML = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20 11a8 8 0 0 0-15.5-2" />
+    <path d="M4 4v5h5" />
+    <path d="M4 13a8 8 0 0 0 15.5 2" />
+    <path d="M20 20v-5h-5" />
+  </svg>
+  <span>재포장하기</span>
+`;
+      // 기존 포장지 색상 클래스 혹시 있으면 제거
+      btnEl.classList.remove(
+        "repackage-bojagi",
+        "repackage-hologram",
+        "repackage-vacuum",
+        "repackage-kraft",
+        "repackage-gold",
+        "repackage-aircap",
+      );
+
+      // 유리 버튼 활성화
+      btnEl.classList.add("repackage");
+
+      // 현재 선택한 포장지 색 적용
+      btnEl.classList.add(`repackage-${currentSelected}`);
+      const selectedButtonStyle = buttonStyle[currentSelected];
+
+      if (selectedButtonStyle) {
+        btnEl.style.left = selectedButtonStyle.left;
+        btnEl.style.top = selectedButtonStyle.top;
+        btnEl.style.bottom = "auto";
+
+        btnEl.style.transform = `translateX(-50%) rotate(${selectedButtonStyle.rotate})`;
+      }
       btnEl.disabled = false;
 
-      // 재포장하기 클릭 시 페이지 완전 새로고침
+      // 재포장하기 클릭 → 처음 상태로 돌아가기
       btnEl.onclick = () => {
         location.reload();
       };
-    }, 700);
+    }, 0);
   } catch (error) {
-    clearInterval(loadingAnimation);
-
     console.error(error);
     alert("에러 발생 😢");
     btnEl.innerText = "포장하기";

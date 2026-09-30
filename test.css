@@ -3,13 +3,10 @@ body {
   font-family: "Noto Sans KR", sans-serif;
   overflow: hidden;
 
-  background-color: #ffece5;
-
-  background-size: 28px 28px;
+  background-color: #f4f3f1;
 
   min-height: 100vh;
 }
-
 /* =========================
    전체
 ========================= */
@@ -45,11 +42,10 @@ body {
 
 .test-card,
 .top-card {
-  background: rgba(255, 255, 255, 0.45);
+  background: #f7f7f7;
+  border: 1px solid #e2e2e2;
 
   backdrop-filter: blur(12px);
-
-  border: 1px solid rgba(255, 255, 255, 0.5);
 
   border-radius: clamp(25px, 1.4vw, 40px);
 
@@ -106,7 +102,7 @@ body {
   width: 100%;
   height: clamp(14px, 0.8vw, 22px);
 
-  background: #f5c1b1;
+  background: #dbdbdb;
 
   border-radius: 999px;
 
@@ -133,9 +129,9 @@ body {
 
   font-weight: 700;
   line-height: 1.5;
-  letter-spacing: -0.7px;
+  letter-spacing: -1.5px;
 
-  color: #453a32;
+  color: #2b2b2b;
 
   margin-bottom: clamp(30px, 1.8vw, 50px);
 }
@@ -168,8 +164,6 @@ body {
 
   background: rgba(255, 255, 255, 0.16);
 
-  border: 2px solid rgba(255, 94, 40, 0.35);
-
   border-radius: clamp(15px, 1vw, 24px);
 
   padding: clamp(22px, 1.5vw, 36px);
@@ -183,10 +177,11 @@ body {
   font-size: clamp(18px, 1vw, 28px);
   font-weight: 600;
   line-height: 1.6;
-  letter-spacing: -0.5px;
+  letter-spacing: -1.5px;
 
-  color: #ff5e28;
-
+  background: rgba(180, 180, 180, 0.14); /* 연한 회색, 마지막 숫자가 투명도 */
+  border: none;
+  color: #8e8d8d;
   cursor: pointer;
 
   transition: all 0.2s ease;
@@ -197,7 +192,11 @@ body {
 /* =========================
    hover
 ========================= */
-
+.choice-btn:hover,
+.choice-btn.selected {
+  color: #ff5e28;
+  border-color: #ff5e28;
+}
 .choice-btn:hover {
   background: rgba(255, 210, 193, 0.7);
 
@@ -217,16 +216,7 @@ body {
 }
 
 .navbar .menu a {
-  color: #555555;
-}
-
-.navbar .menu li.active a {
-  background-color: #ff5e28;
-  color: white;
-}
-
-.navbar .menu {
-  background-color: rgba(255, 255, 255, 0.8);
+  color: #ff5e28;
 }
 
 /* =========================
@@ -262,11 +252,10 @@ body {
   font-size: clamp(24px, 1.3vw, 40px);
   font-weight: 700;
 
-  color: #453a32;
+  color: #2b2b2b;
 
   letter-spacing: -1px;
 }
-
 .result-btn {
   width: clamp(140px, 9vw, 240px);
 

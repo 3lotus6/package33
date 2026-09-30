@@ -12,92 +12,84 @@ body {
    메인 영역
 ========================= */
 .lab-container {
-  position: relative;
-
   width: 100%;
   height: 100vh;
-
-  /* 메뉴바 padding과 동일 */
-  padding: 7vw 4vw 4vw;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
+  text-align: center;
+  transform: translateY(3vh);
 }
 
-/* =========================
-   텍스트
-========================= */
+.lab-title {
+  font-size: clamp(30px, 2.3vw, 50px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: white;
+  margin: 0;
+}
 .lab-text {
-  position: absolute;
+  position: static;
 
-  left: 4vw;
-  bottom: 4vw;
+  width: 100%;
+  max-width: 900px;
 
   color: white;
+
+  text-align: center;
 }
-
-.lab-text h1 {
-  font-size: clamp(52px, 3vw, 128px);
-
+.lab-container > h1 {
+  font-size: clamp(30px, 2.3vw, 50px);
   font-weight: 700;
-
   line-height: 1.05;
-
   letter-spacing: -0.04em;
-
-  margin: 0 0 1.8vw;
+  margin: 0;
+  color: white;
 }
-
 .lab-text p {
-  font-size: clamp(16px, 1.1vw, 34px);
-
+  font-size: clamp(15px, 1.1vw, 22px);
   line-height: 1.8;
-
   font-weight: 400;
   letter-spacing: -0.02em;
+
   color: rgba(255, 255, 255, 0.9);
 
   margin: 0;
 }
-
 /* =========================
    일러스트
 ========================= */
 .lab-illust {
-  position: absolute;
-
-  right: 4vw;
-  top: 8vw;
-
-  width: clamp(520px, 43vw, 1400px);
-
+  position: static;
+  display: block;
+  width: clamp(280px, 23vw, 420px);
   height: auto;
-
+  margin: 50px auto 30px;
   opacity: 0;
-
-  animation: slideInFromRight 0.8s ease-out forwards;
+  animation: slideInFromBottom 0.8s ease-out forwards;
 }
-
 /* =========================
    버튼
 ========================= */
 .start-btn {
-  position: absolute;
+  position: static;
 
-  right: 4vw;
-  bottom: 4vw;
-
-  padding: clamp(10px, 0.7vw, 18px) clamp(20px, 1.4vw, 34px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 12px 24px;
 
   background: #f3f3f3;
-
   color: #ff5e28;
 
   border: none;
+  border-radius: 11px;
 
-  border-radius: clamp(10px, 0.6vw, 18px);
-
-  font-size: clamp(16px, 0.95vw, 30px);
-
+  font-size: clamp(16px, 0.95vw, 22px);
   font-weight: 700;
 
   cursor: pointer;
@@ -115,14 +107,289 @@ body {
 /* =========================
    애니메이션
 ========================= */
-@keyframes slideInFromRight {
+@keyframes slideInFromBottom {
   0% {
-    transform: translateX(5vw);
+    transform: translateY(5vw);
     opacity: 0;
   }
 
   100% {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
+  }
+}
+.talk-illust {
+  width: clamp(530px, 22vw, 520px);
+}
+/* =========================
+   기본
+========================= */
+body {
+  margin: 0;
+  background: #ff612d;
+  font-family: "Noto Sans KR", sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* =========================
+   배경 유기형
+========================= */
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  display: block;
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+
+  box-shadow:
+    inset 0 0 45px rgba(255, 255, 255, 0.08),
+    0 20px 60px rgba(180, 60, 20, 0.04);
+
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* =========================
+   왼쪽 위
+========================= */
+.orb1 {
+  width: 25vw;
+  height: 20vw;
+
+  min-width: 280px;
+  min-height: 230px;
+
+  top: -6vw;
+  left: -5vw;
+
+  border-radius: 58% 42% 65% 35% / 43% 59% 41% 57%;
+
+  background: radial-gradient(
+    ellipse at 35% 25%,
+    rgba(255, 255, 255, 0.34) 0%,
+    rgba(255, 225, 205, 0.2) 35%,
+    rgba(255, 172, 125, 0.08) 70%,
+    rgba(255, 145, 95, 0.02) 100%
+  );
+
+  opacity: 0.75;
+
+  animation: floatA 9s ease-in-out infinite alternate;
+}
+
+/* =========================
+   오른쪽 큰 형태
+========================= */
+.orb2 {
+  width: 27vw;
+  height: 34vw;
+
+  min-width: 310px;
+  min-height: 390px;
+
+  top: 15vh;
+  right: -9vw;
+
+  border-radius: 46% 54% 38% 62% / 57% 39% 61% 43%;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 220, 195, 0.14) 38%,
+    rgba(255, 175, 125, 0.07) 70%,
+    rgba(255, 150, 100, 0.02) 100%
+  );
+
+  opacity: 0.42;
+
+  animation: floatB 11s ease-in-out infinite alternate;
+}
+
+/* =========================
+   왼쪽 아래
+========================= */
+.orb3 {
+  width: 44vw;
+  height: 32vw;
+
+  min-width: 460px;
+  min-height: 340px;
+
+  bottom: -16vw;
+  left: -13vw;
+
+  border-radius: 61% 39% 52% 48% / 44% 63% 37% 56%;
+
+  background: radial-gradient(
+    ellipse at 60% 40%,
+    rgba(255, 245, 235, 0.26) 0%,
+    rgba(255, 215, 185, 0.14) 45%,
+    rgba(255, 170, 120, 0.05) 78%,
+    transparent 100%
+  );
+
+  opacity: 0.68;
+
+  animation: floatC 12s ease-in-out infinite alternate;
+}
+
+/* =========================
+   오른쪽 작은 형태
+========================= */
+.orb4 {
+  width: 7vw;
+  height: 9vw;
+
+  min-width: 80px;
+  min-height: 100px;
+
+  top: 62vh;
+  right: 15vw;
+
+  border-radius: 59% 41% 63% 37% / 48% 60% 40% 52%;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 210, 175, 0.12),
+    rgba(255, 170, 120, 0.03)
+  );
+
+  opacity: 0.45;
+
+  animation: floatD 7s ease-in-out infinite alternate;
+}
+
+/* =========================
+   아래 중앙
+========================= */
+.orb5 {
+  width: 15vw;
+  height: 12vw;
+
+  min-width: 160px;
+  min-height: 130px;
+
+  bottom: -3vw;
+  left: 50%;
+
+  border-radius: 42% 58% 55% 45% / 61% 41% 59% 39%;
+
+  background: radial-gradient(
+    ellipse at 40% 35%,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 205, 170, 0.08) 65%,
+    transparent 100%
+  );
+
+  opacity: 0.5;
+
+  animation: floatE 9s ease-in-out infinite alternate;
+}
+.orb6 {
+  width: 15vw;
+  height: 9vw;
+
+  min-width: 180px;
+  min-height: 100px;
+
+  left: 6.5vw;
+  top: 47vh;
+
+  border-radius: 58% 42% 50% 50% / 46% 54% 42% 58%;
+
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 220, 195, 0.09) 48%,
+    rgba(255, 170, 120, 0.025) 100%
+  );
+
+  opacity: 0.32;
+
+  transform: rotate(-10deg);
+
+  animation: floatF 9s ease-in-out infinite alternate;
+}
+/* =========================
+   컨텐츠 위로
+========================= */
+.navbar,
+.lab-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   움직임
+========================= */
+@keyframes floatA {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  to {
+    transform: translate(1.2vw, 1vw) rotate(7deg);
+  }
+}
+
+@keyframes floatB {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-1.5vw, 1vw) rotate(-6deg);
+  }
+}
+
+@keyframes floatC {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  to {
+    transform: translate(1.8vw, -1vw) rotate(5deg);
+  }
+}
+
+@keyframes floatD {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.45;
+  }
+
+  to {
+    transform: translate(-0.8vw, 1vw) rotate(10deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes floatE {
+  from {
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
+
+  to {
+    transform: translateX(-50%) translateY(-1vw) rotate(-7deg);
+  }
+}
+@keyframes floatF {
+  from {
+    transform: translate(0, 0) rotate(-10deg);
+  }
+
+  to {
+    transform: translate(0.8vw, -0.5vw) rotate(-4deg);
   }
 }

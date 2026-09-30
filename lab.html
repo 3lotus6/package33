@@ -2,7 +2,7 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>RE:TONE - 가상 대화 실험실</title>
+    <title>RE:TONE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,8 +13,21 @@
     <link rel="stylesheet" href="lab.css" />
   </head>
   <body>
+    <div class="bg-orbs">
+      <span class="orb orb1"></span>
+      <span class="orb orb2"></span>
+      <span class="orb orb3"></span>
+      <span class="orb orb4"></span>
+      <span class="orb orb5"></span>
+      <span class="orb orb6"></span>
+    </div>
+
+    <!-- 🔥 네비바 -->
     <div class="navbar">
-      <a href="opening.html" class="logo">RE:TONE</a>
+      <a href="opening.html" class="logo">
+        <img src="images/logo.png" alt="RE:TONE" />
+      </a>
+
       <ul class="menu">
         <li><a href="index.html">언어 포장</a></li>
         <li><a href="storage.html">언어 창고</a></li>
@@ -24,18 +37,18 @@
     </div>
 
     <div class="lab-container">
+      <h1 class="lab-title">가상 대화 실험</h1>
+
+      <img src="images/talk.png" class="lab-illust talk-illust" />
+
       <div class="lab-text">
-        <h1>가상 대화 실험</h1>
         <p>
           현실에서 마주하기 곤란한 상황을 가상으로 체험합니다.<br />
-          각 상황에서 적절한 말을 선택해 보세요.<br />
-          선택에 따라 상대의 반응이 달라지며, 올바른 선택은 다음 단계로
-          이어집니다.<br />
-          여러 상황을 통과하며 말을 더 효과적으로 전달하는 방법을 익혀보세요.
+          각 상황에 맞는 말을 선택하고, 선택에 따라 달라지는 상대의 반응을
+          경험해 보세요.<br />
+          다양한 상황을 통과하며 효과적으로 말을 전달하는 방법을 익혀보세요.
         </p>
       </div>
-
-      <img src="images/talk.png" class="lab-illust" />
 
       <button class="start-btn" onclick="location.href = 'game1.html'">
         시작하기

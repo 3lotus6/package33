@@ -216,7 +216,27 @@ resultImageEl.alt = result.title;
 
 /* 설명 */
 
-resultMainEl.textContent = result.main;
+const wordColors = {
+  bojagi: "#6546d6",
+  aircap: "#c88b13",
+  vacuum: "#626773",
+  gold: "#a8750f",
+  holo: "#7460cf",
+  kraft: "#a46c42",
+};
+
+const wordPosition = result.main.indexOf(result.title);
+const typeWord = document.createElement("span");
+typeWord.textContent = result.title;
+typeWord.style.color = wordColors[maxType];
+
+resultMainEl.replaceChildren(
+  document.createTextNode(result.main.slice(0, wordPosition)),
+  typeWord,
+  document.createTextNode(
+    result.main.slice(wordPosition + result.title.length),
+  ),
+);
 
 resultDesc1El.textContent = result.desc1;
 

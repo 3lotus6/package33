@@ -1,6 +1,6 @@
 const questions = [
   {
-    question: "친구가 단체 채팅방에서 내 흑역사를 말했을 때 나는?",
+    question: "친구가 단체 채팅방에서 내 흑역사를 말했을 때",
 
     answers: [
       {
@@ -26,7 +26,7 @@ const questions = [
   },
 
   {
-    question: "팀플 자료를 아직 안 보낸 팀원에게 나는?",
+    question: "팀플 자료를 아직 안 보낸 팀원에게",
 
     answers: [
       {
@@ -52,7 +52,7 @@ const questions = [
   },
 
   {
-    question: "카페 주문이 너무 늦게 나올 때 나는?",
+    question: "카페 주문이 너무 늦게 나올 때",
 
     answers: [
       {
@@ -78,7 +78,7 @@ const questions = [
   },
 
   {
-    question: "친구가 약속 시간에 늦었을 때 나는?",
+    question: "친구가 약속 시간에 늦었을 때",
 
     answers: [
       {
@@ -104,7 +104,7 @@ const questions = [
   },
 
   {
-    question: "상대가 내 물건을 망가뜨렸을 때 나는?",
+    question: "상대가 내 물건을 망가뜨렸을 때",
 
     answers: [
       {
@@ -118,7 +118,7 @@ const questions = [
       },
 
       {
-        text: "헉… 나 진짜 아끼던 건데 🥲",
+        text: "헉… 나 진짜 아끼던 건데",
         type: "holo",
       },
 
@@ -130,7 +130,7 @@ const questions = [
   },
 
   {
-    question: "과제를 너무 많이 받았을 때 나는?",
+    question: "과제를 너무 많이 받았을 때",
 
     answers: [
       {
@@ -156,7 +156,7 @@ const questions = [
   },
 
   {
-    question: "친구가 너무 과한 선물을 줬을 때 나는?",
+    question: "친구가 너무 과한 선물을 줬을 때",
 
     answers: [
       {
@@ -182,7 +182,7 @@ const questions = [
   },
 
   {
-    question: "친구가 계속 연락을 많이 할 때 나는?",
+    question: "친구가 계속 연락을 많이 할 때",
 
     answers: [
       {
@@ -208,7 +208,7 @@ const questions = [
   },
 
   {
-    question: "회의 의견이 마음에 들지 않을 때 나는?",
+    question: "회의 의견이 마음에 들지 않을 때",
 
     answers: [
       {
@@ -234,7 +234,7 @@ const questions = [
   },
 
   {
-    question: "친구가 내 비밀을 말했을 때 나는?",
+    question: "친구가 내 비밀을 말했을 때",
 
     answers: [
       {
@@ -260,7 +260,7 @@ const questions = [
   },
 
   {
-    question: "발표 직전에 나는?",
+    question: "발표 직전에",
 
     answers: [
       {
@@ -286,7 +286,7 @@ const questions = [
   },
 
   {
-    question: "친구가 고민 상담을 할 때 나는?",
+    question: "친구가 고민 상담을 할 때",
 
     answers: [
       {
@@ -390,8 +390,7 @@ function selectAnswer(type) {
     showQuestion();
   } else {
     localStorage.setItem("retoneResult", JSON.stringify(scores));
-
-    showResultButton();
+    window.location.href = "result.html";
   }
 }
 
