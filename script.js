@@ -1,6 +1,5 @@
 const paperSound = document.getElementById("paperSound");
 fetch("https://package33.onrender.com/ping").catch(() => {});
-// 🔥 프레임 설정
 // =========================
 const rolls = {
   bojagi: {
@@ -242,7 +241,7 @@ async function convert() {
 
   card.classList.add("loading");
   try {
-    const res = await fetch("https://package33.onrender.com/convert", {
+    fetch("https://package33.onrender.com/convert", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
