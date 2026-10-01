@@ -239,9 +239,8 @@ async function convert() {
   // 버튼 로딩 상태로 변경
   btnEl.disabled = true;
 
-  card.classList.add("loading");
   try {
-    fetch("https://package33.onrender.com/convert", {
+    const res = await fetch("https://package33.onrender.com/convert", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -252,7 +251,15 @@ async function convert() {
       }),
     });
 
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("서버 응답 오류:", res.status, errorText);
+      throw new Error(`서버 오류 ${res.status}`);
+    }
+
     const data = await res.json();
+
+    console.log("서버 응답:", data);
 
     // 🔥 카드 축소 → 사라짐 → 새 카드 등장
 
