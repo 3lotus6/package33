@@ -199,7 +199,7 @@ if (textarea && fakePlaceholder && inputWrap) {
       fakePlaceholder.style.display = "none";
       textarea.style.caretColor = "#999";
     } else {
-      fakePlaceholder.style.display = "flex";
+      fakePlaceholder.style.display = "block";
       textarea.style.caretColor = "transparent";
     }
   });
@@ -238,7 +238,7 @@ async function convert() {
 
   // 버튼 로딩 상태로 변경
   btnEl.disabled = true;
-
+  card.classList.add("loading");
   try {
     const res = await fetch("https://package33.onrender.com/convert", {
       method: "POST",
@@ -302,27 +302,42 @@ async function convert() {
       let limitedResult = (data.result || "변환 실패 😢").slice(0, 47);
       limitedResult = limitedResult.replace(/^["'“”‘’]|["'“”‘’]$/g, "");
       function makeTwoLines(text) {
-        const words = text.trim().split(/\s+/);
+        const cleanText = text.trim();
+        const words = cleanText.split(/\s+/);
 
-        let firstLine = "";
-        let cutIndex = words.length;
+        // 짧으면 굳이 두 줄로 나누지 않음
+        if (cleanText.length <= 17) {
+          return {
+            firstLine: cleanText,
+            secondLine: "",
+          };
+        }
 
-        for (let i = 0; i < words.length; i++) {
-          const test = firstLine ? firstLine + " " + words[i] : words[i];
+        let bestFirst = cleanText;
+        let bestSecond = "";
+        let bestScore = Infinity;
 
-          if (test.length <= 17 || firstLine === "") {
-            firstLine = test;
-          } else {
-            cutIndex = i;
-            break;
+        // 띄어쓰기 위치를 기준으로 가장 균형 좋은 줄바꿈 찾기
+        for (let i = 1; i < words.length; i++) {
+          const first = words.slice(0, i).join(" ");
+          const second = words.slice(i).join(" ");
+
+          // 한 줄이 너무 길어지는 경우 제외
+          if (first.length > 24 || second.length > 24) continue;
+
+          // 두 줄 길이 차이가 적을수록 좋음
+          const difference = Math.abs(first.length - second.length);
+
+          if (difference < bestScore) {
+            bestScore = difference;
+            bestFirst = first;
+            bestSecond = second;
           }
         }
 
-        const secondLine = words.slice(cutIndex).join(" ");
-
         return {
-          firstLine,
-          secondLine,
+          firstLine: bestFirst,
+          secondLine: bestSecond,
         };
       }
       const lines = makeTwoLines(limitedResult);
@@ -372,7 +387,7 @@ async function convert() {
         },
 
         kraft: {
-          color: "#643e22",
+          color: "#5e2a00",
           top: "48%",
           left: "50%",
           rotate: "8deg",

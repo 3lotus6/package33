@@ -177,7 +177,7 @@ body {
   font-size: clamp(18px, 1vw, 28px);
   font-weight: 600;
   line-height: 1.6;
-  letter-spacing: -1.5px;
+  letter-spacing: -1px;
 
   background: rgba(180, 180, 180, 0.14); /* 연한 회색, 마지막 숫자가 투명도 */
   border: none;
@@ -346,5 +346,11 @@ body {
     min-height: 100px;
 
     font-size: 15px;
+  }
+}
+@media (min-height: 900px) {
+  .test-inner {
+    transform: scale(1.08);
+    transform-origin: center center;
   }
 }

@@ -266,3 +266,7 @@ result.jobs.forEach((job) => {
 const typeCard = document.getElementById("typeCard");
 
 typeCard.classList.add(maxType);
+function restartTest() {
+  localStorage.removeItem("retoneResult");
+  window.location.href = "test.html";
+}

@@ -308,3 +308,39 @@ body:has(.type-card.kraft) {
 .info-column h3 {
   color: var(--result-accent, #414141);
 }
+.retry-btn {
+  position: fixed;
+  right: 2.2vw;
+  bottom: 2.2vw;
+
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #ff5e28;
+  color: white;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.9vw;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+
+  cursor: pointer;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+
+  transition: 0.2s ease;
+  z-index: 1000;
+}
+
+.retry-btn:hover {
+  background: #f14815;
+  transform: translateY(-2px);
+}
+@media (min-height: 900px) {
+  .result-wrap {
+    transform: scale(1.08);
+    transform-origin: center center;
+  }
+}

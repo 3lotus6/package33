@@ -23,10 +23,11 @@ body {
 /* ───────── 상단 패키지 ───────── */
 .packages {
   position: absolute;
-  top: 3vh;
+  top: 1vw;
+  height: 20vw;
   left: 0;
   right: 0;
-  height: 37vh;
+
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -59,10 +60,10 @@ body {
 /* ───────── 텍스트 영역 ───────── */
 .text-area {
   position: absolute;
-  top: 45vh;
+  top: 22.5vw;
+  height: 23vw;
   left: 10vw; /* 160px를 vw 비율로 수정 */
   right: 10vw;
-  height: 42vh;
 
   border-top: 1px solid rgba(255, 255, 255, 0.7);
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
@@ -271,7 +272,7 @@ body {
 /* ───────── 푸터 ───────── */
 .footer {
   position: absolute;
-  bottom: 7.5vh; /* 70px를 vh 비율로 수정 */
+  bottom: 8vw;
   left: 0;
   right: 0;
   display: flex;
@@ -294,4 +295,14 @@ body {
     -0.15vw 0.15vw 0 rgb(255, 94, 25),
     0.15vw 0.15vw 0 rgb(255, 94, 25);
 }
-/* 마지막 문장 전용 폰트 */
+.opening-scene {
+  position: absolute;
+
+  width: 100vw;
+  height: 56.25vw;
+
+  left: 0;
+  top: 52%;
+
+  transform: translateY(-50%);
+}

@@ -82,7 +82,6 @@ body {
   text-align: center;
 
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 1.05vw;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: -0.04em;
@@ -114,10 +113,10 @@ body {
   text-align: center;
 
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 1.15vw;
-  font-weight: 600;
+  font-size: 1.1vw;
+  font-weight: 500;
   line-height: 1.75;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.05em;
 
   /* 핵심 */
   white-space: pre-line;
@@ -378,8 +377,8 @@ body {
 
 /* 🔥 홀로그램 */
 .hologram {
-  top: 21.5vw;
-  left: -2vw;
+  top: 22.5vw;
+  left: -1vw;
   z-index: 18;
 }
 .hologram img {
@@ -760,19 +759,18 @@ body {
   text-align: center;
 
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 1.15vw;
+  font-size: 1.1vw;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: -0.04em;
 
-  color: #563d2a;
+  color: #5e0700;
 
   caret-color: #999999;
 
   z-index: 2;
 }
 
-/* 처음 보이는 안내문 */
 .fake-placeholder {
   position: absolute;
   left: 50%;
@@ -780,34 +778,39 @@ body {
 
   transform: translate(-50%, -50%);
 
-  display: flex;
-  align-items: center;
+  width: 100%;
+  text-align: center;
 
-  white-space: nowrap;
+  display: block;
+
   pointer-events: none;
 
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 1.15vw;
-  font-weight: 500;
+  font-size: 1.05vw;
+  font-weight: 550;
+  line-height: 1.75;
   letter-spacing: -0.06em;
 
   color: #adadad;
 
+  white-space: nowrap;
+
   z-index: 1;
 }
-
-/* 안내문 뒤 깜빡이는 커서 */
 .fake-cursor {
+  display: inline-block;
+
   width: 1.5px;
-  height: 1.3em;
+  height: 1.15em;
 
   margin-left: 3px;
 
   background: #999;
 
+  vertical-align: -0.15em;
+
   animation: cursorBlink 1s steps(1) infinite;
 }
-
 @keyframes cursorBlink {
   0%,
   50% {
@@ -1352,7 +1355,7 @@ body {
 .card-wrap #result-text span,
 .card-wrap button,
 .card-wrap button span {
-  font-weight: 650 !important;
+  font-weight: 600 !important;
 }
 #input-text {
   color: #5d1f02 !important;
@@ -1363,4 +1366,17 @@ body {
 }
 .card-wrap .fake-placeholder {
   font-weight: 550 !important;
+}
+@media (min-height: 900px) {
+  .card-wrap {
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+
+  .roll {
+    transform: scale(1.12);
+  }
+}
+.example-text {
+  font-weight: 500;
+  opacity: 0.92;
 }

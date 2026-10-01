@@ -20,7 +20,9 @@ body {
   justify-content: center;
   box-sizing: border-box;
   text-align: center;
-  transform: translateY(3vh);
+
+  transform: none;
+  gap: 0;
 }
 
 .lab-title {
@@ -33,13 +35,15 @@ body {
 }
 .lab-text {
   position: static;
-
   width: 100%;
   max-width: 900px;
 
   color: white;
-
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .lab-container > h1 {
   font-size: clamp(30px, 2.3vw, 50px);
@@ -392,4 +396,19 @@ body {
   to {
     transform: translate(0.8vw, -0.5vw) rotate(-4deg);
   }
+}
+@media (min-height: 900px) {
+  .lab-container {
+    transform: scale(1.08);
+    transform-origin: center center;
+  }
+}
+.navbar {
+  position: relative;
+  z-index: 1000;
+}
+
+.start-btn {
+  position: relative;
+  z-index: 10;
 }

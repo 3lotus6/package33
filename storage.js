@@ -314,8 +314,13 @@ function openBox(box, item) {
     void card.offsetWidth;
 
     card.classList.add("drop");
-    front.style.backgroundImage = `url(${cardFrontImages[item.style]})`;
+    const frontImage = cardFrontImages[item.style];
+
+    front.style.backgroundImage = `url(${frontImage})`;
     back.style.backgroundImage = 'url("images/card2.png")';
+
+    front.style.setProperty("--card-mask", `url(${frontImage})`);
+    back.style.setProperty("--card-mask", 'url("images/card2.png")');
 
     /* =========================
    포장 날짜 / 시간
@@ -331,19 +336,19 @@ function openBox(box, item) {
       const hours = String(date.getHours()).padStart(2, "0");
       const minutes = String(date.getMinutes()).padStart(2, "0");
 
-      packDate.textContent = `${year}.${month}.${day} ${hours}:${minutes}`;
+      packDate.textContent = `${year}.${month}.${day} ${hours}:${minutes}      포장됨`;
     }
     /* =========================
    포장지별 글꼴 + 색상
    언어 포장 페이지와 동일
 ========================= */
     const dateColors = {
-      보자기: "#231c60",
-      홀로그램: "#3e3a64",
+      보자기: "#433c7f",
+      홀로그램: "#76729b",
       진공팩: "#4E4E4E",
-      크라프트지: "#643e22",
-      황금: "#472f03",
-      에어캡: "#56616c",
+      크라프트지: "#815b3f",
+      황금: "#664912",
+      에어캡: "#aaafb4",
     };
 
     packDate.style.color = dateColors[item.style] || "#482c23";
@@ -413,29 +418,51 @@ function openBox(box, item) {
       .replace(/^["'“”‘’]|["'“”‘’]$/g, "")
       .trim();
 
-    const words = result.split(/\s+/);
-    let firstLine = "";
-    let cutIndex = words.length;
+    function makeTwoLines(text) {
+      const words = text.split(/\s+/);
 
-    for (let i = 0; i < words.length; i++) {
-      const next = firstLine ? firstLine + " " + words[i] : words[i];
-
-      if (next.length <= 17 || firstLine === "") {
-        firstLine = next;
-      } else {
-        cutIndex = i;
-        break;
+      // 짧은 문장은 한 줄
+      if (text.length <= 17) {
+        return {
+          firstLine: text,
+          secondLine: "",
+        };
       }
+
+      let bestFirst = text;
+      let bestSecond = "";
+      let bestScore = Infinity;
+
+      for (let i = 1; i < words.length; i++) {
+        const first = words.slice(0, i).join(" ");
+        const second = words.slice(i).join(" ");
+
+        // 너무 긴 줄 제외
+        if (first.length > 24 || second.length > 24) continue;
+
+        const difference = Math.abs(first.length - second.length);
+
+        if (difference < bestScore) {
+          bestScore = difference;
+          bestFirst = first;
+          bestSecond = second;
+        }
+      }
+
+      return {
+        firstLine: bestFirst,
+        secondLine: bestSecond,
+      };
     }
 
-    const secondLine = words.slice(cutIndex).join(" ");
+    const lines = makeTwoLines(result);
 
     text.textContent = "";
-    text.append(document.createTextNode(firstLine));
+    text.append(document.createTextNode(lines.firstLine));
 
-    if (secondLine) {
+    if (lines.secondLine) {
       text.append(document.createElement("br"));
-      text.append(document.createTextNode(secondLine));
+      text.append(document.createTextNode(lines.secondLine));
     }
 
     original.innerHTML = (item.original || "").replace(/\n/g, "<br>");

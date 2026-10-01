@@ -3,7 +3,7 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: "Noto Sans KR", sans-serif;
-  background: #ff5e28;
+  background: #ff5b19;
 
   background-size: cover;
   background-position: center;
@@ -179,8 +179,8 @@ body {
 }
 /* 🔥 카드 */
 .card-flip {
-  width: 27vw;
-  height: 15.75vw;
+  width: 30vw;
+  height: 17.5vw;
   perspective: 1000px;
 
   opacity: 0;
@@ -231,10 +231,10 @@ body {
 
   font-family: "Noto Sans KR", sans-serif;
 
-  font-size: 0.95vw;
+  font-size: 1vw;
   font-weight: 400;
   line-height: 1.8;
-  letter-spacing: -0.02vw;
+  letter-spacing: -0.5vw;
 
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -282,16 +282,33 @@ body {
   position: fixed;
   top: 1.43vw;
   right: 1.82vw;
-  left: auto;
-  transform: none;
-  font-size: 1.56vw;
-  font-weight: 400;
+
+  width: 2.5vw;
+  height: 2.5vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 91, 25, 0.75);
+
   color: white;
+
+  font-size: 1.05vw;
+  font-weight: 600;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
 }
-/* 🔥 hover */
 .close-btn:hover {
   transform: scale(1.08);
-  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.16);
+  opacity: 1;
 }
 /* 🔥 카드 안내문 */
 .flip-guide {
@@ -299,8 +316,8 @@ body {
   bottom: 2vw;
   left: 50%;
   transform: translateX(-50%);
-
-  font-size: 0.8vw;
+  opacity: 0.75;
+  font-size: 0.85vw;
   font-weight: 500;
 
   color: rgba(47, 45, 44, 0.7);
@@ -314,20 +331,20 @@ body {
 .flip-guide {
   animation: guideBlink 1.6s ease-in-out infinite;
 }
-
 @keyframes guideBlink {
   0% {
-    opacity: 0.4;
+    opacity: 0.25;
   }
 
   50% {
-    opacity: 1;
+    opacity: 0.7;
   }
 
   100% {
-    opacity: 0.4;
+    opacity: 0.25;
   }
 }
+
 /* 🔥 카드 hover */
 .card-flip {
   transition: transform 0.3s ease;
@@ -353,64 +370,9 @@ body {
   }
 }
 /* 카드가 해체되기 직전 */
-.card-inner.breaking {
-  animation: breakPackage 0.35s ease;
-}
-
-@keyframes breakPackage {
-  0% {
-    transform: scale(1) rotate(0deg);
-    filter: blur(0);
-  }
-
-  20% {
-    transform: translateX(-2px) rotate(-1deg);
-  }
-
-  40% {
-    transform: translateX(2px) rotate(1deg);
-  }
-
-  60% {
-    transform: scale(0.97);
-    filter: blur(1px);
-  }
-
-  100% {
-    transform: scale(1);
-    filter: blur(0);
-  }
-}
 
 /* 포장 파편 */
-.card-front::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-}
 
-.card-inner.breaking .card-front::after {
-  animation: packageDust 0.4s ease forwards;
-}
-
-@keyframes packageDust {
-  0% {
-    opacity: 0;
-    transform: scale(1);
-  }
-
-  30% {
-    opacity: 0.8;
-    transform: scale(1.02);
-  }
-
-  100% {
-    opacity: 0;
-    transform: scale(1.08);
-  }
-}
 .card-inner.breaking {
   animation: breakPackage 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
 }
@@ -481,9 +443,9 @@ body {
   transform: none;
 
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 0.7vw;
-  font-weight: 500;
-
+  font-size: 0.75vw;
+  font-weight: 2000;
+  letter-spacing: -0.03em;
   color: rgba(47, 45, 44, 0.55);
 
   white-space: nowrap;
@@ -537,9 +499,10 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+
   line-height: 1.75;
-  font-size: 1.15vw;
-  font-weight: 800;
+  font-size: 1.2vw;
+  font-weight: 600;
 }
 #packDate {
   bottom: 15%;
@@ -567,9 +530,70 @@ body {
 .card-flip p span,
 .card-flip #packDate,
 .card-flip .basic-card-message {
-  font-weight: 650 !important;
+  font-weight: 600 !important;
 }
 .belt,
 .rail {
   transform: translateY(calc(50vh - 28.5vw));
+}
+@media (min-height: 900px) {
+  .belt-wrapper {
+    transform: scale(1.1);
+    transform-origin: center center;
+  }
+}
+
+.card-front::after,
+.card-back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.08) 34%,
+    rgba(255, 255, 255, 0.55) 46%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(255, 255, 255, 0.55) 54%,
+    rgba(255, 255, 255, 0.08) 66%,
+    transparent 80%
+  );
+
+  background-size: 250% 100%;
+  background-position: 150% 0;
+
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+
+  -webkit-mask-image: var(--card-mask);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: 100% 100%;
+
+  mask-image: var(--card-mask);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: 100% 100%;
+}
+.card-flip.drop .card-front::after,
+.card-flip.drop .card-back::after {
+  animation: cardLightSweep 1.2s ease-out 0.35s forwards;
+}
+
+@keyframes cardLightSweep {
+  0% {
+    background-position: 150% 0;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    background-position: -50% 0;
+    opacity: 0;
+  }
 }
