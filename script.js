@@ -506,8 +506,10 @@ async function convert() {
       };
     }, 0);
   } catch (error) {
-    console.error(error);
-    alert("에러 발생 😢");
+    console.error("변환 오류:", error);
+
+    alert("에러 발생 😢\n" + error.message);
+
     btnEl.innerText = "포장하기";
     btnEl.disabled = false;
   }
