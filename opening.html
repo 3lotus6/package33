@@ -16,32 +16,62 @@
       <source src="sounds/typing.mp3" type="audio/mpeg" />
     </audio>
 
-    <div class="opening-scene">
+    <div class="opening-scene" id="opening-scene">
       <!-- 상단 패키지 -->
       <div class="packages">
-        <div class="pkg"><img src="images/bubble.png" alt="에어캡" /></div>
-        <div class="pkg"><img src="images/kraft.png" alt="박스" /></div>
-        <div class="pkg"><img src="images/bojagi.png" alt="보자기" /></div>
-        <div class="pkg"><img src="images/gold.png" alt="골드박스" /></div>
-        <div class="pkg"><img src="images/vacuum.png" alt="은박파우치" /></div>
-        <div class="pkg"><img src="images/holo.png" alt="홀로그램" /></div>
+        <div class="pkg">
+          <img src="images/bubble.png" alt="에어캡" />
+        </div>
+        <div class="pkg">
+          <img src="images/kraft.png" alt="크라프트지" />
+        </div>
+        <div class="pkg">
+          <img src="images/bojagi.png" alt="보자기" />
+        </div>
+        <div class="pkg">
+          <img src="images/gold.png" alt="금박" />
+        </div>
+        <div class="pkg">
+          <img src="images/vacuum.png" alt="압축팩" />
+        </div>
+        <div class="pkg">
+          <img src="images/holo.png" alt="홀로그램" />
+        </div>
       </div>
 
       <div class="divider"></div>
 
-      <!-- 텍스트 -->
+      <!-- 텍스트 영역 -->
       <div class="text-area">
         <div class="re-wrapper">
           <div id="re-tooltip" class="re-tooltip">Click!</div>
-          <button id="re-btn" class="re-btn clickable">RE</button>
+
+          <button
+            id="re-btn"
+            class="re-btn clickable"
+            type="button"
+            aria-label="RE 클릭하여 다음 문장 보기"
+          >
+            <img src="images/re.png" alt="" class="re-image" />
+          </button>
         </div>
 
+        <!-- 콜론 -->
         <div id="colon-area" class="colon">
           <div class="colon-dot"></div>
           <div class="colon-dot"></div>
         </div>
 
+        <!-- 타이핑 문장 -->
         <div id="typed-text" class="typed-text"></div>
+
+        <!-- 마지막 TONE 이미지 -->
+        <img
+          id="tone-image"
+          class="tone-image"
+          src="images/tone.png"
+          alt="TONE"
+        />
       </div>
 
       <!-- 푸터 -->

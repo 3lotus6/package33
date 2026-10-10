@@ -238,9 +238,12 @@ async function convert() {
 
   // 버튼 로딩 상태로 변경
   btnEl.disabled = true;
-  card.classList.add("loading");
+
+  const envelopeEntry = insertCardIntoEnvelope();
+
   try {
-    const res = await fetch("https://package33.onrender.com/convert", {
+    // 서버 요청을 먼저 시작하고, 카드 삽입은 동시에 진행
+    const requestPromise = fetch("https://package33.onrender.com/convert", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -250,7 +253,18 @@ async function convert() {
         style: currentSelected,
       }),
     });
+    await envelopeEntry;
 
+    // 봉투가 닫히면 두구두구 시작
+    const cardWrap = document.querySelector(".card-wrap");
+    cardWrap?.classList.add("envelope-drumroll");
+
+    // 서버 변환 결과 기다리기
+    const drumrollMinTime = waitEnvelope(1000);
+
+    // 서버 변환 완료까지 기다림
+    const res = await requestPromise;
+    await drumrollMinTime;
     if (!res.ok) {
       const errorText = await res.text();
       console.error("서버 응답 오류:", res.status, errorText);
@@ -260,8 +274,30 @@ async function convert() {
     const data = await res.json();
 
     console.log("서버 응답:", data);
+    cardWrap?.classList.remove("envelope-drumroll");
 
-    // 🔥 카드 축소 → 사라짐 → 새 카드 등장
+    // 봉투 다시 열기
+    // 봉투가 닫혀 있을 때 완성된 카드 이미지 준비
+    const baseCard = document.querySelector(".base-card-image");
+
+    if (baseCard && cardImages[currentSelected]) {
+      baseCard.src = cardImages[currentSelected];
+    }
+
+    // 변환된 문장도 미리 준비
+    inputEl.style.display = "none";
+    resultEl.textContent = (data.result || "변환 실패 😢").slice(0, 47);
+    resultEl.style.display = "block";
+
+    // 뚜껑 열기
+
+    btnEl.onclick = () => {
+      location.reload();
+    };
+
+    // 모든 포장 결과 적용 완료
+
+    // 완성된 카드가 위로 올라갔다가 확대되며 내려옴
 
     const sparkle = document.getElementById("sparkle");
 
@@ -273,7 +309,7 @@ async function convert() {
       sparkle.classList.remove("sparkle-active");
     }, 1200);
     // 카드가 사라지는 순간 새 카드 이미지로 교체
-    const baseCard = document.querySelector(".base-card-image");
+    // 위에서 선언한 baseCard를 그대로 사용
     if (baseCard && cardImages[currentSelected]) {
       const imagePath = cardImages[currentSelected];
 
@@ -283,204 +319,194 @@ async function convert() {
         .querySelector(".landing-dust")
         ?.style.setProperty("--dust-mask", `url("${imagePath}")`);
     }
-    card.classList.remove("loading", "impact", "card-shine");
-    void card.offsetWidth;
-    card.classList.add("impact");
 
-    setTimeout(() => {
-      card.classList.add("card-shine");
-    }, 1550);
-
-    setTimeout(() => {
-      card.classList.remove("impact", "card-shine");
-    }, 2600);
     // 2. 연기가 가장 짙어지는 타이밍(약 500ms 뒤)에 텍스트와 버튼 교체
-    setTimeout(() => {
-      // 텍스트 교체
-      inputEl.style.display = "none";
-      resultEl.style.display = "block";
-      let limitedResult = (data.result || "변환 실패 😢").slice(0, 47);
-      limitedResult = limitedResult.replace(/^["'“”‘’]|["'“”‘’]$/g, "");
-      function makeTwoLines(text) {
-        const cleanText = text.trim();
-        const words = cleanText.split(/\s+/);
 
-        // 짧으면 굳이 두 줄로 나누지 않음
-        if (cleanText.length <= 17) {
-          return {
-            firstLine: cleanText,
-            secondLine: "",
-          };
-        }
+    // 텍스트 교체
+    inputEl.style.display = "none";
+    resultEl.style.display = "block";
+    let limitedResult = (data.result || "변환 실패 😢").slice(0, 47);
+    limitedResult = limitedResult.replace(/^["'“”‘’]|["'“”‘’]$/g, "");
+    function makeTwoLines(text) {
+      const cleanText = text.trim();
+      const words = cleanText.split(/\s+/);
 
-        let bestFirst = cleanText;
-        let bestSecond = "";
-        let bestScore = Infinity;
-
-        // 띄어쓰기 위치를 기준으로 가장 균형 좋은 줄바꿈 찾기
-        for (let i = 1; i < words.length; i++) {
-          const first = words.slice(0, i).join(" ");
-          const second = words.slice(i).join(" ");
-
-          // 한 줄이 너무 길어지는 경우 제외
-          if (first.length > 24 || second.length > 24) continue;
-
-          // 두 줄 길이 차이가 적을수록 좋음
-          const difference = Math.abs(first.length - second.length);
-
-          if (difference < bestScore) {
-            bestScore = difference;
-            bestFirst = first;
-            bestSecond = second;
-          }
-        }
-
+      // 짧으면 굳이 두 줄로 나누지 않음
+      if (cleanText.length <= 17) {
         return {
-          firstLine: bestFirst,
-          secondLine: bestSecond,
+          firstLine: cleanText,
+          secondLine: "",
         };
       }
-      const lines = makeTwoLines(limitedResult);
 
-      resultEl.innerHTML = "";
+      let bestFirst = cleanText;
+      let bestSecond = "";
+      let bestScore = Infinity;
 
-      const line1 = document.createElement("span");
-      line1.className = "result-line-1";
-      line1.textContent = lines.firstLine;
+      // 띄어쓰기 위치를 기준으로 가장 균형 좋은 줄바꿈 찾기
+      for (let i = 1; i < words.length; i++) {
+        const first = words.slice(0, i).join(" ");
+        const second = words.slice(i).join(" ");
 
-      resultEl.appendChild(line1);
+        // 한 줄이 너무 길어지는 경우 제외
+        if (first.length > 24 || second.length > 24) continue;
 
-      if (lines.secondLine) {
-        resultEl.appendChild(document.createElement("br"));
+        // 두 줄 길이 차이가 적을수록 좋음
+        const difference = Math.abs(first.length - second.length);
 
-        const line2 = document.createElement("span");
-        line2.className = "result-line-2";
-        line2.textContent = lines.secondLine;
-
-        resultEl.appendChild(line2);
+        if (difference < bestScore) {
+          bestScore = difference;
+          bestFirst = first;
+          bestSecond = second;
+        }
       }
-      resultEl.style.fontWeight = "700";
-      // =========================
-      // 🔥 포장지별 글꼴 & 글자색
-      // =========================
 
-      const styleText = {
-        bojagi: {
-          color: "#231c60",
-          top: "47%",
-          left: "50%",
-          rotate: "10deg",
-        },
-
-        hologram: {
-          color: "#3e3a64",
-          top: "47%",
-          left: "49%",
-          rotate: "8deg",
-        },
-
-        vacuum: {
-          color: "#4E4E4E",
-          top: "45%",
-          left: "50%",
-          rotate: "8deg",
-        },
-
-        kraft: {
-          color: "#5e2a00",
-          top: "48%",
-          left: "50%",
-          rotate: "8deg",
-        },
-
-        gold: {
-          color: "#472f03",
-          top: "46%",
-          left: "50%",
-          rotate: "10deg",
-        },
-
-        aircap: {
-          color: "#56616c",
-          top: "47%",
-          left: "50%",
-          rotate: "11deg",
-        },
+      return {
+        firstLine: bestFirst,
+        secondLine: bestSecond,
       };
-      const buttonStyle = {
-        bojagi: {
-          left: "47%",
-          top: "64%",
-          rotate: "10deg",
-        },
+    }
+    const lines = makeTwoLines(limitedResult);
 
-        hologram: {
-          left: "48%",
-          top: "64%",
-          rotate: "8deg",
-        },
+    resultEl.innerHTML = "";
 
-        vacuum: {
-          left: "47%",
-          top: "64%",
-          rotate: "8deg",
-        },
+    const line1 = document.createElement("span");
+    line1.className = "result-line-1";
+    line1.textContent = lines.firstLine;
 
-        kraft: {
-          left: "46%",
-          top: "68%",
-          rotate: "8deg",
-        },
+    resultEl.appendChild(line1);
 
-        gold: {
-          left: "47%",
-          top: "65%",
-          rotate: "10deg",
-        },
+    if (lines.secondLine) {
+      resultEl.appendChild(document.createElement("br"));
 
-        aircap: {
-          left: "47%",
-          top: "62%",
-          rotate: "11deg",
-        },
-      };
-      const selectedStyle = styleText[currentSelected];
+      const line2 = document.createElement("span");
+      line2.className = "result-line-2";
+      line2.textContent = lines.secondLine;
 
-      if (selectedStyle) {
-        resultEl.style.color = selectedStyle.color;
-        resultEl.style.top = selectedStyle.top;
-        resultEl.style.left = selectedStyle.left;
+      resultEl.appendChild(line2);
+    }
+    resultEl.style.fontWeight = "700";
+    // =========================
+    // 🔥 포장지별 글꼴 & 글자색
+    // =========================
 
-        resultEl.style.transform = `translate(-50%, -50%) rotate(${selectedStyle.rotate})`;
-      }
-      const saved = JSON.parse(localStorage.getItem("texts")) || [];
+    const styleText = {
+      bojagi: {
+        color: "#231c60",
+        top: "47%",
+        left: "50%",
+        rotate: "10deg",
+      },
 
-      const styleMap = {
-        aircap: "에어캡",
-        bojagi: "보자기",
-        hologram: "홀로그램",
-        vacuum: "진공팩",
-        kraft: "크라프트지",
-        gold: "황금",
-      };
+      hologram: {
+        color: "#3e3a64",
+        top: "47%",
+        left: "49%",
+        rotate: "8deg",
+      },
 
-      // 포장한 순간의 날짜와 시간
-      const createdAt = Date.now();
+      vacuum: {
+        color: "#4E4E4E",
+        top: "45%",
+        left: "50%",
+        rotate: "8deg",
+      },
 
-      saved.push({
-        id: createdAt,
-        text: data.result,
-        original: text,
-        style: styleMap[currentSelected],
-        createdAt: createdAt,
-      });
+      kraft: {
+        color: "#5e2a00",
+        top: "48%",
+        left: "50%",
+        rotate: "8deg",
+      },
 
-      localStorage.setItem("texts", JSON.stringify(saved));
-      // =========================
-      // 🔥 재포장하기 버튼으로 변경
-      // =========================
+      gold: {
+        color: "#472f03",
+        top: "46%",
+        left: "50%",
+        rotate: "10deg",
+      },
 
-      btnEl.innerHTML = `
+      aircap: {
+        color: "#56616c",
+        top: "47%",
+        left: "50%",
+        rotate: "11deg",
+      },
+    };
+    const buttonStyle = {
+      bojagi: {
+        left: "47%",
+        top: "64%",
+        rotate: "10deg",
+      },
+
+      hologram: {
+        left: "48%",
+        top: "64%",
+        rotate: "8deg",
+      },
+
+      vacuum: {
+        left: "47%",
+        top: "64%",
+        rotate: "8deg",
+      },
+
+      kraft: {
+        left: "46%",
+        top: "68%",
+        rotate: "8deg",
+      },
+
+      gold: {
+        left: "47%",
+        top: "65%",
+        rotate: "10deg",
+      },
+
+      aircap: {
+        left: "47%",
+        top: "62%",
+        rotate: "11deg",
+      },
+    };
+    const selectedStyle = styleText[currentSelected];
+
+    if (selectedStyle) {
+      resultEl.style.color = selectedStyle.color;
+      resultEl.style.top = selectedStyle.top;
+      resultEl.style.left = selectedStyle.left;
+
+      resultEl.style.transform = `translate(-50%, -50%) rotate(${selectedStyle.rotate})`;
+    }
+    const saved = JSON.parse(localStorage.getItem("texts")) || [];
+
+    const styleMap = {
+      aircap: "에어캡",
+      bojagi: "보자기",
+      hologram: "홀로그램",
+      vacuum: "진공팩",
+      kraft: "크라프트지",
+      gold: "황금",
+    };
+
+    // 포장한 순간의 날짜와 시간
+    const createdAt = Date.now();
+
+    saved.push({
+      id: createdAt,
+      text: data.result,
+      original: text,
+      style: styleMap[currentSelected],
+      createdAt: createdAt,
+    });
+
+    localStorage.setItem("texts", JSON.stringify(saved));
+    // =========================
+    // 🔥 재포장하기 버튼으로 변경
+    // =========================
+
+    btnEl.innerHTML = `
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M20 11a8 8 0 0 0-15.5-2" />
     <path d="M4 4v5h5" />
@@ -489,43 +515,319 @@ async function convert() {
   </svg>
   <span>재포장하기</span>
 `;
-      // 기존 포장지 색상 클래스 혹시 있으면 제거
-      btnEl.classList.remove(
-        "repackage-bojagi",
-        "repackage-hologram",
-        "repackage-vacuum",
-        "repackage-kraft",
-        "repackage-gold",
-        "repackage-aircap",
-      );
+    // 기존 포장지 색상 클래스 혹시 있으면 제거
+    btnEl.classList.remove(
+      "repackage-bojagi",
+      "repackage-hologram",
+      "repackage-vacuum",
+      "repackage-kraft",
+      "repackage-gold",
+      "repackage-aircap",
+    );
 
-      // 유리 버튼 활성화
-      btnEl.classList.add("repackage");
+    // 유리 버튼 활성화
+    btnEl.classList.add("repackage");
 
-      // 현재 선택한 포장지 색 적용
-      btnEl.classList.add(`repackage-${currentSelected}`);
-      const selectedButtonStyle = buttonStyle[currentSelected];
+    // 현재 선택한 포장지 색 적용
+    btnEl.classList.add(`repackage-${currentSelected}`);
+    const selectedButtonStyle = buttonStyle[currentSelected];
 
-      if (selectedButtonStyle) {
-        btnEl.style.left = selectedButtonStyle.left;
-        btnEl.style.top = selectedButtonStyle.top;
-        btnEl.style.bottom = "auto";
+    if (selectedButtonStyle) {
+      btnEl.style.left = selectedButtonStyle.left;
+      btnEl.style.top = selectedButtonStyle.top;
+      btnEl.style.bottom = "auto";
 
-        btnEl.style.transform = `translateX(-50%) rotate(${selectedButtonStyle.rotate})`;
-      }
-      btnEl.disabled = false;
+      btnEl.style.transform = `translateX(-50%) rotate(${selectedButtonStyle.rotate})`;
+    }
+    btnEl.disabled = false;
 
-      // 재포장하기 클릭 → 처음 상태로 돌아가기
-      btnEl.onclick = () => {
-        location.reload();
-      };
-    }, 0);
+    // 재포장하기 클릭 → 처음 상태로 돌아가기
+
+    btnEl.onclick = () => {
+      location.reload();
+    };
+
+    // 포장지별 카드 디자인과 버튼 적용 완료
+
+    // 뚜껑 열기
+    openEnvelopeFlap();
+
+    // 뚜껑이 열린 후
+    await waitEnvelope(375);
+
+    // 완성된 카드 꺼내기
+    await ejectCardFromEnvelope();
+
+    // 중앙 도착 즉시 먼지 + 광 효과
   } catch (error) {
     console.error("변환 오류:", error);
 
+    openEnvelopeFlap();
+
+    card.classList.remove("loading");
+
     alert("에러 발생 😢\n" + error.message);
 
-    btnEl.innerText = "포장하기";
     btnEl.disabled = false;
   }
+}
+
+/* ==========================================
+   RE:TONE 봉투 애니메이션
+========================================== */
+
+function envelopeWait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/* 봉투 애니메이션 준비 */
+
+function prepareEnvelope(originalText) {
+  const overlay = document.getElementById("envelopeOverlay");
+  const stage = document.getElementById("envelopeStage");
+
+  const cardImage = document.getElementById("envelopeCardImage");
+  const cardText = document.getElementById("envelopeCardText");
+
+  if (!overlay || !stage || !cardImage || !cardText) {
+    return false;
+  }
+
+  stage.className = "envelope-stage";
+  overlay.className = "envelope-overlay active";
+
+  const originalCard = document.querySelector(".base-card-image");
+
+  cardImage.src = originalCard?.getAttribute("src") || "images/card.png";
+  cardText.textContent = originalText;
+  cardText.style.color = "#5d1f02";
+
+  document.body.classList.add("envelope-busy");
+
+  return true;
+}
+
+/* STEP 1~3: 카드 들어감 → 닫힘 → 포장 중 */
+
+async function envelopeEnter(originalText) {
+  if (!prepareEnvelope(originalText)) return;
+
+  const stage = document.getElementById("envelopeStage");
+
+  // 봉투와 카드가 화면에 등장
+  await envelopeWait(150);
+
+  // 카드가 안으로 들어감
+  stage.classList.add("inserting");
+  await envelopeWait(1000);
+
+  // 뚜껑 닫힘
+  stage.classList.add("closed");
+  await envelopeWait(850);
+
+  // 언어 포장 중
+  stage.classList.add("packing");
+}
+
+/* STEP 4~5: 변환 카드 준비 → 열림 → 배출 */
+
+async function envelopeReveal(convertedText, selectedType) {
+  const stage = document.getElementById("envelopeStage");
+  const cardImage = document.getElementById("envelopeCardImage");
+  const cardText = document.getElementById("envelopeCardText");
+
+  if (!stage || !cardImage || !cardText) return;
+
+  // 서버 응답 후에도 잠시 닫힌 상태 유지
+  await envelopeWait(550);
+
+  // 포장 완료: 카드 이미지와 텍스트 변경
+  const images = {
+    bojagi: "images/card_bojagi.png",
+    hologram: "images/card_holo.png",
+    vacuum: "images/card_vacuum.png",
+    kraft: "images/card_kraft.png",
+    gold: "images/card_gold.png",
+    aircap: "images/card_aircap.png",
+  };
+
+  const colors = {
+    bojagi: "#231c60",
+    hologram: "#3e3a64",
+    vacuum: "#4e4e4e",
+    kraft: "#5e2a00",
+    gold: "#472f03",
+    aircap: "#56616c",
+  };
+
+  cardImage.src = images[selectedType] || "images/card.png";
+  cardText.textContent = convertedText;
+  cardText.style.color = colors[selectedType] || "#333333";
+
+  // 흔들림 중지
+  stage.classList.remove("packing");
+
+  // 닫힌 이미지 사라짐, 뚜껑 열림
+  stage.classList.remove("closed");
+  stage.classList.add("opening");
+
+  await envelopeWait(850);
+
+  // 카드가 봉투 밖으로 나옴
+  stage.classList.remove("inserting", "opening");
+  stage.classList.add("ejecting");
+
+  await envelopeWait(1050);
+}
+
+/* STEP 6: 기존 완성 카드 화면으로 복귀 */
+
+function envelopeFinish() {
+  const overlay = document.getElementById("envelopeOverlay");
+
+  if (!overlay) return;
+
+  document.body.classList.remove("envelope-busy");
+
+  overlay.classList.add("disappearing");
+
+  setTimeout(() => {
+    overlay.className = "envelope-overlay finished";
+
+    const stage = document.getElementById("envelopeStage");
+
+    if (stage) {
+      stage.className = "envelope-stage";
+    }
+  }, 450);
+}
+
+/* 오류 발생 시 복구 */
+
+function envelopeCancel() {
+  const overlay = document.getElementById("envelopeOverlay");
+  const stage = document.getElementById("envelopeStage");
+
+  document.body.classList.remove("envelope-busy");
+
+  if (overlay) {
+    overlay.className = "envelope-overlay";
+  }
+
+  if (stage) {
+    stage.className = "envelope-stage";
+  }
+}
+
+/* 기존 봉투 뚜껑 닫기 */
+
+function closeEnvelopeFlap() {
+  const envelope = document.querySelector(".envelope-back-layer");
+  const cardWrap = document.querySelector(".card-wrap");
+
+  if (!envelope || !cardWrap) return;
+
+  // 뚜껑 즉시 닫기 시작
+  envelope.classList.remove("opened");
+  envelope.classList.add("closed");
+
+  // 뚜껑 접힘과 동시에 닫힌 봉투로 빠르게 전환
+  setTimeout(() => {
+    if (envelope.classList.contains("closed")) {
+      cardWrap.classList.add("envelope-sealed");
+    }
+  }, 200);
+}
+/* 기존 봉투 뚜껑 열기 */
+
+function openEnvelopeFlap() {
+  const envelope = document.querySelector(".envelope-back-layer");
+  const cardWrap = document.querySelector(".card-wrap");
+
+  if (!envelope || !cardWrap) return;
+
+  cardWrap.classList.remove("envelope-sealed");
+
+  envelope.classList.remove("closed");
+  envelope.classList.add("opened");
+}
+/* 애니메이션 시간 대기 */
+
+function waitEnvelope(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/* 카드가 봉투 안으로 들어가기 */
+
+async function insertCardIntoEnvelope() {
+  const cardWrap = document.querySelector(".card-wrap");
+  if (!cardWrap) return;
+
+  cardWrap.classList.remove(
+    "card-ejecting",
+    "card-inside",
+    "envelope-sealed",
+    "front-over-card",
+  );
+
+  // 카드 상승 + 축소 + 봉투 삽입
+  cardWrap.classList.add("card-inserting");
+
+  // 위로 올라간 뒤 내려오기 시작
+  await waitEnvelope(700);
+
+  // 카드가 봉투 앞 포켓 뒤로 들어감
+  cardWrap.classList.add("front-over-card");
+
+  // 삽입 애니메이션 완료
+  await waitEnvelope(400);
+
+  // 카드 위치 유지
+  cardWrap.classList.add("card-inside");
+  cardWrap.classList.remove("card-inserting");
+
+  // 기다리지 않고 바로 뚜껑 닫기
+  closeEnvelopeFlap();
+
+  await waitEnvelope(200);
+}
+
+/* 변환된 카드가 봉투 밖으로 나오기 */
+
+async function ejectCardFromEnvelope() {
+  const cardWrap = document.querySelector(".card-wrap");
+  if (!cardWrap) return;
+
+  const card = cardWrap.querySelector(".card-inner");
+
+  cardWrap.classList.remove(
+    "card-inserting",
+    "card-inside",
+    "card-above-envelope",
+  );
+
+  cardWrap.classList.add("card-ejecting");
+
+  await waitEnvelope(525);
+  cardWrap.classList.add("card-above-envelope");
+
+  // 쿵 착지 순간 먼지 + 광
+  await waitEnvelope(255);
+
+  if (card) {
+    card.classList.remove("impact", "card-shine");
+    void card.offsetWidth;
+    card.classList.add("impact", "card-shine");
+
+    setTimeout(() => {
+      card.classList.remove("impact", "card-shine");
+    }, 1800);
+  }
+
+  // 반동까지 끝난 다음 애니메이션 종료
+  await waitEnvelope(260);
+
+  cardWrap.classList.remove("card-ejecting");
+  cardWrap.classList.add("envelope-finished");
+  cardWrap.classList.remove("card-above-envelope");
 }

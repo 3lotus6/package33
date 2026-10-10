@@ -56,13 +56,30 @@
     <div class="roll aircap" id="aircapRoll">
       <img src="images/aircap1.png" />
     </div>
+
     <div class="container">
       <div class="card-wrap">
+        <!-- 1. 봉투 뒷판과 열린 뚜껑 -->
+        <div class="envelope-back-layer" aria-hidden="true">
+          <img
+            class="envelope-base-back"
+            src="images/envelope-back.png"
+            alt=""
+          />
+
+          <img
+            class="envelope-base-flap"
+            src="images/envelope-flap.png"
+            alt=""
+          />
+        </div>
+
+        <!-- 기존 효과 -->
         <div class="landing-dust" aria-hidden="true"></div>
         <div id="sparkle"></div>
 
+        <!-- 2. 기존 카드 -->
         <div class="card-inner">
-          <!-- 기존 카드 -->
           <div class="card-front">
             <div class="card-bg" id="card-bg">
               <img class="base-card-image" src="images/card.png" alt="" />
@@ -75,10 +92,11 @@
                   placeholder=""
                   maxlength="47"
                 ></textarea>
+
                 <div class="fake-placeholder">
                   포장할 직설적인 문장을 입력하세요<br />
-                  <span class="example-text">예시: 제 정신이야?</span
-                  ><span class="fake-cursor"></span>
+                  <span class="example-text"> 예시: 제정신이야? </span>
+                  <span class="fake-cursor"></span>
                 </div>
               </div>
 
@@ -90,13 +108,28 @@
             </div>
           </div>
 
-          <!-- 포장된 카드 -->
           <div class="card-back"></div>
         </div>
-        <script src="script.js"></script>
-        <script src="common.js"></script>
+
+        <!-- 3. 봉투 앞 포켓 -->
+        <img
+          class="envelope-front-layer"
+          src="images/envelope-front.png"
+          alt=""
+          aria-hidden="true"
+        />
+
+        <!-- 4. 닫힌 상태 이미지 -->
+        <img
+          class="envelope-closed-layer"
+          src="images/envelope-closed.png"
+          alt=""
+          aria-hidden="true"
+        />
       </div>
-      <!-- card-wrap -->
     </div>
+
+    <script src="script.js"></script>
+    <script src="common.js"></script>
   </body>
 </html>

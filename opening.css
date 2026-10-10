@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +9,13 @@
 :root {
   --orange: #ff5e28;
   --white: #ffffff;
+  --ux-black: #1d1d1f;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
@@ -20,19 +27,43 @@ body {
   position: relative;
 }
 
+/* ───────── 전체 오프닝 화면 ───────── */
+
+.opening-scene {
+  position: absolute;
+  width: 100vw;
+  height: 56.25vw;
+
+  left: 0;
+  top: 52%;
+
+  transform: translateY(-50%);
+
+  opacity: 1;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.opening-scene.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* ───────── 상단 패키지 ───────── */
+
 .packages {
   position: absolute;
-  top: 1vw;
+  top: 2.2vw;
   height: 20vw;
+
   left: 0;
   right: 0;
 
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 0.4vw; /* 고정 px에서 vw로 수정 */
-  padding: 2vw 10vw; /* px 패딩을 vw 비율로 수정 */
+
+  gap: 0.4vw;
+  padding: 2vw 10vw;
 }
 
 .pkg {
@@ -40,6 +71,7 @@ body {
   flex: 1;
   max-width: 14.5vw;
   height: 100%;
+
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -52,17 +84,20 @@ body {
   object-position: bottom;
 }
 
-/* ───────── 구분선 (숨김) ───────── */
+/* ───────── 구분선 ───────── */
+
 .divider {
   display: none;
 }
 
 /* ───────── 텍스트 영역 ───────── */
+
 .text-area {
   position: absolute;
-  top: 22.5vw;
-  height: 23vw;
-  left: 10vw; /* 160px를 vw 비율로 수정 */
+  top: 24vw;
+  height: 20vw;
+
+  left: 10vw;
   right: 10vw;
 
   border-top: 1px solid rgba(255, 255, 255, 0.7);
@@ -71,46 +106,114 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
   padding: 0;
-  gap: 5vw; /* 6.125rem을 vw로 수정하여 대화면 대응 */
+  gap: 5vw;
+
   z-index: 10;
 }
 
-/* ───────── ✨ RE 버튼 & 툴팁 ───────── */
+/* ───────── RE 버튼 ───────── */
+
 .re-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
+
   flex-shrink: 0;
   margin-right: 1vw;
+}
+
+/* ───────── RE 이미지 버튼 ───────── */
+
+.re-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20vw;
+  height: 16vw;
+
+  padding: 0;
+  margin: 0;
+
+  background: none;
+  border: none;
+
+  cursor: pointer;
+  flex-shrink: 0;
+
+  z-index: 20;
+}
+
+/* RE 이미지 */
+.re-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  transform: translateX(0.8vw) scale(1.05);
+
+  transition: opacity 0.3s ease;
+}
+
+/* 호버 효과 */
+
+.re-btn:hover .re-image {
+  opacity: 0.7;
+}
+
+/* RE 버튼 움직임 제거 */
+
+.re-btn.clickable:not(.disabled) {
+  animation: none;
+}
+
+/* 클릭 비활성화 */
+
+.re-btn.disabled {
+  pointer-events: none !important;
+  cursor: default !important;
 }
 
 .re-tooltip {
   position: absolute;
   top: -3.5vw;
+
   background-color: var(--white);
   color: var(--orange);
-  font-size: 1.4vw;
-  font-weight: 800;
-  padding: 0.5vw 1.2vw;
+
+  font-size: 1.5vw; /* 기존 1.4vw */
+  padding: 0.55vw 1.3vw; /* 기존 0.5vw 1.2vw */
   border-radius: 10px;
+  font-weight: 800;
+
   white-space: nowrap;
   pointer-events: none;
 
   opacity: 0;
   transform: translateY(10px);
+
   transition: opacity 0.3s ease;
+
   z-index: 30;
 }
 
 .re-tooltip::after {
   content: "";
   position: absolute;
+
   bottom: -0.4vw;
   left: 50%;
+
   transform: translateX(-50%);
+
   border-width: 0.5vw 0.4vw 0;
   border-style: solid;
+
   border-color: var(--white) transparent transparent transparent;
 }
 
@@ -123,70 +226,40 @@ body {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-15px);
   }
 }
 
-.re-btn {
-  font-weight: 530;
-  font-size: 16vw;
-  color: var(--white);
-  background: none;
-  border: none;
-  cursor: pointer;
-  letter-spacing: 0em;
-  line-height: 1;
-  position: relative;
-  display: block;
-  z-index: 20;
-  transition: color 0.3s ease;
-}
+/* ───────── 포장지 흔들림 ───────── */
 
-.re-btn:hover {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.re-btn.disabled {
-  pointer-events: none !important;
-  cursor: default !important;
-}
-
-@keyframes pulseRE {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.04);
-  }
-}
-
-.re-btn.clickable:not(.disabled) {
-  animation: pulseRE 1.4s ease-in-out infinite;
-}
-
-/* ───── ✨ 제자리에서 강하게 흔들리는 애니메이션 ───── */
 @keyframes shake {
   0%,
   100% {
     transform: translateX(0) rotate(0);
   }
+
   15% {
     transform: translateX(-15px) rotate(-6deg);
   }
+
   30% {
     transform: translateX(15px) rotate(6deg);
   }
+
   45% {
     transform: translateX(-15px) rotate(-6deg);
   }
+
   60% {
     transform: translateX(15px) rotate(6deg);
   }
+
   75% {
     transform: translateX(-8px) rotate(-3deg);
   }
+
   90% {
     transform: translateX(8px) rotate(3deg);
   }
@@ -197,112 +270,255 @@ body {
 }
 
 /* ───────── 콜론 ───────── */
+
 .colon {
   display: flex !important;
   flex-direction: column;
+
   gap: 6vw;
   align-items: center;
   justify-content: center;
+
   margin: 0;
   flex-shrink: 0;
+
   position: relative;
   top: 0.5vw;
-  opacity: 1 !important;
-  visibility: visible !important;
+
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateX(0.8vw) translateY(-0.2vw);
 }
 
 .colon-dot {
   width: 2vw;
   height: 2vw;
+
   min-width: 10px;
   min-height: 10px;
-  background: white !important;
+
+  background: white;
   border-radius: 50%;
 }
 
-/* ───────── 오른쪽 텍스트 ───────── */
+/* ───────── 오른쪽 타이핑 텍스트 ───────── */
+
 .typed-text {
-  font-weight: 550;
+  font-family: "Noto Sans KR", sans-serif;
+
+  font-weight: 700;
   font-size: 13vw;
+
   color: var(--white);
+
   line-height: 1;
   letter-spacing: -0.02em;
+
   white-space: pre;
   word-break: keep-all;
+
   display: block;
-  transition: opacity 1s ease-in-out;
   position: relative;
+
   top: -1vw;
+
   opacity: 1;
   margin-left: 1vw;
+
+  min-width: 0;
+  flex-shrink: 0;
+
+  transition: opacity 1s ease-in-out;
 }
+
+/* 2줄 문장 */
 
 .typed-text.small-text {
   font-size: 5vw;
+  font-weight: 700;
   line-height: 1.5;
+
   top: 0;
   margin-top: -1.2vw;
+
   letter-spacing: -0.03em;
 }
 
-.typed-text.tone-mode {
-  font-size: 16vw;
-  font-weight: 505;
-  top: 0;
-  margin-top: -2.4vw;
+/* 마지막 안내 문장 */
+
+.typed-text.final-text {
+  color: var(--ux-black);
+  font-weight: 800;
+  text-shadow: none;
 }
 
-/* 커서 */
+/* ───────── 커서 ───────── */
+
 .cursor {
   display: inline-block;
+  transform: translateY(15px);
   width: 3px;
   height: 0.9em;
-  background: white;
-  margin-left: 5px;
-  animation: blink 0.7s infinite;
-  vertical-align: bottom;
+
+  background: currentColor;
+  margin-left: 3px;
+
+  animation: blink 0.7s step-end infinite;
+  vertical-align: baseline;
 }
 
 @keyframes blink {
-  50% {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
     opacity: 0;
   }
 }
 
+/* ───────── 마지막 TONE 이미지 ───────── */
+
+.tone-image {
+  display: block;
+  position: absolute;
+
+  /* 콜론 다음 위치에 정렬 */
+  left: 0;
+  top: 50%;
+
+  width: auto;
+  max-width: 100%;
+  height: 16vw;
+
+  object-fit: contain;
+  object-position: left center;
+
+  transform: translateY(-50%);
+
+  opacity: 0;
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity 1.1s ease-in-out,
+    visibility 0s linear 1.1s;
+}
+
+.tone-image.visible {
+  opacity: 1;
+  visibility: visible;
+
+  transition: opacity 1.1s ease-in-out;
+}
+
 /* ───────── 푸터 ───────── */
+
 .footer {
   position: absolute;
-  bottom: 8vw;
+
+  bottom: 9.5vw; /* 8.5vw → 11vw */
+
   left: 0;
   right: 0;
+
   display: flex;
   justify-content: space-between;
-  padding: 0 11vw; /* 160px를 vw 비율로 수정 */
+
+  padding: 0 10vw;
 }
 
 .footer-item {
-  font-size: 1vw; /* 18px를 vw로 수정 */
-  font-weight: 300; /* 너무 가늘지 않게 소폭 조정 */
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1vw;
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
 }
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap");
 
-.typed-text.outline-text {
-  color: rgb(41, 30, 28);
-  font-weight: 700;
-  text-shadow:
-    -0.15vw -0.15vw 0 rgb(255, 94, 25),
-    0.15vw -0.15vw 0 rgb(255, 94, 25),
-    -0.15vw 0.15vw 0 rgb(255, 94, 25),
-    0.15vw 0.15vw 0 rgb(255, 94, 25);
+/* ───────── 가로선 기준으로 정렬 ───────── */
+
+/* 포장지 영역 */
+.packages {
+  padding-left: 10vw;
+  padding-right: 10vw;
 }
-.opening-scene {
-  position: absolute;
 
-  width: 100vw;
-  height: 56.25vw;
+/* 첫 번째 에어캡 이미지 왼쪽 정렬 */
+.pkg:first-child {
+  justify-content: flex-start;
+}
 
-  left: 0;
-  top: 52%;
+.pkg:first-child img {
+  width: 100%;
+  object-position: left bottom;
+}
 
-  transform: translateY(-50%);
+/* 마지막 포장지 오른쪽 정렬 */
+.pkg:last-child {
+  justify-content: flex-end;
+}
+
+.pkg:last-child img {
+  width: 100%;
+  object-position: right bottom;
+}
+
+/* 하단 작은 글씨 */
+.footer {
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+
+/* ───────── 패키지 간격 균일하게 정렬 ───────── */
+
+.packages {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  column-gap: 1.2vw;
+
+  padding-left: 10vw;
+  padding-right: 10vw;
+
+  justify-content: initial;
+  align-items: end;
+}
+
+.pkg {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  height: 100%;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.pkg img,
+.pkg:first-child img,
+.pkg:last-child img {
+  display: block;
+  width: 100%;
+  height: 90%;
+
+  object-fit: contain;
+  object-position: center bottom;
+
+  transform: none;
+}
+.typed-text:not(.small-text) .cursor {
+  margin-left: 3px;
+  transform: translateY(15px);
+}
+
+/* 두 번째 문장부터 커서 */
+.typed-text.small-text .cursor {
+  margin-left: 10px;
+  transform: translateY(7px);
+  letter-spacing: 0;
 }
