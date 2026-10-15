@@ -97,7 +97,7 @@ body {
   border: 0.18vw solid #ff5e28;
   border-radius: 1vw;
   color: #ff5e28;
-  font-size: 1.03vw;
+  font-size: 1.2vw;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
@@ -164,7 +164,7 @@ body {
   }
 
   .option-btn {
-    font-size: 18px;
+    font-size: 18.5px;
   }
 }
 @media (max-aspect-ratio: 4/3) {

@@ -829,6 +829,7 @@ async function ejectCardFromEnvelope() {
     card.classList.remove("impact", "card-shine");
     void card.offsetWidth;
     card.classList.add("impact", "card-shine");
+    burstCardParticles();
 
     setTimeout(() => {
       card.classList.remove("impact", "card-shine");
@@ -841,4 +842,54 @@ async function ejectCardFromEnvelope() {
   cardWrap.classList.remove("card-ejecting");
   cardWrap.classList.add("envelope-finished");
   cardWrap.classList.remove("card-above-envelope");
+}
+
+function burstCardParticles() {
+  const container = document.getElementById("card-particles");
+  if (!container) return;
+
+  const colors = [
+    "#E60033",
+    "#F50075",
+    "#00A6D9",
+    "#00A651",
+    "#FFD900",
+    "#FF7900",
+    "#651A8B",
+    "#009F91",
+  ];
+
+  const card = document.querySelector(".card-wrap");
+  if (!card) return;
+
+  const containerRect = container.getBoundingClientRect();
+
+  for (let i = 0; i < 70; i++) {
+    const particle = document.createElement("span");
+    particle.className = "card-particle";
+    const angle = (Math.PI * 2 * i) / 70;
+    const distance = 180 + Math.random() * 250;
+
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance - 60;
+    const spin = `${Math.random() * 720 - 360}deg`;
+
+    particle.style.left = "50%";
+    particle.style.top = "75%";
+    particle.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    particle.style.width = `${3 + Math.random() * 4}px`;
+    particle.style.height = `${4 + Math.random() * 6}px`;
+    particle.style.setProperty("--move-x", `${moveX}px`);
+    particle.style.setProperty("--move-y", `${moveY}px`);
+    particle.style.setProperty("--spin", spin);
+    particle.style.animationDelay = `${Math.random() * 0.08}s`;
+
+    container.appendChild(particle);
+
+    particle.addEventListener("animationend", () => particle.remove(), {
+      once: true,
+    });
+  }
 }
