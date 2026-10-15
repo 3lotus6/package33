@@ -77,44 +77,55 @@ const cardImages = {
 // 첫 화면은 일반 카드
 
 let currentSelected = null;
+
 let intervals = {};
 
-// =========================
-// 🔥 펼치기
-// =========================
+// 롤 이미지 프레임을 미리 불러오기
+Object.values(rolls).forEach((roll) => {
+  roll.frames.forEach((src) => {
+    const image = new Image();
+    image.src = src;
+  });
+});
+
+// 펼치기
 function playForward(key) {
   const roll = rolls[key];
   if (!roll?.element) return;
 
   const img = roll.element.querySelector("img");
-  let i = 0;
   clearInterval(intervals[key]);
+
+  let i = 0;
 
   intervals[key] = setInterval(() => {
     img.src = roll.frames[i];
     i++;
+
     if (i >= roll.frames.length) {
       clearInterval(intervals[key]);
+      intervals[key] = null;
     }
   }, 80);
 }
 
-// =========================
-// 🔥 되감기
-// =========================
+// 되감기
 function playReverse(key) {
   const roll = rolls[key];
   if (!roll?.element) return;
 
   const img = roll.element.querySelector("img");
-  let i = roll.frames.length - 1;
   clearInterval(intervals[key]);
+
+  let i = roll.frames.length - 1;
 
   intervals[key] = setInterval(() => {
     img.src = roll.frames[i];
     i--;
+
     if (i < 0) {
       clearInterval(intervals[key]);
+      intervals[key] = null;
     }
   }, 80);
 }

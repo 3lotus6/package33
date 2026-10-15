@@ -334,16 +334,12 @@ body {
   z-index: 2;
 }
 
-/* =========================
-   움직임
-========================= */
 @keyframes floatA {
   from {
     transform: translate(0, 0) rotate(0deg);
   }
-
   to {
-    transform: translate(1.2vw, 1vw) rotate(7deg);
+    transform: translate(2.5vw, 2vw) rotate(12deg);
   }
 }
 
@@ -351,9 +347,8 @@ body {
   from {
     transform: translate(0, 0) rotate(0deg);
   }
-
   to {
-    transform: translate(-1.5vw, 1vw) rotate(-6deg);
+    transform: translate(-3vw, 2vw) rotate(-10deg);
   }
 }
 
@@ -361,9 +356,8 @@ body {
   from {
     transform: translate(0, 0) rotate(0deg);
   }
-
   to {
-    transform: translate(1.8vw, -1vw) rotate(5deg);
+    transform: translate(3vw, -2vw) rotate(9deg);
   }
 }
 
@@ -372,9 +366,8 @@ body {
     transform: translate(0, 0) rotate(0deg);
     opacity: 0.45;
   }
-
   to {
-    transform: translate(-0.8vw, 1vw) rotate(10deg);
+    transform: translate(-1.5vw, 2vw) rotate(15deg);
     opacity: 0.7;
   }
 }
@@ -383,18 +376,17 @@ body {
   from {
     transform: translateX(-50%) translateY(0) rotate(0deg);
   }
-
   to {
-    transform: translateX(-50%) translateY(-1vw) rotate(-7deg);
+    transform: translateX(-50%) translateY(-2vw) rotate(-10deg);
   }
 }
+
 @keyframes floatF {
   from {
     transform: translate(0, 0) rotate(-10deg);
   }
-
   to {
-    transform: translate(0.8vw, -0.5vw) rotate(-4deg);
+    transform: translate(1.8vw, -1.5vw) rotate(-3deg);
   }
 }
 @media (min-height: 900px) {

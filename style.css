@@ -363,6 +363,8 @@ body {
   width: 27vw;
   cursor: pointer;
   transition: transform 0.3s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 /* 🔥 보자기 */
 .bojagi {
