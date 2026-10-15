@@ -16,48 +16,53 @@ body {
   color: #ff5e28;
 }
 
-/* 🔥 전체 레이아웃 */
+/* 전체 레이아웃 */
 .result-container {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 4.2vw;
-  max-width: 75vw;
-  width: 100%;
+  align-items: center;
+  gap: clamp(24px, 3vw, 48px);
+  width: min(90vw, 1500px);
   margin: 0 auto;
-  padding: 0 2.6vw;
+  padding: 0 2vw;
   box-sizing: border-box;
-  height: calc(100vh - 5.2vw);
+  height: calc(100vh - 100px);
 }
 
-/* 🔥 캐릭터 영역 */
+/* 캐릭터 영역 */
 .character-area {
   text-align: center;
   align-self: end;
-  margin-bottom: -5.2vw;
+  margin-bottom: 0;
+  position: relative;
+  top: 100px;
 }
 
 .character-img {
-  max-width: 78%;
-  height: auto;
+  height: 78vh;
+  max-height: calc(100vh - 140px);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
   display: block;
   margin: 0 auto;
   opacity: 0;
   animation: slideUp 0.8s ease-out forwards;
 }
 
-/* 🔥 피드백 영역 */
+/* 피드백 영역 */
 .feedback-area {
   align-self: flex-start;
-  margin-top: 14.3vw;
+  margin-top: 15.5vw;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 1.95vw;
-  width: 110%;
+  width: 100%;
   max-width: 50vw;
 }
 
-/* 🔹 말풍선 */
+/* 말풍선 */
 .speech-bubble {
   position: relative;
   width: 100%;
@@ -73,7 +78,7 @@ body {
   animation: slideInRight 0.6s ease-out 0.3s forwards;
 }
 
-/* 🔹 말풍선 꼬리 */
+/* 말풍선 꼬리 */
 .speech-bubble::before {
   content: "";
   position: absolute;
@@ -93,36 +98,38 @@ body {
   border-style: solid;
   border-color: #f7f2ef transparent transparent transparent;
 }
-
-/* 🔹 말풍선 텍스트 */
+/* 말풍선 텍스트 */
 .speech-bubble p {
   margin: 0;
   font-size: 1.25vw;
   font-weight: 700;
   color: #ff5e28;
   line-height: 1.8;
+  letter-spacing: -0.5px;
 }
 
-/* 🔥 스탬프 */
+/* 스탬프 */
 .stamp-img {
   position: absolute;
-  right: 2.6vw;
+  right: clamp(18px, 2vw, 30px);
   top: 50%;
   transform: translateY(-50%);
-  width: 9.1vw;
+  width: clamp(90px, 9.1vw, 140px);
+  max-width: 25%;
   opacity: 0;
   animation: stampBang 0.4s ease-in 0.8s forwards;
 }
 
-/* 🔥 다시하기 버튼 */
+/* 다시하기 버튼 */
 .retry-btn {
   background-color: #ff5e28;
   color: white;
   border: none;
-  border-radius: 0.65vw;
-  padding: 0.8vw 1.7vw;
-  font-size: 1vw;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: clamp(14px, 1.03vw, 18px);
   font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
   transition: all 0.2s;
   opacity: 0;
@@ -134,7 +141,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* 🔥 애니메이션 */
+/* 애니메이션 */
 @keyframes slideUp {
   0% {
     transform: translateY(100px);
@@ -169,5 +176,39 @@ body {
   100% {
     opacity: 1;
     transform: translateY(-50%) scale(1);
+  }
+}
+
+/* 큰 화면 */
+@media (min-width: 1600px) {
+  .result-container {
+    width: 75vw;
+    max-width: 1500px;
+    gap: 48px;
+  }
+
+  .speech-bubble p {
+    font-size: 20px;
+  }
+
+  .retry-btn {
+    font-size: 18px;
+  }
+}
+
+/* 화면 비율이 4:3 이하인 경우 */
+@media (max-aspect-ratio: 4/3) {
+  .result-container {
+    width: 94vw;
+    gap: 2vw;
+  }
+}
+@media (min-width: 1600px) {
+  .speech-bubble p {
+    font-size: 21px;
+  }
+
+  .retry-btn {
+    font-size: 18px;
   }
 }

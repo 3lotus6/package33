@@ -319,7 +319,7 @@ function fadeToIndex() {
   openingScene.classList.add("fade-out");
 
   setTimeout(() => {
-    window.location.href = "index.html";
+    window.location.href = "opening.html";
   }, 1250);
 }
 

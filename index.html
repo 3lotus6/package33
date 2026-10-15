@@ -1,135 +1,81 @@
 <!doctype html>
-
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-
-    <title>RE:TONE</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hahmlet&family=Nanum+Myeongjo&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;600;700&family=Song+Myung&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-
-    <link rel="stylesheet" href="common.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RE:TONE Opening</title>
+    <link rel="stylesheet" href="opening.css" />
   </head>
 
   <body>
-    <div class="navbar">
-      <a href="opening.html" class="logo">
-        <img src="images/logo.png" alt="RE:TONE" />
-      </a>
+    <div class="opening-scene" id="opening-scene">
+      <!-- 상단 패키지 -->
+      <div class="packages">
+        <div class="pkg">
+          <img src="images/bubble.png" alt="에어캡" />
+        </div>
+        <div class="pkg">
+          <img src="images/kraft.png" alt="크라프트지" />
+        </div>
+        <div class="pkg">
+          <img src="images/bojagi.png" alt="보자기" />
+        </div>
+        <div class="pkg">
+          <img src="images/gold.png" alt="금박" />
+        </div>
+        <div class="pkg">
+          <img src="images/vacuum.png" alt="압축팩" />
+        </div>
+        <div class="pkg">
+          <img src="images/holo.png" alt="홀로그램" />
+        </div>
+      </div>
 
-      <ul class="menu">
-        <li class="active"><a href="index.html">언어 포장</a></li>
+      <div class="divider"></div>
 
-        <li><a href="storage.html">언어 창고</a></li>
+      <!-- 텍스트 영역 -->
+      <div class="text-area">
+        <div class="re-wrapper">
+          <div id="re-tooltip" class="re-tooltip">Click!</div>
 
-        <li><a href="test.html">포장 유형 테스트</a></li>
-
-        <li><a href="lab.html">가상 대화 실험</a></li>
-      </ul>
-    </div>
-    <div class="roll bojagi" id="bojagiRoll">
-      <img src="images/bojagi1.png" />
-    </div>
-
-    <div class="roll hologram" id="holoRoll">
-      <img src="images/holo1.png" />
-    </div>
-
-    <div class="roll vacuum" id="vacuumRoll">
-      <img src="images/vacuum1.png" />
-    </div>
-
-    <div class="roll kraft" id="kraftRoll">
-      <img src="images/kraft1.png" />
-    </div>
-
-    <div class="roll gold" id="goldRoll">
-      <img src="images/gold1.png" />
-    </div>
-
-    <div class="roll aircap" id="aircapRoll">
-      <img src="images/aircap1.png" />
-    </div>
-
-    <div class="container">
-      <div class="card-wrap">
-        <!-- 1. 봉투 뒷판과 열린 뚜껑 -->
-        <div class="envelope-back-layer" aria-hidden="true">
-          <img
-            class="envelope-base-back"
-            src="images/envelope-back.png"
-            alt=""
-          />
-
-          <img
-            class="envelope-base-flap"
-            src="images/envelope-flap.png"
-            alt=""
-          />
+          <button
+            id="re-btn"
+            class="re-btn clickable"
+            type="button"
+            aria-label="RE 클릭하여 다음 문장 보기"
+          >
+            <img src="images/re.png" alt="" class="re-image" />
+          </button>
         </div>
 
-        <!-- 기존 효과 -->
-        <div class="landing-dust" aria-hidden="true"></div>
-        <div id="sparkle"></div>
-
-        <!-- 2. 기존 카드 -->
-        <div class="card-inner">
-          <div class="card-front">
-            <div class="card-bg" id="card-bg">
-              <img class="base-card-image" src="images/card.png" alt="" />
-
-              <div id="smoke-overlay"></div>
-
-              <div class="input-wrap">
-                <textarea
-                  id="input-text"
-                  placeholder=""
-                  maxlength="47"
-                ></textarea>
-
-                <div class="fake-placeholder">
-                  포장할 직설적인 문장을 입력하세요<br />
-                  <span class="example-text"> 예시: 제정신이야? </span>
-                  <span class="fake-cursor"></span>
-                </div>
-              </div>
-
-              <div id="result-text"></div>
-
-              <button id="convert-btn" onclick="convert()">
-                <img src="images/button.png" alt="포장하기" />
-              </button>
-            </div>
-          </div>
-
-          <div class="card-back"></div>
+        <!-- 콜론 -->
+        <div id="colon-area" class="colon">
+          <div class="colon-dot"></div>
+          <div class="colon-dot"></div>
         </div>
 
-        <!-- 3. 봉투 앞 포켓 -->
-        <img
-          class="envelope-front-layer"
-          src="images/envelope-front.png"
-          alt=""
-          aria-hidden="true"
-        />
+        <!-- 타이핑 문장 -->
+        <div id="typed-text" class="typed-text"></div>
 
-        <!-- 4. 닫힌 상태 이미지 -->
+        <!-- 마지막 TONE 이미지 -->
         <img
-          class="envelope-closed-layer"
-          src="images/envelope-closed.png"
-          alt=""
-          aria-hidden="true"
+          id="tone-image"
+          class="tone-image"
+          src="images/tone.png"
+          alt="TONE"
         />
+      </div>
+
+      <!-- 푸터 -->
+      <div class="footer">
+        <span class="footer-item">Wrap your words</span>
+        <span class="footer-item">Soften the message</span>
+        <span class="footer-item">Filter what you say</span>
+        <span class="footer-item">Say it differently</span>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="opening.js"></script>
     <script src="common.js"></script>
   </body>
 </html>

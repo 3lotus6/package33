@@ -16,65 +16,69 @@ body {
   color: #ff5e28;
 }
 
-/* 🔥 전체 레이아웃 */
 .game-container {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
-  gap: 3vw;
-  max-width: 75vw;
-  width: 100%;
+  align-items: center;
+  gap: clamp(24px, 3vw, 48px);
+  width: min(90vw, 1500px);
   margin: 0 auto;
   padding: 0 2vw;
   box-sizing: border-box;
-  height: calc(100vh - 4vw);
+  height: calc(100vh - 100px);
 }
-
-/* 🔥 캐릭터 영역 */
-.character-area {
-  text-align: center;
-  align-self: end;
-  margin-bottom: -4vw;
-}
-
 .character-img {
-  max-width: 76%;
-  height: auto;
+  height: 78vh;
+  max-height: calc(100vh - 140px);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
   display: block;
   margin: 0 auto;
   opacity: 0;
   animation: slideUp 0.8s ease-out forwards;
 }
-
 /* 🔥 퀴즈 영역 */
 .quiz-area {
   align-self: center;
   display: flex;
   flex-direction: column;
-  gap: 1.5vw;
+  gap: clamp(12px, 1.5vw, 24px);
+  min-width: 0;
 }
-
+.character-area {
+  text-align: center;
+  align-self: end;
+  margin-bottom: 0;
+  position: relative;
+  top: 100px;
+}
 /* 🔹 질문 박스 */
 .question-box {
+  box-sizing: border-box;
+  padding: clamp(18px, 2vw, 30px);
+  border-radius: clamp(12px, 1.3vw, 20px);
   background-color: #ff5e28;
-  color: rgb(255, 255, 255);
-  padding: 2vw 2vw;
-  border-radius: 1.3vw;
+  color: white;
   opacity: 0;
   animation: slideInRight 0.6s ease-out 0.3s forwards;
 }
 
 .question-box h2 {
   margin-top: 0;
-  margin-bottom: 0.5vw;
-  font-size: 1.2vw;
-  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: clamp(16px, 1.2vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
+/* 설명 */
 .question-box p {
   margin: 0;
-  font-size: 1vw;
+  font-size: clamp(13px, 1vw, 18px);
   line-height: 1.6;
-  font-weight: 300;
+  font-weight: 350;
+  letter-spacing: -0.5px;
 }
 
 /* 🔹 선택지 목록 */
@@ -99,6 +103,7 @@ body {
   cursor: pointer;
   line-height: 1.6;
   transition: all 0.2s ease-in-out;
+  letter-spacing: -0.5px;
 }
 
 .option-btn:hover {
@@ -141,5 +146,30 @@ body {
   100% {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+@media (min-width: 1600px) {
+  .game-container {
+    width: 75vw;
+    max-width: 1500px;
+    gap: 48px;
+  }
+
+  .question-box h2 {
+    font-size: 20px;
+  }
+
+  .question-box p {
+    font-size: 18px;
+  }
+
+  .option-btn {
+    font-size: 18px;
+  }
+}
+@media (max-aspect-ratio: 4/3) {
+  .game-container {
+    width: 94vw;
+    gap: 2vw;
   }
 }
