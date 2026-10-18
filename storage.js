@@ -20,10 +20,132 @@ const boxImages = {
    저장된 데이터 불러오기
 ========================= */
 
-const allTexts = JSON.parse(localStorage.getItem("texts")) || [];
+const defaultTexts = [
+  // 에어캡: 조심스럽게 제안하기
+  {
+    original: "제대로 해.",
+    text: "한 번 더 꼼꼼하게 살펴보면 어떨까요?",
+    style: "에어캡",
+  },
+  {
+    original: "다시 해.",
+    text: "조금 더 다듬어보는 건 어떨까요?",
+    style: "에어캡",
+  },
+  {
+    original: "개 시끄러.",
+    text: "조금만 조용히 이야기해 보면 어떨까요?",
+    style: "에어캡",
+  },
+  {
+    original: "그만 하지?",
+    text: "이제 그만해 보는 건 어떨까요?",
+    style: "에어캡",
+  },
 
-// 최근 24개만 표시
-const storedTexts = allTexts.slice(-30);
+  // 보자기: 정중하고 격식 있게 말하기
+  {
+    original: "틀렸어.",
+    text: "이 부분은 수정이 필요할 것 같습니다.",
+    style: "보자기",
+  },
+  {
+    original: "빨리 해.",
+    text: "가능한 한 빠르게 전달해 주시면 감사하겠습니다.",
+    style: "보자기",
+  },
+  {
+    original: "말이 안 되잖아.",
+    text: "해당 부분은 추가적인 검토가 필요할 것 같습니다.",
+    style: "보자기",
+  },
+  {
+    original: "내일까지 해라.",
+    text: "내일까지 완료해 주시면 감사하겠습니다.",
+    style: "보자기",
+  },
+
+  // 진공팩: 핵심만 압축하기
+  {
+    original: "ㅈㄴ 이상해.",
+    text: "방향 수정 필요.",
+    style: "진공팩",
+  },
+  {
+    original: "언제 낼거냐?",
+    text: "진행 상황 확인 필요.",
+    style: "진공팩",
+  },
+  {
+    original: "다시 설명해.",
+    text: "재설명 필요.",
+    style: "진공팩",
+  },
+  {
+    original: "ㅈㄴ 늦네",
+    text: "시간 준수 필요.",
+    style: "진공팩",
+  },
+
+  // 황금: 사소한 말을 거대하게 과장하기
+  {
+    original: "개망했네",
+    text: "천상의 질서가 이 결과 앞에서 무너지는구나!",
+    style: "황금",
+  },
+  {
+    original: "다시 해.",
+    text: "운명의 판결이다! 이 작업은 처음부터 다시 시작하라!",
+    style: "황금",
+  },
+  {
+    original: "개 늦었네.",
+    text: "시간의 신이여! 대체 언제 도착한단 말인가!",
+    style: "황금",
+  },
+
+  // 홀로그램: 센스 있고 긍정적으로 받아치기
+  {
+    original: "개별로.",
+    text: "좋아요, 더 색다른 방향도 찾아보죠!",
+    style: "홀로그램",
+  },
+  {
+    original: "대충 함?",
+    text: "조금만 더 다듬으면 훨씬 좋아지겠네요!",
+    style: "홀로그램",
+  },
+  {
+    original: "아 다시 해.",
+    text: "좋아요, 이번엔 새로운 버전으로 가보시죠!",
+    style: "홀로그램",
+  },
+
+  // 크라프트지: 감정을 솔직하게 표현하기
+  {
+    original: "개 빡쳐.",
+    text: "나는 네 행동 때문에 정말 짜증 나.",
+    style: "크라프트지",
+  },
+  {
+    original: "ㅈㄴ 싫어.",
+    text: "나는 그건 정말 하고 싶지 않아.",
+    style: "크라프트지",
+  },
+  {
+    original: "왜 내 말 무시해?",
+    text: "내 말을 무시하는 것 같아서 속상해.",
+    style: "크라프트지",
+  },
+  {
+    original: "실망",
+    text: "나는 기대했던 것과 달라서 많이 실망했어.",
+    style: "크라프트지",
+  },
+];
+
+const allTexts = JSON.parse(localStorage.getItem("texts")) || [];
+const storedTexts = [...defaultTexts, ...allTexts].slice(-30);
 
 const belt1 = document.getElementById("belt1");
 const belt2 = document.getElementById("belt2");
@@ -54,9 +176,10 @@ function createBox(item, imageIndex = 0) {
 
   const img = document.createElement("img");
 
-  img.src = getBoxImage(item.style, imageIndex);
   img.className = "box-img";
-
+  img.loading = "eager";
+  img.decoding = "async";
+  img.src = getBoxImage(item.style, imageIndex);
   box.appendChild(img);
 
   box.dataset.text = item.text || "";
@@ -220,36 +343,35 @@ function startBelt(belt, speed, offset) {
   }
 
   function animate() {
-    const totalWidth = getTotalWidth();
-
+    // 모든 박스를 왼쪽으로 이동
     boxes.forEach((box) => {
       let x = parseFloat(box.dataset.x);
-
       x -= speed;
 
       box.dataset.x = x;
       box.style.left = `${x}px`;
     });
 
-    /*
-     * 가장 왼쪽에서 화면 밖으로 나간 박스를
-     * 가장 오른쪽 박스 바로 뒤로 이동
-     */
+    // 화면 왼쪽을 완전히 벗어난 박스만 재배치
     boxes.forEach((box) => {
       const width = box.offsetWidth;
       const x = parseFloat(box.dataset.x);
 
-      if (x + width < 0) {
-        const rightmostBox = boxes.reduce((rightmost, current) => {
-          return parseFloat(current.dataset.x) > parseFloat(rightmost.dataset.x)
-            ? current
-            : rightmost;
-        }, boxes[0]);
+      if (x + width <= 0) {
+        // 현재 박스들을 기준으로 가장 오른쪽 끝 찾기
+        let rightEdge = 0;
 
-        const rightmostX = parseFloat(rightmostBox.dataset.x);
-        const rightmostWidth = rightmostBox.offsetWidth;
+        boxes.forEach((otherBox) => {
+          if (otherBox === box) return;
 
-        const newX = rightmostX + rightmostWidth + gap;
+          const otherX = parseFloat(otherBox.dataset.x);
+          const otherRight = otherX + otherBox.offsetWidth;
+
+          rightEdge = Math.max(rightEdge, otherRight);
+        });
+
+        // 화면 오른쪽 밖 또는 가장 오른쪽 박스 뒤에 배치
+        const newX = Math.max(window.innerWidth + 10, rightEdge + gap);
 
         box.dataset.x = newX;
         box.style.left = `${newX}px`;
@@ -258,16 +380,47 @@ function startBelt(belt, speed, offset) {
 
     requestAnimationFrame(animate);
   }
-
   animate();
 }
 /* =========================
    벨트 시작
 ========================= */
 
-startBelt(belt1, 0.5, 0.08);
-startBelt(belt2, 0.6, 0.22);
-startBelt(belt3, 0.4, 0.14);
+/* =========================
+   이미지 미리 로드 후 벨트 시작
+========================= */
+
+function preloadImages() {
+  const imagePaths = [
+    ...Object.values(boxImages).flat(),
+    ...Object.values(cardFrontImages),
+    "images/card2.png",
+  ];
+
+  const uniquePaths = [...new Set(imagePaths)];
+
+  return Promise.all(
+    uniquePaths.map((src) => {
+      return new Promise((resolve) => {
+        const img = new Image();
+
+        img.onload = () => resolve();
+        img.onerror = () => resolve();
+
+        img.src = src;
+
+        // 캐시에 이미 있거나 로드가 끝난 이미지 처리
+        if (img.complete) resolve();
+      });
+    }),
+  );
+}
+
+preloadImages().then(() => {
+  startBelt(belt1, 0.5, 0.08);
+  startBelt(belt2, 0.6, 0.22);
+  startBelt(belt3, 0.4, 0.14);
+});
 
 /* =========================
    클릭 이벤트

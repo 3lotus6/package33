@@ -78,20 +78,23 @@ body {
 /* =========================
    버튼
 ========================= */
+
 .start-btn {
   position: static;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
-  padding: 12px 24px;
+
+  margin-top: clamp(30px, 2vw, 45px);
+
+  padding: clamp(12px, 0.8vw, 20px) clamp(24px, 1.5vw, 36px);
 
   background: #f3f3f3;
   color: #ff5e28;
 
   border: none;
-  border-radius: 11px;
+  border-radius: clamp(11px, 0.7vw, 16px);
 
   font-size: clamp(16px, 0.95vw, 22px);
   font-weight: 700;
@@ -123,7 +126,8 @@ body {
   }
 }
 .talk-illust {
-  width: clamp(530px, 22vw, 520px);
+  width: clamp(400px, 28vw, 650px);
+  height: auto;
 }
 /* =========================
    기본
@@ -188,7 +192,7 @@ body {
 
   opacity: 0.75;
 
-  animation: floatA 9s ease-in-out infinite alternate;
+  animation: floatA 4s ease-in-out infinite alternate;
 }
 
 /* =========================
@@ -216,7 +220,7 @@ body {
 
   opacity: 0.42;
 
-  animation: floatB 11s ease-in-out infinite alternate;
+  animation: floatB 5s ease-in-out infinite alternate;
 }
 
 /* =========================
@@ -244,7 +248,7 @@ body {
 
   opacity: 0.68;
 
-  animation: floatC 12s ease-in-out infinite alternate;
+  animation: floatC 4.5s ease-in-out infinite alternate;
 }
 
 /* =========================
@@ -271,7 +275,7 @@ body {
 
   opacity: 0.45;
 
-  animation: floatD 7s ease-in-out infinite alternate;
+  animation: floatD 3s ease-in-out infinite alternate;
 }
 
 /* =========================
@@ -298,7 +302,7 @@ body {
 
   opacity: 0.5;
 
-  animation: floatE 9s ease-in-out infinite alternate;
+  animation: floatE 4s ease-in-out infinite alternate;
 }
 .orb6 {
   width: 15vw;
@@ -323,7 +327,7 @@ body {
 
   transform: rotate(-10deg);
 
-  animation: floatF 9s ease-in-out infinite alternate;
+  animation: floatF 3.5s ease-in-out infinite alternate;
 }
 /* =========================
    컨텐츠 위로

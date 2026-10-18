@@ -2009,3 +2009,41 @@ body {
     filter: brightness(1);
   }
 }
+
+/* 두구두구 중 봉투 뒤로 새어 나오는 금빛 */
+.card-wrap.envelope-drumroll::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  width: 125%;
+  height: 115%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 245, 190, 0.8) 0%,
+    rgba(255, 210, 75, 0.65) 25%,
+    rgba(255, 175, 35, 0.35) 48%,
+    rgba(255, 155, 20, 0.12) 65%,
+    transparent 78%
+  );
+
+  filter: blur(14px);
+  animation: envelopeGoldGlow 0.55s ease-in-out infinite alternate;
+}
+
+@keyframes envelopeGoldGlow {
+  from {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+
+  to {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
