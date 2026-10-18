@@ -176,10 +176,9 @@ function createBox(item, imageIndex = 0) {
 
   const img = document.createElement("img");
 
-  img.className = "box-img";
-  img.loading = "eager";
-  img.decoding = "async";
   img.src = getBoxImage(item.style, imageIndex);
+  img.className = "box-img";
+
   box.appendChild(img);
 
   box.dataset.text = item.text || "";
@@ -386,41 +385,9 @@ function startBelt(belt, speed, offset) {
    벨트 시작
 ========================= */
 
-/* =========================
-   이미지 미리 로드 후 벨트 시작
-========================= */
-
-function preloadImages() {
-  const imagePaths = [
-    ...Object.values(boxImages).flat(),
-    ...Object.values(cardFrontImages),
-    "images/card2.png",
-  ];
-
-  const uniquePaths = [...new Set(imagePaths)];
-
-  return Promise.all(
-    uniquePaths.map((src) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-
-        img.onload = () => resolve();
-        img.onerror = () => resolve();
-
-        img.src = src;
-
-        // 캐시에 이미 있거나 로드가 끝난 이미지 처리
-        if (img.complete) resolve();
-      });
-    }),
-  );
-}
-
-preloadImages().then(() => {
-  startBelt(belt1, 0.5, 0.08);
-  startBelt(belt2, 0.6, 0.22);
-  startBelt(belt3, 0.4, 0.14);
-});
+startBelt(belt1, 0.5, 0.08);
+startBelt(belt2, 0.6, 0.22);
+startBelt(belt3, 0.4, 0.14);
 
 /* =========================
    클릭 이벤트
@@ -708,6 +675,15 @@ const cardFrontImages = {
   크라프트지: "images/card2_kraft.png",
   황금: "images/card2_gold.png",
 };
+const cardImageCache = {};
+
+const allCardImages = [...Object.values(cardFrontImages), "images/card2.png"];
+
+allCardImages.forEach((src) => {
+  const img = new Image();
+  img.src = src;
+  cardImageCache[src] = img;
+});
 /* =========================
    포장지별 폰트
 ========================= */
