@@ -388,7 +388,27 @@ function startBelt(belt, speed, offset) {
 startBelt(belt1, 0.5, 0.08);
 startBelt(belt2, 0.6, 0.22);
 startBelt(belt3, 0.4, 0.14);
+// 컨베이어 벨트 작동 소리
 
+/* =========================
+   컨베이어 벨트 작동 소리
+========================= */
+
+const conveyorSound = document.getElementById("conveyorSound");
+
+if (conveyorSound) {
+  conveyorSound.loop = true;
+  conveyorSound.volume = 0.7;
+
+  conveyorSound
+    .play()
+    .then(() => {
+      console.log("재생 성공", conveyorSound.paused);
+    })
+    .catch((error) => {
+      console.log("재생 실패:", error.name, error.message);
+    });
+}
 /* =========================
    클릭 이벤트
 ========================= */

@@ -66,5 +66,26 @@
       </div>
     </div>
     <script src="common.js"></script>
+    <audio
+      id="characterSound"
+      src="sounds/creatorshome-pop-cartoon-328167.mp3"
+      preload="auto"
+    ></audio>
+
+    <script>
+      const character = document.querySelector(".character-img");
+      const sound = document.getElementById("characterSound");
+
+      if (character && sound) {
+        sound.volume = 0.3; // 음량 12%
+
+        character.addEventListener("animationstart", (event) => {
+          if (event.animationName === "slideUp") {
+            sound.currentTime = 0;
+            sound.play().catch(() => {});
+          }
+        });
+      }
+    </script>
   </body>
 </html>

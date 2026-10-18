@@ -270,6 +270,15 @@ async function convert() {
     const cardWrap = document.querySelector(".card-wrap");
     cardWrap?.classList.add("envelope-drumroll");
 
+    // 두구두구 효과음 재생
+    const drumrollSound = document.getElementById("drumrollSound");
+
+    if (drumrollSound) {
+      drumrollSound.currentTime = 0;
+      drumrollSound.volume = 0.7;
+      drumrollSound.play().catch(() => {});
+    }
+
     // 서버 변환 결과 기다리기
     const drumrollMinTime = waitEnvelope(1000);
 
@@ -781,6 +790,15 @@ async function insertCardIntoEnvelope() {
     "front-over-card",
   );
 
+  // 카드가 봉투에 들어가는 소리
+  const insertSound = document.getElementById("insertSound");
+
+  if (insertSound) {
+    insertSound.currentTime = 0;
+    insertSound.volume = 0.7;
+    insertSound.play().catch(() => {});
+  }
+
   // 카드 상승 + 축소 + 봉투 삽입
   cardWrap.classList.add("card-inserting");
 
@@ -826,6 +844,13 @@ async function ejectCardFromEnvelope() {
   await waitEnvelope(255);
 
   if (card) {
+    const impactSound = document.getElementById("impactSound");
+
+    if (impactSound) {
+      impactSound.currentTime = 0;
+      impactSound.volume = 0.7;
+      impactSound.play().catch(() => {});
+    }
     card.classList.remove("impact", "card-shine");
     void card.offsetWidth;
     card.classList.add("impact", "card-shine");
