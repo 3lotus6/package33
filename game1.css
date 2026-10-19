@@ -20,23 +20,21 @@ body {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   align-items: center;
-  gap: clamp(24px, 3vw, 60px);
-
-  width: min(90vw, 1800px);
+  gap: clamp(24px, 3vw, 48px);
+  width: min(90vw, 1500px);
   margin: 0 auto;
   padding: 0 2vw;
   box-sizing: border-box;
   height: calc(100vh - 100px);
 }
 .character-img {
-  height: clamp(500px, 48vw, 900px);
+  height: 78vh;
   max-height: calc(100vh - 140px);
   width: auto;
   max-width: 100%;
   object-fit: contain;
   display: block;
   margin: 0 auto;
-
   opacity: 0;
   animation: slideUp 0.8s ease-out forwards;
 }
@@ -58,25 +56,26 @@ body {
 /* 🔹 질문 박스 */
 .question-box {
   box-sizing: border-box;
-  padding: clamp(24px, 2vw, 40px);
-  border-radius: clamp(12px, 1.3vw, 24px);
+  padding: clamp(18px, 2vw, 30px);
+  border-radius: clamp(12px, 1.3vw, 20px);
   background-color: #ff5e28;
   color: white;
-
   opacity: 0;
   animation: slideInRight 0.6s ease-out 0.3s forwards;
 }
+
 .question-box h2 {
   margin-top: 0;
-  margin-bottom: 12px;
-  font-size: clamp(18px, 1.25vw, 26px);
+  margin-bottom: 8px;
+  font-size: clamp(16px, 1.2vw, 22px);
   font-weight: 600;
   letter-spacing: -0.5px;
 }
 
+/* 설명 */
 .question-box p {
   margin: 0;
-  font-size: clamp(14px, 1vw, 22px);
+  font-size: clamp(13px, 1vw, 18px);
   line-height: 1.6;
   font-weight: 350;
   letter-spacing: -0.5px;
@@ -93,18 +92,14 @@ body {
 .option-btn {
   width: 100%;
   text-align: left;
-
-  padding: clamp(18px, 1.4vw, 30px) clamp(22px, 1.6vw, 36px);
-
+  padding: 1.3vw 1.5vw;
   background-color: rgba(255, 243, 238, 0.85);
-  border: clamp(2px, 0.18vw, 3px) solid #ff5e28;
-  border-radius: clamp(10px, 1vw, 18px);
-
+  border: 0.18vw solid #ff5e28;
+  border-radius: 1vw;
   color: #ff5e28;
-  font-size: clamp(16px, 1.15vw, 23px);
+  font-size: 1.2vw;
   font-weight: 700;
   font-family: inherit;
-
   cursor: pointer;
   line-height: 1.6;
   transition: all 0.2s ease-in-out;
@@ -155,26 +150,32 @@ body {
 }
 @media (min-width: 1600px) {
   .game-container {
-    width: 85vw;
-    max-width: 1800px;
-    gap: clamp(40px, 3vw, 60px);
+    width: 75vw;
+    max-width: 1500px;
+    gap: 48px;
   }
 
   .question-box h2 {
-    font-size: clamp(22px, 1.25vw, 26px);
+    font-size: 20px;
   }
 
   .question-box p {
-    font-size: clamp(18px, 1vw, 22px);
+    font-size: 18px;
   }
 
   .option-btn {
-    font-size: clamp(19px, 1.15vw, 23px);
+    font-size: 18.5px;
   }
 }
 @media (max-aspect-ratio: 4/3) {
   .game-container {
     width: 94vw;
     gap: 2vw;
+  }
+}
+@media (min-height: 900px) {
+  .game-container {
+    transform: scale(1.08);
+    transform-origin: center center;
   }
 }
