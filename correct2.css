@@ -38,6 +38,7 @@ body {
   top: 100px;
 }
 
+/* 캐릭터 이미지 */
 .character-img {
   height: 78vh;
   max-height: calc(100vh - 140px);
@@ -60,6 +61,7 @@ body {
   gap: 1.95vw;
   width: 100%;
   max-width: 50vw;
+  min-width: 0;
 }
 
 /* 말풍선 */
@@ -98,24 +100,25 @@ body {
   border-style: solid;
   border-color: #f7f2ef transparent transparent transparent;
 }
+
 /* 말풍선 텍스트 */
 .speech-bubble p {
   margin: 0;
-  font-size: 1.25vw;
+  font-size: clamp(18px, 1.15vw, 26px);
   font-weight: 700;
   color: #ff5e28;
   line-height: 1.8;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
 }
 
 /* 스탬프 */
 .stamp-img {
   position: absolute;
-  right: clamp(18px, 2vw, 30px);
+  right: 2.6vw;
   top: 50%;
   transform: translateY(-50%);
-  width: clamp(90px, 9.1vw, 140px);
-  max-width: 25%;
+  width: clamp(110px, 10vw, 180px);
+  max-width: 28%;
   opacity: 0;
   animation: stampBang 0.4s ease-in 0.8s forwards;
 }
@@ -125,11 +128,12 @@ body {
   background-color: #ff5e28;
   color: white;
   border: none;
-  border-radius: 10px;
-  padding: 12px 24px;
-  font-size: clamp(14px, 1.03vw, 18px);
+  border-radius: 14px;
+  padding: clamp(12px, 0.8vw, 16px) clamp(24px, 1.35vw, 32px);
+  font-size: clamp(14px, 0.9vw, 20px);
   font-weight: 700;
   font-family: inherit;
+  letter-spacing: -0.5px;
   cursor: pointer;
   transition: all 0.2s;
   opacity: 0;
@@ -147,6 +151,7 @@ body {
     transform: translateY(100px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -158,6 +163,7 @@ body {
     transform: translateX(50px);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -169,10 +175,12 @@ body {
     opacity: 0;
     transform: translateY(-50%) scale(3);
   }
+
   70% {
     opacity: 1;
     transform: translateY(-50%) scale(0.9);
   }
+
   100% {
     opacity: 1;
     transform: translateY(-50%) scale(1);
@@ -184,15 +192,15 @@ body {
   .result-container {
     width: 75vw;
     max-width: 1500px;
-    gap: 48px;
+    gap: clamp(72px, 4vw, 100px);
   }
 
   .speech-bubble p {
-    font-size: 20px;
+    font-size: clamp(22px, 1.15vw, 30px);
   }
 
   .retry-btn {
-    font-size: 18px;
+    font-size: clamp(18px, 0.95vw, 24px);
   }
 }
 
@@ -203,12 +211,25 @@ body {
     gap: 2vw;
   }
 }
-@media (min-width: 1600px) {
-  .speech-bubble p {
-    font-size: 21px;
+
+/* 2560px급 화면에서만 말풍선 영역 확대 */
+@media (min-width: 2400px) and (max-width: 2800px) {
+  .result-container {
+    width: 80vw;
+    max-width: 1750px;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
   }
 
-  .retry-btn {
-    font-size: 18px;
+  .feedback-area {
+    width: 100%;
+    max-width: none;
+  }
+  .stamp-img {
+    width: 200px;
+    max-width: 30%;
+  }
+  .speech-bubble p {
+    font-size: clamp(26px, 1.15vw, 31px);
   }
 }

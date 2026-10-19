@@ -64,11 +64,13 @@ body {
 .question-box {
   box-sizing: border-box;
   padding: clamp(18px, 2vw, 30px);
-  border-radius: clamp(12px, 1.3vw, 20px);
+  padding-left: 1.5vw;
+  border-radius: 1vw;
   background-color: #ff5e28;
   color: white;
   opacity: 0;
   animation: slideInRight 0.6s ease-out 0.3s forwards;
+  padding-left: 1.7vw;
 }
 
 .question-box h2 {
@@ -105,13 +107,15 @@ body {
   border: 0.18vw solid #ff5e28;
   border-radius: 1vw;
   color: #ff5e28;
-  font-size: 1.03vw;
+  font-size: 1.2vw;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
   line-height: 1.6;
   letter-spacing: -0.5px;
   transition: all 0.2s ease-in-out;
+  padding-left: 1.7vw;
+  box-sizing: border-box;
 }
 
 .option-btn:hover {
@@ -143,6 +147,7 @@ body {
     transform: translateY(100px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -154,6 +159,7 @@ body {
     transform: translateX(50px);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -164,20 +170,20 @@ body {
 @media (min-width: 1600px) {
   .game-container {
     width: 75vw;
-    max-width: 1500px;
-    gap: 48px;
+    max-width: 1700px;
+    gap: clamp(40px, 2vw, 60px);
   }
 
   .question-box h2 {
-    font-size: 20px;
+    font-size: clamp(20px, 1.1vw, 28px);
   }
 
   .question-box p {
-    font-size: 18px;
+    font-size: clamp(16px, 0.9vw, 23px);
   }
 
   .option-btn {
-    font-size: 18.5px;
+    font-size: clamp(16px, 1vw, 25px);
   }
 }
 
@@ -186,5 +192,11 @@ body {
   .game-container {
     width: 94vw;
     gap: 2vw;
+  }
+}
+@media (min-width: 2400px) and (max-width: 2800px) {
+  .question-box {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 }

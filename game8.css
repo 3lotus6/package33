@@ -16,6 +16,7 @@ body {
   color: #ff5e28;
 }
 
+/* 전체 레이아웃 */
 .game-container {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -27,6 +28,8 @@ body {
   box-sizing: border-box;
   height: calc(100vh - 100px);
 }
+
+/* 캐릭터 이미지 */
 .character-img {
   height: 78vh;
   max-height: calc(100vh - 140px);
@@ -38,7 +41,8 @@ body {
   opacity: 0;
   animation: slideUp 0.8s ease-out forwards;
 }
-/* 🔥 퀴즈 영역 */
+
+/* 퀴즈 영역 */
 .quiz-area {
   align-self: center;
   display: flex;
@@ -46,6 +50,8 @@ body {
   gap: clamp(12px, 1.5vw, 24px);
   min-width: 0;
 }
+
+/* 캐릭터 영역 */
 .character-area {
   text-align: center;
   align-self: end;
@@ -53,15 +59,18 @@ body {
   position: relative;
   top: 100px;
 }
-/* 🔹 질문 박스 */
+
+/* 질문 박스 */
 .question-box {
   box-sizing: border-box;
   padding: clamp(18px, 2vw, 30px);
-  border-radius: clamp(12px, 1.3vw, 20px);
+  padding-left: 1.5vw;
+  border-radius: 1vw;
   background-color: #ff5e28;
   color: white;
   opacity: 0;
   animation: slideInRight 0.6s ease-out 0.3s forwards;
+  padding-left: 1.7vw;
 }
 
 .question-box h2 {
@@ -72,7 +81,7 @@ body {
   letter-spacing: -0.5px;
 }
 
-/* 설명 */
+/* 질문 설명 */
 .question-box p {
   margin: 0;
   font-size: clamp(13px, 1vw, 18px);
@@ -81,29 +90,32 @@ body {
   letter-spacing: -0.5px;
 }
 
-/* 🔹 선택지 목록 */
+/* 선택지 목록 */
 .options {
   display: flex;
   flex-direction: column;
   gap: 1vw;
 }
 
-/* 🔹 선택지 버튼 */
+/* 선택지 버튼 */
 .option-btn {
   width: 100%;
+  box-sizing: border-box;
   text-align: left;
   padding: 1.3vw 1.5vw;
   background-color: rgba(255, 243, 238, 0.85);
   border: 0.18vw solid #ff5e28;
   border-radius: 1vw;
   color: #ff5e28;
-  font-size: 1.03vw;
+  font-size: 1.2vw;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
   line-height: 1.6;
   transition: all 0.2s ease-in-out;
   letter-spacing: -0.5px;
+  padding-left: 1.7vw;
+  box-sizing: border-box;
 }
 
 .option-btn:hover {
@@ -113,25 +125,29 @@ body {
   box-shadow: 0 6px 15px rgba(255, 94, 40, 0.3);
 }
 
+/* 선택지 순차 등장 애니메이션 */
 .option-btn:nth-child(1) {
   opacity: 0;
   animation: slideInRight 0.5s ease-out 0.5s forwards;
 }
+
 .option-btn:nth-child(2) {
   opacity: 0;
   animation: slideInRight 0.5s ease-out 0.7s forwards;
 }
+
 .option-btn:nth-child(3) {
   opacity: 0;
   animation: slideInRight 0.5s ease-out 0.9s forwards;
 }
 
-/* 🔥 애니메이션 */
+/* 애니메이션 */
 @keyframes slideUp {
   0% {
     transform: translateY(100px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -143,33 +159,44 @@ body {
     transform: translateX(50px);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
   }
 }
+
+/* 큰 화면 */
 @media (min-width: 1600px) {
   .game-container {
     width: 75vw;
-    max-width: 1500px;
-    gap: 48px;
+    max-width: 1700px;
+    gap: clamp(40px, 2vw, 60px);
   }
 
   .question-box h2 {
-    font-size: 20px;
+    font-size: clamp(20px, 1.1vw, 28px);
   }
 
   .question-box p {
-    font-size: 18px;
+    font-size: clamp(16px, 0.9vw, 23px);
   }
 
   .option-btn {
-    font-size: 18.5px;
+    font-size: clamp(16px, 1vw, 25px);
   }
 }
+
+/* 화면 비율이 4:3 이하인 경우 */
 @media (max-aspect-ratio: 4/3) {
   .game-container {
     width: 94vw;
     gap: 2vw;
+  }
+}
+@media (min-width: 2400px) and (max-width: 2800px) {
+  .question-box {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 }

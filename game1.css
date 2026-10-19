@@ -57,11 +57,12 @@ body {
 .question-box {
   box-sizing: border-box;
   padding: clamp(18px, 2vw, 30px);
-  border-radius: clamp(12px, 1.3vw, 20px);
+  border-radius: 1vw;
   background-color: #ff5e28;
   color: white;
   opacity: 0;
   animation: slideInRight 0.6s ease-out 0.3s forwards;
+  padding-left: 1.7vw;
 }
 
 .question-box h2 {
@@ -104,6 +105,8 @@ body {
   line-height: 1.6;
   transition: all 0.2s ease-in-out;
   letter-spacing: -0.5px;
+  padding-left: 1.7vw;
+  box-sizing: border-box;
 }
 
 .option-btn:hover {
@@ -151,20 +154,20 @@ body {
 @media (min-width: 1600px) {
   .game-container {
     width: 75vw;
-    max-width: 1500px;
-    gap: 48px;
+    max-width: 1700px;
+    gap: clamp(40px, 2vw, 60px);
   }
 
   .question-box h2 {
-    font-size: 20px;
+    font-size: clamp(20px, 1.1vw, 28px);
   }
 
   .question-box p {
-    font-size: 18px;
+    font-size: clamp(16px, 0.9vw, 23px);
   }
 
   .option-btn {
-    font-size: 18.5px;
+    font-size: clamp(16px, 1vw, 25px);
   }
 }
 @media (max-aspect-ratio: 4/3) {
@@ -173,9 +176,9 @@ body {
     gap: 2vw;
   }
 }
-@media (min-width: 1600px) and (min-height: 900px) {
-  .character-img {
-    height: 85vh;
-    max-height: calc(100vh - 100px);
+@media (min-width: 2400px) and (max-width: 2800px) {
+  .question-box {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 }
