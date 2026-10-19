@@ -393,12 +393,7 @@ body {
     transform: translate(1.8vw, -1.5vw) rotate(-3deg);
   }
 }
-@media (min-height: 900px) {
-  .lab-container {
-    transform: scale(1.08);
-    transform-origin: center center;
-  }
-}
+
 .navbar {
   position: relative;
   z-index: 1000;
@@ -407,4 +402,42 @@ body {
 .start-btn {
   position: relative;
   z-index: 10;
+}
+/* =========================
+   2560px급 화면 전용
+========================= */
+@media (min-width: 2400px) and (max-width: 2800px) {
+  /* 메인 제목 */
+  .lab-title,
+  .lab-container > h1 {
+    font-size: 64px;
+  }
+
+  /* 설명 영역 */
+  .lab-text {
+    max-width: 1200px;
+  }
+
+  .lab-text p {
+    font-size: 28px;
+  }
+
+  /* 기본 일러스트 */
+  .lab-illust {
+    width: 540px;
+    margin: 52px auto 32px;
+  }
+
+  /* 대화 실험 일러스트 */
+  .talk-illust {
+    width: 800px;
+  }
+
+  /* 시작 버튼 */
+  .start-btn {
+    margin-top: 54px;
+    padding: 22px 44px;
+    font-size: 27px;
+    border-radius: 18px;
+  }
 }
