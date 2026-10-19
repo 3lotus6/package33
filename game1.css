@@ -178,4 +178,9 @@ body {
     transform: scale(1.08);
     transform-origin: center center;
   }
+
+  .character-img {
+    height: 78vh;
+    max-height: none;
+  }
 }
