@@ -56,8 +56,8 @@ body {
 /* 🔹 질문 박스 */
 .question-box {
   box-sizing: border-box;
-  padding: clamp(18px, 2vw, 30px);
-  border-radius: clamp(12px, 1.3vw, 20px);
+  padding: clamp(24px, 1.5vw, 40px);
+  border-radius: clamp(16px, 1vw, 24px);
   background-color: #ff5e28;
   color: white;
   opacity: 0;
@@ -66,17 +66,17 @@ body {
 
 .question-box h2 {
   margin-top: 0;
-  margin-bottom: 8px;
-  font-size: clamp(16px, 1.2vw, 22px);
+  margin-bottom: 12px;
+  font-size: clamp(20px, 1.3vw, 32px);
   font-weight: 600;
   letter-spacing: -0.5px;
+  line-height: 1.5;
 }
-
 /* 설명 */
 .question-box p {
   margin: 0;
-  font-size: clamp(13px, 1vw, 18px);
-  line-height: 1.6;
+  font-size: clamp(16px, 1.05vw, 26px);
+  line-height: 1.7;
   font-weight: 350;
   letter-spacing: -0.5px;
 }
@@ -85,25 +85,30 @@ body {
 .options {
   display: flex;
   flex-direction: column;
-  gap: 1vw;
+  gap: clamp(14px, 1vw, 24px);
 }
 
 /* 🔹 선택지 버튼 */
 .option-btn {
   width: 100%;
+  box-sizing: border-box;
   text-align: left;
-  padding: 1.3vw 1.5vw;
+
+  padding: clamp(18px, 1.2vw, 32px) clamp(22px, 1.5vw, 40px);
+
   background-color: rgba(255, 243, 238, 0.85);
-  border: 0.18vw solid #ff5e28;
-  border-radius: 1vw;
+  border: 2px solid #ff5e28;
+  border-radius: clamp(12px, 0.8vw, 20px);
+
   color: #ff5e28;
-  font-size: 1.2vw;
+  font-size: clamp(17px, 1.1vw, 27px);
   font-weight: 700;
   font-family: inherit;
+
   cursor: pointer;
-  line-height: 1.6;
-  transition: all 0.2s ease-in-out;
+  line-height: 1.7;
   letter-spacing: -0.5px;
+  transition: all 0.2s ease-in-out;
 }
 
 .option-btn:hover {
@@ -148,25 +153,7 @@ body {
     opacity: 1;
   }
 }
-@media (min-width: 1600px) {
-  .game-container {
-    width: 75vw;
-    max-width: 1500px;
-    gap: 48px;
-  }
 
-  .question-box h2 {
-    font-size: 20px;
-  }
-
-  .question-box p {
-    font-size: 18px;
-  }
-
-  .option-btn {
-    font-size: 18.5px;
-  }
-}
 @media (max-aspect-ratio: 4/3) {
   .game-container {
     width: 94vw;
