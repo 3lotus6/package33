@@ -181,6 +181,6 @@ body {
 
   .character-img {
     height: 78vh;
-    max-height: none;
+    max-height: calc(100vh - 100px);
   }
 }
