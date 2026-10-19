@@ -173,14 +173,9 @@ body {
     gap: 2vw;
   }
 }
-@media (min-height: 900px) {
-  .game-container {
-    transform: scale(1.08);
-    transform-origin: center center;
-  }
-
+@media (min-width: 1600px) and (min-height: 900px) {
   .character-img {
-    height: 78vh;
+    height: 85vh;
     max-height: calc(100vh - 100px);
   }
 }
