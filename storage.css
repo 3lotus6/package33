@@ -536,12 +536,6 @@ body {
 .rail {
   transform: translateY(calc(50vh - 28.5vw));
 }
-@media (min-height: 900px) {
-  .belt-wrapper {
-    transform: scale(1.1);
-    transform-origin: center center;
-  }
-}
 
 .card-front::after,
 .card-back::after {
@@ -595,5 +589,37 @@ body {
   100% {
     background-position: -50% 0;
     opacity: 0;
+  }
+}
+/* =========================
+   2560px급 화면 전용
+========================= */
+@media (min-width: 2400px) and (max-width: 2800px) {
+  /* 컨베이어 위의 박스 */
+  .box {
+    width: clamp(220px, 9vw, 280px);
+  }
+  /* 팝업 카드 */
+  .card-flip {
+    width: 32vw;
+    height: 18.67vw;
+  }
+
+  /* 카드 앞뒷면 글자 */
+  .card-front p,
+  .card-back p {
+    font-size: 1.25vw;
+  }
+
+  /* 닫기 버튼 */
+  .close-btn {
+    width: 3vw;
+    height: 3vw;
+    font-size: 1.3vw;
+  }
+
+  /* 카드 안내문 */
+  .flip-guide {
+    font-size: 0.9vw;
   }
 }

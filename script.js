@@ -848,7 +848,7 @@ async function ejectCardFromEnvelope() {
 
     if (impactSound) {
       impactSound.currentTime = 0;
-      impactSound.volume = 0.7;
+      impactSound.volume = 0.4;
       impactSound.play().catch(() => {});
     }
     card.classList.remove("impact", "card-shine");

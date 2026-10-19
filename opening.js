@@ -64,7 +64,9 @@ function playSound(audio, volume = 1, rate = 1) {
   if (!audio) return;
 
   audio.pause();
-  audio.currentTime = 0;
+
+  // 타이핑 음원은 앞부분의 무음을 건너뛰고 재생
+  audio.currentTime = audio === typingSound ? 0.42 : 0;
 
   audio.volume = volume;
   audio.playbackRate = rate;
@@ -269,6 +271,12 @@ function resetTextStyle() {
 /* ───────── 마지막 TONE 이미지 표시 ───────── */
 
 function showToneLogo() {
+  // 타이핑 효과음 즉시 정지
+  if (typingSound) {
+    typingSound.pause();
+    typingSound.currentTime = 0;
+  }
+
   // 마지막 문장을 먼저 페이드아웃
   typedText.style.opacity = "0";
 
@@ -305,7 +313,7 @@ function showToneLogo() {
     setTimeout(() => {
       fadeToIndex();
     }, 2500);
-  }, 1050);
+  }, 1000);
 }
 
 /* ───────── 화면 전체 페이드아웃 ───────── */
@@ -370,10 +378,16 @@ function runStep(idx) {
       shakePkg(s.shakeIdx);
     }, 800);
   }
-
-  // 마지막 문장 효과음
   if (s.isLast) {
-    playSound(typingSound, 0.8, 2);
+    playSound(typingSound, 0.75, 1);
+
+    // 타이핑 소리는 1초 후 정지
+    setTimeout(() => {
+      if (typingSound) {
+        typingSound.pause();
+        typingSound.currentTime = 0;
+      }
+    }, 1000);
   }
 
   typeText(

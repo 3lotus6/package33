@@ -398,7 +398,7 @@ const conveyorSound = document.getElementById("conveyorSound");
 
 if (conveyorSound) {
   conveyorSound.loop = true;
-  conveyorSound.volume = 0.7;
+  conveyorSound.volume = 0.4;
 
   conveyorSound
     .play()

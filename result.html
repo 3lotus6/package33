@@ -93,5 +93,34 @@
     <!-- JS -->
     <script src="result.js"></script>
     <script src="common.js"></script>
+    <audio
+      id="resultSound"
+      src="sounds/yodguard-item-pickup-3-540193.mp3"
+      preload="auto"
+    ></audio>
+
+    <audio
+      id="resultSound"
+      src="sounds/yodguard-item-pickup-3-540193.mp3"
+      preload="auto"
+    ></audio>
+    <script>
+      const resultSound = document.getElementById("resultSound");
+
+      if (resultSound) {
+        resultSound.volume = 0.6;
+
+        resultSound.addEventListener(
+          "canplaythrough",
+          () => {
+            resultSound.currentTime = 0;
+            resultSound.play().catch(() => {});
+          },
+          { once: true },
+        );
+
+        resultSound.load();
+      }
+    </script>
   </body>
 </html>

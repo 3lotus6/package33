@@ -342,3 +342,10 @@ body:has(.type-card.kraft) {
     transform-origin: center center;
   }
 }
+@media (min-width: 2400px) and (max-width: 2800px) {
+  .retry-btn {
+    font-size: 26px;
+    padding: 18px 38px;
+    border-radius: 16px;
+  }
+}
