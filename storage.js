@@ -351,6 +351,9 @@ function startBelt(belt, speed, offset) {
     lastTime = timestamp;
 
     boxes.forEach((box) => {
+      // 클릭한 박스는 현재 위치에 고정
+      if (box.classList.contains("opening")) return;
+
       let x = parseFloat(box.dataset.x);
       x -= (speed * deltaTime) / 16.67;
 
@@ -359,12 +362,13 @@ function startBelt(belt, speed, offset) {
     });
 
     boxes.forEach((box) => {
+      // 클릭한 박스는 재배치하지 않음
+      if (box.classList.contains("opening")) return;
+
       const width = box.offsetWidth;
       const x = parseFloat(box.dataset.x);
 
       if (x + width <= 0) {
-        let rightEdge = 0;
-
         boxes.forEach((otherBox) => {
           if (otherBox === box) return;
 
