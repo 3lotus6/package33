@@ -376,6 +376,7 @@ function startBelt(belt, speed, offset) {
 
         const newX = Math.max(window.innerWidth + 10, rightEdge + gap);
 
+        box.style.transition = "none";
         box.dataset.x = newX;
         box.style.transform = `translate3d(${newX}px, 0, 0)`;
       }
