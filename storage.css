@@ -623,3 +623,8 @@ body {
     font-size: 0.9vw;
   }
 }
+
+/* 일반 카드 뒷면에서는 포장 날짜 숨기기 */
+.card-inner.flip #packDate {
+  visibility: hidden;
+}
