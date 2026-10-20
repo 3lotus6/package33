@@ -379,7 +379,7 @@ function runStep(idx) {
     }, 800);
   }
   if (s.isLast) {
-    playSound(typingSound, 0.75, 1);
+    playSound(typingSound, 1, 1);
 
     // 타이핑 소리는 1초 후 정지
     setTimeout(() => {

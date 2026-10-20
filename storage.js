@@ -317,78 +317,71 @@ function startBelt(belt, speed, offset) {
 
   const gap = Math.min(Math.max(window.innerWidth * 0.03, 20), 140);
 
-  /*
-   * 박스들을 처음부터 정확한 간격으로 배치
-   */
   let currentX = window.innerWidth * offset;
 
-  boxes.forEach((box) => {
+  // 박스 너비는 처음에 한 번만 계산
+  const boxData = boxes.map((box) => {
     const width = box.offsetWidth;
+    const baseX = currentX;
 
     box.style.position = "absolute";
-    box.dataset.x = currentX;
-    box.style.left = `${currentX}px`;
+    box.style.left = `${baseX}px`;
+    box.style.translate = "0px 0px";
+
+    box.dataset.baseX = baseX;
+    box.dataset.moveX = 0;
 
     currentX += width + gap;
+
+    return { box, width };
   });
 
-  /*
-   * 모든 박스가 차지하는 전체 길이
-   */
-  function getTotalWidth() {
-    return boxes.reduce((total, box) => {
-      return total + box.offsetWidth + gap;
-    }, 0);
-  }
-
   function animate() {
-    // 모든 박스를 왼쪽으로 이동
-    boxes.forEach((box) => {
-      let x = parseFloat(box.dataset.x);
-      x -= speed;
-
-      box.dataset.x = x;
-      box.style.left = `${x}px`;
+    // 박스 위치는 translate로 이동해 레이아웃 계산을 줄임
+    boxData.forEach(({ box }) => {
+      let moveX = Number(box.dataset.moveX) - speed;
+      box.dataset.moveX = moveX;
+      box.style.translate = `${moveX}px 0px`;
     });
 
-    // 화면 왼쪽을 완전히 벗어난 박스만 재배치
-    boxes.forEach((box) => {
-      const width = box.offsetWidth;
-      const x = parseFloat(box.dataset.x);
+    // 화면을 벗어난 박스만 재배치
+    boxData.forEach(({ box, width }) => {
+      const baseX = Number(box.dataset.baseX);
+      const moveX = Number(box.dataset.moveX);
 
-      if (x + width <= 0) {
-        // 현재 박스들을 기준으로 가장 오른쪽 끝 찾기
+      if (baseX + moveX + width <= 0) {
         let rightEdge = 0;
 
-        boxes.forEach((otherBox) => {
-          if (otherBox === box) return;
+        boxData.forEach(({ box: other, width: otherWidth }) => {
+          if (other === box) return;
 
-          const otherX = parseFloat(otherBox.dataset.x);
-          const otherRight = otherX + otherBox.offsetWidth;
+          const otherRight =
+            Number(other.dataset.baseX) +
+            Number(other.dataset.moveX) +
+            otherWidth;
 
           rightEdge = Math.max(rightEdge, otherRight);
         });
 
-        // 화면 오른쪽 밖 또는 가장 오른쪽 박스 뒤에 배치
         const newX = Math.max(window.innerWidth + 10, rightEdge + gap);
 
-        box.dataset.x = newX;
+        box.dataset.baseX = newX;
+        box.dataset.moveX = 0;
         box.style.left = `${newX}px`;
+        box.style.translate = "0px 0px";
       }
     });
 
     requestAnimationFrame(animate);
   }
-  animate();
-}
-/* =========================
-   벨트 시작
-========================= */
-startBelt(belt1, 1.5, 0.08);
-startBelt(belt2, 1.8, 0.22);
-startBelt(belt3, 1.3, 0.14);
-// 컨베이어 벨트 작동 소리
 
+  requestAnimationFrame(animate);
+}
+
+// 기존 속도와 시작 위치 유지
+startBelt(belt1, 3.5, 0.08);
+startBelt(belt2, 4.0, 0.22);
+startBelt(belt3, 3.0, 0.14);
 /* =========================
    컨베이어 벨트 작동 소리
 ========================= */
@@ -616,11 +609,25 @@ function openBox(box, item) {
 
 function flipCard() {
   const card = document.getElementById("cardInner");
+  const paperTearSound = document.getElementById("paperTearSound");
 
   if (!card) return;
 
-  // 앞면 → 뒷면
+  // 앞면 → 뒷면: 종이 찢는 소리 재생
   if (!card.classList.contains("flip")) {
+    if (paperTearSound) {
+      paperTearSound.currentTime = 0;
+      paperTearSound.volume = 0.7;
+      paperTearSound
+        .play()
+        .then(() => {
+          console.log("종이 찢는 소리 재생 성공");
+        })
+        .catch((error) => {
+          console.error("종이 찢는 소리 재생 실패:", error);
+        });
+    }
+
     card.classList.add("breaking");
 
     setTimeout(() => {
@@ -628,10 +635,11 @@ function flipCard() {
       card.classList.remove("breaking");
     }, 320);
   } else {
-    // 다시 앞면
+    // 뒷면 → 앞면: 소리 없이 돌아가기
     card.classList.remove("flip");
   }
 }
+
 /* =========================
    모달 닫기
 ========================= */
