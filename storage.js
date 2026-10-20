@@ -389,9 +389,9 @@ function startBelt(belt, speed, offset) {
 /* =========================
    벨트 시작
 ========================= */
-startBelt(belt1, 5, 0.08);
-startBelt(belt2, 6, 0.22);
-startBelt(belt3, 4.5, 0.14);
+startBelt(belt1, 2.5, 0.08);
+startBelt(belt2, 3.0, 0.22);
+startBelt(belt3, 2.0, 0.14);
 // 컨베이어 벨트 작동 소리
 
 /* =========================
