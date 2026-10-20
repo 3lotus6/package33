@@ -97,9 +97,9 @@ body {
   display: flex;
   align-items: flex-end;
   cursor: pointer;
+  transition: transform 0.2s ease;
 
-  transition: none;
-  will-change: transform;
+  will-change: left, transform;
 }
 
 /* 🔥 이미지 */

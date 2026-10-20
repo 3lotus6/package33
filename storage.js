@@ -327,8 +327,7 @@ function startBelt(belt, speed, offset) {
 
     box.style.position = "absolute";
     box.dataset.x = currentX;
-    box.style.left = "0px";
-    box.style.transform = `translate3d(${currentX}px, 0, 0)`;
+    box.style.left = `${currentX}px`;
 
     currentX += width + gap;
   });
@@ -347,6 +346,7 @@ function startBelt(belt, speed, offset) {
   function animate(timestamp) {
     if (!lastTime) lastTime = timestamp;
 
+    // 실제 경과 시간 기준으로 이동
     const deltaTime = Math.min(timestamp - lastTime, 50);
     lastTime = timestamp;
 
@@ -355,7 +355,7 @@ function startBelt(belt, speed, offset) {
       x -= (speed * deltaTime) / 16.67;
 
       box.dataset.x = x;
-      box.style.transform = `translate3d(${x}px, 0, 0)`;
+      box.style.left = `${x}px`;
     });
 
     boxes.forEach((box) => {
@@ -376,9 +376,8 @@ function startBelt(belt, speed, offset) {
 
         const newX = Math.max(window.innerWidth + 10, rightEdge + gap);
 
-        box.style.transition = "none";
         box.dataset.x = newX;
-        box.style.transform = `translate3d(${newX}px, 0, 0)`;
+        box.style.left = `${newX}px`;
       }
     });
 
@@ -390,9 +389,9 @@ function startBelt(belt, speed, offset) {
 /* =========================
    벨트 시작
 ========================= */
-startBelt(belt1, 2.5, 0.08);
-startBelt(belt2, 3.0, 0.22);
-startBelt(belt3, 2.0, 0.14);
+startBelt(belt1, 1.5, 0.08);
+startBelt(belt2, 1.8, 0.22);
+startBelt(belt3, 1.2, 0.14);
 // 컨베이어 벨트 작동 소리
 
 /* =========================
