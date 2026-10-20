@@ -341,23 +341,28 @@ function startBelt(belt, speed, offset) {
     }, 0);
   }
 
-  function animate() {
-    // 모든 박스를 왼쪽으로 이동
+  let lastTime = 0;
+
+  function animate(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+
+    // 실제 경과 시간 기준으로 이동
+    const deltaTime = Math.min(timestamp - lastTime, 50);
+    lastTime = timestamp;
+
     boxes.forEach((box) => {
       let x = parseFloat(box.dataset.x);
-      x -= speed;
+      x -= (speed * deltaTime) / 16.67;
 
       box.dataset.x = x;
       box.style.left = `${x}px`;
     });
 
-    // 화면 왼쪽을 완전히 벗어난 박스만 재배치
     boxes.forEach((box) => {
       const width = box.offsetWidth;
       const x = parseFloat(box.dataset.x);
 
       if (x + width <= 0) {
-        // 현재 박스들을 기준으로 가장 오른쪽 끝 찾기
         let rightEdge = 0;
 
         boxes.forEach((otherBox) => {
@@ -369,7 +374,6 @@ function startBelt(belt, speed, offset) {
           rightEdge = Math.max(rightEdge, otherRight);
         });
 
-        // 화면 오른쪽 밖 또는 가장 오른쪽 박스 뒤에 배치
         const newX = Math.max(window.innerWidth + 10, rightEdge + gap);
 
         box.dataset.x = newX;
@@ -379,7 +383,8 @@ function startBelt(belt, speed, offset) {
 
     requestAnimationFrame(animate);
   }
-  animate();
+
+  requestAnimationFrame(animate);
 }
 /* =========================
    벨트 시작
