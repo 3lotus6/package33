@@ -384,9 +384,9 @@ function startBelt(belt, speed, offset) {
 /* =========================
    벨트 시작
 ========================= */
-startBelt(belt1, 4.0, 0.08);
-startBelt(belt2, 4.8, 0.22);
-startBelt(belt3, 3.2, 0.14);
+startBelt(belt1, 1.5, 0.08);
+startBelt(belt2, 1.8, 0.22);
+startBelt(belt3, 1.3, 0.14);
 // 컨베이어 벨트 작동 소리
 
 /* =========================
@@ -430,8 +430,6 @@ document.addEventListener("click", (e) => {
 ========================= */
 
 function openBox(box, item) {
-  // 클릭했을 때의 가로 위치 저장
-
   box.classList.add("opening");
 
   setTimeout(() => {
@@ -652,14 +650,6 @@ function closeModal() {
   }
   document.querySelectorAll(".box").forEach((box) => {
     box.classList.remove("opening");
-
-    // 닫을 때 클릭했던 위치로 복귀
-    if (box.dataset.returnX !== undefined) {
-      box.dataset.x = box.dataset.returnX;
-      box.style.left = `${box.dataset.returnX}px`;
-
-      delete box.dataset.returnX;
-    }
   });
 
   const card = document.getElementById("cardInner");
